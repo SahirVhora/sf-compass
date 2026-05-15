@@ -51,24 +51,24 @@
   --theme-icon: '☀';
 }
 [data-theme="light"] {
-  --bg: #f2f2f7; --bg2: #e8e8ed; --surface: #ffffff; --surface2: #f9f9fb;
-  --border: #e5e5ea; --border2: #dcdce0;
-  --text: #1d1d1f; --text2: #3a3a3c; --dim: #86868b; --dim2: #aeaeb2;
-  --accent: #b8972e; --accent2: #8b6f1f;
-  --green: #2d8a4e; --amber: #b88a20; --orange: #c96a2e; --red: #d13b3b;
-  --purple: #6e5fd4; --blue: #4a72d4;
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
-  --tech-bg: #f5f5fa; --tech-border: var(--purple);
-  --tag-bg: rgba(74,114,212,0.06); --tag-border: rgba(74,114,212,0.12);
-  --search-bg: #ebebf0; --feas-bg: #ebebf0;
-  --pill-bg-from: #f5f5fa; --pill-bg-to: #eeeef4; --pill-border: #dcdce0;
-  --pill-active-bg-from: rgba(110,95,212,0.12); --pill-active-bg-to: rgba(74,114,212,0.08);
-  --entry-hover-border: #d0d0d8;
-  --detail-text: #505055; --tech-text: #505058;
-  --scrollbar-thumb: #cdcdd2;
-  --sidebar-header-gradient: linear-gradient(180deg, rgba(184,151,46,0.06) 0%, transparent 100%);
-  --h1-gradient: linear-gradient(135deg, #1d1d1f 0%, #5a5a5e 100%);
+  --bg: #f8f6f2; --bg2: #f0ede8; --surface: #ffffff; --surface2: #faf9f6;
+  --border: #e8e4dc; --border2: #dcd7ce;
+  --text: #1a1815; --text2: #3d3831; --dim: #7a7368; --dim2: #a0988a;
+  --accent: #b8941e; --accent2: #7a5f0e;
+  --green: #287a3e; --amber: #a67c18; --orange: #bc5a26; --red: #c93030;
+  --purple: #5b4fd4; --blue: #4a68cc;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05); --shadow-md: 0 4px 14px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.09);
+  --tech-bg: #f5f2ec; --tech-border: var(--purple);
+  --tag-bg: rgba(74,104,204,0.05); --tag-border: rgba(74,104,204,0.1);
+  --search-bg: #f0ede8; --feas-bg: #f0ede8;
+  --pill-bg-from: #f5f2ec; --pill-bg-to: #efece5; --pill-border: #dcd7ce;
+  --pill-active-bg-from: rgba(91,79,212,0.1); --pill-active-bg-to: rgba(74,104,204,0.06);
+  --entry-hover-border: #d4cec2;
+  --detail-text: #4a4540; --tech-text: #4a4540;
+  --scrollbar-thumb: #d4cec2;
+  --sidebar-header-gradient: linear-gradient(180deg, rgba(184,148,30,0.06) 0%, transparent 100%);
+  --h1-gradient: linear-gradient(135deg, #1a1815 0%, #5a5142 100%);
   --theme-icon: '☾';
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -83,7 +83,7 @@ body {
 
 /* ── SIDEBAR ── */
 #sidebar {
-  width: 270px; min-width: 270px; background: var(--surface);
+  width: 300px; min-width: 300px; max-width: 300px; background: var(--surface);
   border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden;
   transition: background 0.4s ease, border-color 0.4s ease;
 }
@@ -138,6 +138,29 @@ body {
   box-shadow: inset 1px 0 0 var(--accent);
 }
 .cat-item .icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.module-header {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--dim); padding: 12px 14px 8px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: all 0.2s ease; user-select: none;
+  border-radius: 6px; margin: 2px 6px;
+}
+.module-header:hover { color: var(--accent2); background: rgba(200,168,78,0.04); }
+.module-header .mod-icon { font-size: 15px; width: 22px; text-align: center; }
+.module-header .mod-chevron {
+  margin-left: auto; font-size: 10px; transition: transform 0.25s ease;
+  opacity: 0.5;
+}
+.module-header.open .mod-chevron { transform: rotate(90deg); opacity: 1; }
+.module-header .mod-count {
+  font-size: 10px; background: var(--border); padding: 2px 8px;
+  border-radius: 10px; font-weight: 500; color: var(--dim2);
+}
+.module-categories {
+  overflow: hidden; max-height: 0; transition: max-height 0.35s ease;
+}
+.module-categories.open { max-height: 600px; }
+.module-categories .cat-item { padding-left: 28px; }
 .cat-item .count {
   margin-left: auto; font-size: 10px; background: var(--border); padding: 3px 8px;
   border-radius: 10px; font-weight: 500;
@@ -293,6 +316,29 @@ body {
 }
 .expand-hint:hover { color: var(--accent); }
 
+/* ── CLIENT QUERY INPUT ── */
+.query-panel {
+  margin: 0 20px 16px 20px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.query-panel label {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; display: block;
+}
+.query-panel textarea {
+  width: 100%; background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 8px; color: var(--text); font-family: inherit; font-size: 13px;
+  padding: 10px 14px; resize: vertical; min-height: 56px; max-height: 140px;
+  outline: none; transition: border-color 0.3s ease; line-height: 1.5;
+}
+.query-panel textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,168,78,0.1); }
+.query-panel textarea::placeholder { color: var(--dim2); }
+.query-panel .query-hint {
+  font-size: 10px; color: var(--dim2); margin-top: 6px; display: flex; justify-content: space-between; align-items: center;
+}
+.query-match-count { color: var(--accent2); font-weight: 600; }
+
 .empty-state { text-align: center; padding: 80px 20px; color: var(--dim); }
 .empty-state .icon { font-size: 52px; margin-bottom: 20px; opacity: 0.6; }
 .empty-state h3 { font-size: 17px; color: var(--text); margin-bottom: 8px; font-weight: 600; }
@@ -315,9 +361,9 @@ body {
   <div class="sidebar-header">
     <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme">☀</button>
     <h1><span>SF</span> Compass</h1>
-    <div class="subtitle">EC Implementation Reference</div>
+    <div class="subtitle">94 scenarios · 8 SF modules</div>
   </div>
-  <input type="text" id="search-box" placeholder="Search client questions..." oninput="filterEntries()">
+  <input type="text" id="search-box" placeholder="Search by keyword, tag, or topic..." oninput="filterEntries()">
   <div class="category-list" id="category-list"></div>
   <div class="sidebar-footer">
     <div class="legend">
@@ -326,13 +372,21 @@ body {
       <div class="legend-item"><span class="legend-dot" style="background:var(--orange)"></span> Wknd</div>
       <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Limited</div>
     </div>
-    <div style="font-size:10px">SF Compass · 74 items</div>
+    <div style="font-size:10px">SF Compass · 94 items</div>
   </div>
 </div>
 
 <div id="main">
+  <div class="query-panel" id="query-panel">
+    <label>🎯 Client Query / Issue</label>
+    <textarea id="client-query" placeholder="Paste your client's question or issue here... e.g., 'Client wants matrix reporting for UK team plus country-specific statutory fields for Germany and France'"></textarea>
+    <div class="query-hint">
+      <span>Matches across all 94 scenarios automatically as you type</span>
+      <span class="query-match-count" id="query-match-count"></span>
+    </div>
+  </div>
   <div class="toolbar">
-    <span class="active-cat" id="active-cat-label">All Topics</span>
+    <span class="active-cat" id="active-cat-label">All Modules</span>
     <span class="result-count" id="result-count"></span>
     <div class="feasibility-filter" id="feas-filter">
       <button class="feas-btn active" data-feas="all" onclick="setFeasFilter('all', this)">All</button>
@@ -355,18 +409,38 @@ body {
 
 <script>
 const CATEGORIES = [
-  { id: 'foundation', name: 'Foundation Objects', icon: '🏛' },
-  { id: 'position', name: 'Position Management', icon: '📊' },
-  { id: 'employee', name: 'Employee Data Model', icon: '👤' },
-  { id: 'rules', name: 'Business Rules', icon: '⚙' },
-  { id: 'workflow', name: 'Workflows & Approvals', icon: '🔄' },
-  { id: 'events', name: 'Event Reasons', icon: '📋' },
-  { id: 'ui', name: 'UI & Self-Service', icon: '🖥' },
-  { id: 'reporting', name: 'Reporting & Analytics', icon: '📈' },
-  { id: 'integration', name: 'Integrations', icon: '🔗' },
-  { id: 'compliance', name: 'Compliance & Localization', icon: '🛡' },
-  { id: 'time', name: 'Time & Attendance', icon: '⏱' },
-  { id: 'data', name: 'Data Import & Migration', icon: '📥' },
+  { id: 'foundation', name: 'Foundation Objects', icon: '🏛', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'position', name: 'Position Management', icon: '📊', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'employee', name: 'Employee Data Model', icon: '👤', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'rules', name: 'Business Rules', icon: '⚙', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'workflow', name: 'Workflows & Approvals', icon: '🔄', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'events', name: 'Event Reasons', icon: '📋', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'ui', name: 'UI & Self-Service', icon: '🖥', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'time', name: 'Time & Attendance', icon: '⏱', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'compliance', name: 'Compliance & Localization', icon: '🛡', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'rcm-req', name: 'Requisitions', icon: '📝', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'rcm-cand', name: 'Candidate Management', icon: '👥', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'rcm-offer', name: 'Offer Letters', icon: '✉️', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'rcm-career', name: 'Career Site', icon: '🌐', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'onb-proc', name: 'Onboarding Processes', icon: '🚀', module: 'Onboarding', modIcon: '🌟' },
+  { id: 'onb-doc', name: 'Document Collection', icon: '📄', module: 'Onboarding', modIcon: '🌟' },
+  { id: 'onb-comp', name: 'Compliance Forms', icon: '✅', module: 'Onboarding', modIcon: '🌟' },
+  { id: 'pmgm-form', name: 'Performance Forms', icon: '📋', module: 'Performance', modIcon: '📈' },
+  { id: 'pmgm-goal', name: 'Goal Management', icon: '🎯', module: 'Performance', modIcon: '📈' },
+  { id: 'pmgm-calib', name: 'Calibration', icon: '⚖️', module: 'Performance', modIcon: '📈' },
+  { id: 'pmgm-360', name: '360 Reviews', icon: '🔄', module: 'Performance', modIcon: '📈' },
+  { id: 'comp-base', name: 'Base Salary', icon: '💰', module: 'Compensation', modIcon: '💎' },
+  { id: 'comp-var', name: 'Variable Pay', icon: '📊', module: 'Compensation', modIcon: '💎' },
+  { id: 'comp-stock', name: 'Equity / Long-Term', icon: '📈', module: 'Compensation', modIcon: '💎' },
+  { id: 'lms-catalog', name: 'Course Catalog', icon: '📚', module: 'Learning', modIcon: '🎓' },
+  { id: 'lms-assign', name: 'Assignments', icon: '📌', module: 'Learning', modIcon: '🎓' },
+  { id: 'lms-ext', name: 'External Content', icon: '🔗', module: 'Learning', modIcon: '🎓' },
+  { id: 'scdp-nom', name: 'Talent Nominations', icon: '⭐', module: 'Succession', modIcon: '🌱' },
+  { id: 'scdp-pool', name: 'Talent Pools', icon: '🏊', module: 'Succession', modIcon: '🌱' },
+  { id: 'scdp-dev', name: 'Development Plans', icon: '🌱', module: 'Succession', modIcon: '🌱' },
+  { id: 'integration', name: 'Integrations', icon: '🔗', module: 'Platform', modIcon: '⚡' },
+  { id: 'reporting', name: 'Reporting & Analytics', icon: '📈', module: 'Platform', modIcon: '⚡' },
+  { id: 'data', name: 'Data Import & Migration', icon: '📥', module: 'Platform', modIcon: '⚡' },
 ];
 
 // DATA: q=client question, s=summary, f=feasibility, level=effort, tags, approach=business explanation, tech=implementation steps
@@ -913,6 +987,146 @@ const ENTRIES = [
     tags:['Import Validation'],
     tech:`<ol><li>Import validation happens in two stages: (1) structural validation — field format, required fields, valid picklist codes, existing FO codes; (2) business rule validation — onSave rules fire on each imported row</li><li>Stage 1 errors: wrong date format, missing required field, invalid picklist code. These are caught immediately during validate-only step</li><li>Stage 2 errors: business rule raises error (e.g., "Cost Center must match Department"). These rows are skipped and listed in the import error file</li><li>Download the error file from the import results → fix the source data → re-import only the errored rows</li><li>Pro tip: always run <b>Validate Only</b> before the actual import. This catches both structural and rule errors without committing any data</li></ol><div class="source">Source: SAP SF Implementation Workbook — Import Validation (Lesson 7.6)</div>`
   },
+  { cat:'rcm-req', f:'green', level:'Configuration',
+    q:'Can we create job requisitions directly from vacant positions in EC?',
+    s:'Standard integration. Vacant positions in EC can be converted to requisitions in Recruiting with one click. Position attributes auto-populate.',
+    approach:'In Recruiting, use "Create Requisition from Position". The requisition links to the EC position for auto-fill on hire.',
+    tags:['Position-to-RCM','Requisitions'],
+    tech:`<ol><li>In <b>Recruiting → Requisitions</b>, click <b>Create Requisition</b> → select <b>From Position</b></li><li>Search for the vacant position. Job code, department, location, FTE auto-populate</li><li>Add recruiting fields: posting date, target fill date, hiring manager, recruiter</li><li>When candidate is hired, the position auto-fills. Verify in <b>Manage Positions</b></li></ol><div class="source">Source: SAP SF Recruiting — Position Integration (RCM Admin Guide 4.2)</div>`
+  },
+  { cat:'rcm-cand', f:'green', level:'Configuration',
+    q:'Can candidates apply via a branded career site instead of the default SF page?',
+    s:'SF Recruiting supports branded Career Site Builder. Customize layout, colors, logo, and content to match your company brand.',
+    approach:'Use Career Site Builder. Configure domain, theme, and page content. No coding required.',
+    tags:['Career Site','Branding'],
+    tech:`<ol><li>Go to <b>Admin Center → Career Site Builder</b></li><li>Create new site: set name, language, logo. Under <b>Theme</b>, set colors, fonts, buttons</li><li>Build pages with drag-and-drop widgets (Hero Banner, Job Search, Testimonials)</li><li>Set custom domain (careers.yourcompany.com). Publish</li></ol><div class="source">Source: SAP SF Recruiting — Career Site Builder (RCM Admin Guide 7.1)</div>`
+  },
+  { cat:'rcm-offer', f:'amber', level:'Configuration + Templates',
+    q:'Can we generate offer letters with custom templates including compensation details?',
+    s:'Offer Letter templates are configurable with merge fields from requisition, candidate, and compensation data.',
+    approach:'Create templates in Offer Letter Administration. Use merge tokens. Map templates to job codes or countries.',
+    tags:['Offer Letters','Templates'],
+    tech:`<ol><li>Go to <b>Admin Center → Offer Letter Templates</b> → <b>Create Template</b> (HTML or DOCX)</li><li>Add merge tokens: <code>{{candidate.firstName}}</code>, <code>{{compensation.baseSalary}}</code>, <code>{{offer.startDate}}</code></li><li>Assign templates by job code or country. Configure offer approval workflow</li><li>Limitation: e-signature NOT native — integrate DocuSign or Adobe Sign</li></ol><div class="source">Source: SAP SF Recruiting — Offer Letters (RCM Admin Guide 9.3)</div>`
+  },
+  { cat:'rcm-career', f:'green', level:'Configuration',
+    q:'Can we add multi-language support to the career site for global recruiting?',
+    s:'Career Site Builder supports full multi-language. Pages have translated versions; jobs display in candidate's browser language.',
+    approach:'Enable languages. Create translated page versions. Job descriptions auto-translate from requisition content.',
+    tags:['Multi-Language','Global Recruiting'],
+    tech:`<ol><li>In <b>Career Site Builder → Site Configuration → Languages</b>, add supported languages</li><li>Create translated versions of each page. Dynamic widgets auto-render in user's language</li><li>Add translated job descriptions to requisitions. Fallback to default language</li></ol><div class="source">Source: SAP SF Career Site Builder — Multi-Language (RCM Admin Guide 7.4)</div>`
+  },
+  { cat:'onb-proc', f:'green', level:'Configuration',
+    q:'Can we trigger onboarding automatically when a candidate accepts an offer?',
+    s:'Yes. When offer accepted and hire date confirmed, Onboarding auto-triggers based on configured rules.',
+    approach:'Configure RCM-to-ONB trigger. Map onboarding programs to job codes, countries, or departments.',
+    tags:['Auto-Trigger','RCM-ONB Integration'],
+    tech:`<ol><li>In <b>Admin Center → Onboarding → Program Settings</b>, create an onboarding program</li><li>Under <b>Triggers</b>, select <b>Recruiting → Hire</b>. Map to job codes, countries, departments</li><li>New hire receives email with dashboard link. Monitor via <b>Onboarding Dashboard</b></li></ol><div class="source">Source: SAP SF Onboarding — Program Configuration (ONB Admin Guide 3.2)</div>`
+  },
+  { cat:'onb-doc', f:'green', level:'Configuration',
+    q:'Can new hires upload and sign documents electronically during onboarding?',
+    s:'Onboarding includes Document Collection. New hires upload files (ID, certificates) and complete electronic forms.',
+    approach:'Add Document Collection step. Add required document types with expiry tracking. Integrate e-signature.',
+    tags:['Document Collection','Compliance'],
+    tech:`<ol><li>Add a <b>Document Collection</b> step in the program. Add types: Passport, Visa, P45, Bank Details</li><li>Set Required/Optional. Configure expiry tracking. Add e-forms for I-9, Right to Work</li><li>Integrate DocuSign/Adobe Sign for e-signature. HR reviews submitted docs</li></ol><div class="source">Source: SAP SF Onboarding — Document Management (ONB Admin Guide 5.1)</div>`
+  },
+  { cat:'onb-comp', f:'green', level:'Configuration',
+    q:'Can we include compliance forms like I-9, Right to Work, and tax withholding in onboarding?',
+    s:'Compliance forms are configurable. Standard templates for I-9, W-4, Right to Work available. Custom forms can be built.',
+    approach:'Add compliance steps. Use pre-built templates. Create custom forms for country-specific requirements.',
+    tags:['Compliance','I-9','Right to Work'],
+    tech:`<ol><li>Add a <b>Compliance Step</b>. Select templates: I-9 (US), W-4 (US), Right to Work (UK), TFN (AUS)</li><li>Build custom forms via <b>Form Builder</b>. Set as Required Before Day 1 or post-start</li><li>HR reviews in <b>Compliance Dashboard</b>. Forms stored with retention periods</li></ol><div class="source">Source: SAP SF Onboarding — Compliance Forms (ONB Admin Guide 6.1)</div>`
+  },
+  { cat:'pmgm-form', f:'green', level:'Configuration',
+    q:'Can we create a performance review form with sections for goals, competencies, and development?',
+    s:'Performance forms are fully configurable. Mix sections: goals, competencies, values, development, custom sections.',
+    approach:'Use Form Template Designer. Add sections, rating scales, weights. Assign via route maps.',
+    tags:['Performance Forms','Templates'],
+    tech:`<ol><li>Go to <b>Admin Center → Performance Management → Form Templates</b> → <b>Create Template</b></li><li>Add sections: Goal Summary, Competency Assessment, Development Plan, Manager Comments, Self-Assessment</li><li>Configure rating scales, section weights (Goals 60%, Competencies 30%, Values 10%)</li><li>Create Route Map: Self-Assessment → Manager Review → 1:1 → Acknowledgment. Launch for review period</li></ol><div class="source">Source: SAP SF Performance — Form Template Design (PMGM Admin Guide 4.1)</div>`
+  },
+  { cat:'pmgm-goal', f:'green', level:'Standard',
+    q:'Can goals cascade from company objectives down to individual employees?',
+    s:'Goal Management supports cascading goals. Company → Department → Team → Individual, all linked with auto roll-up.',
+    approach:'Create company goals. Use Cascade to push down. Employees align personal goals.',
+    tags:['Goal Cascading','OKRs'],
+    tech:`<ol><li>Create company goal in <b>Goal Management → Company Goals</b>. Use <b>Cascade</b> to push to departments</li><li>Department heads refine and cascade to teams, then to individuals</li><li>Goal Alignment Chart shows full cascade. Progress rolls up automatically</li></ol><div class="source">Source: SAP SF Goal Management — Cascading Goals (PMGM Admin Guide 5.3)</div>`
+  },
+  { cat:'pmgm-calib', f:'amber', level:'Configuration + Facilitation',
+    q:'Can we run calibration sessions where managers review and adjust ratings across teams?',
+    s:'Calibration is a structured process. Configure templates, launch sessions by org, facilitators adjust with drag-and-drop.',
+    approach:'Create calibration template. Launch sessions. Facilitators adjust and publish final ratings.',
+    tags:['Calibration','Rating Consistency'],
+    tech:`<ol><li>Create template in <b>Admin Center → Calibration → Templates</b>. Choose rating scale, 9-box grid</li><li>Define subjects, guidelines (target distribution, forced ranking). Launch session with facilitators</li><li>Facilitators drag-and-drop to adjust, add comments. Publish adjusted ratings after session</li></ol><div class="source">Source: SAP SF Calibration — Session Management (PMGM Admin Guide 8.2)</div>`
+  },
+  { cat:'pmgm-360', f:'amber', level:'Configuration + Change Management',
+    q:'Can we run 360-degree feedback where employees get reviews from managers, peers, and direct reports?',
+    s:'SF supports 360 Reviews as separate process. Collects feedback from multiple raters and aggregates results.',
+    approach:'Configure 360 template. Select participants. Launch feedback collection. Results compiled into report.',
+    tags:['360 Review','Multi-Rater Feedback'],
+    tech:`<ol><li>Go to <b>Admin Center → 360 Reviews → Templates</b>. Design questionnaire with rating scale + free text</li><li>Configure rater categories: Self, Manager, Peers (min 3 for anonymity), Direct Reports, Matrix Partners</li><li>Launch: select participants, set window (2-3 weeks). System generates aggregated 360 Report</li></ol><div class="source">Source: SAP SF 360 Reviews — Template & Process (PMGM Admin Guide 9.1)</div>`
+  },
+  { cat:'comp-base', f:'green', level:'Configuration',
+    q:'Can we manage annual salary review cycles with budget allocation and manager worksheets?',
+    s:'SF Compensation supports structured cycles. Budgets allocated to managers, who distribute increases within constraints.',
+    approach:'Create compensation template with budget rules, guidelines, worksheets. Launch and monitor completion.',
+    tags:['Salary Review','Compensation Cycle'],
+    tech:`<ol><li>Go to <b>Admin Center → Compensation → Plan Setup</b>. Create template with merit budget (3.5%), promotion/adjustment budgets</li><li>Set guidelines: min/max increase, tenure tiers, performance multipliers. Add compa-ratio visualization</li><li>Launch cycle. Managers use <b>Compensation Worksheet</b> to allocate within budget. HR approves. Writes to EC</li></ol><div class="source">Source: SAP SF Compensation — Cycle Management (COMP Admin Guide 4.1)</div>`
+  },
+  { cat:'comp-var', f:'amber', level:'Configuration + Plan Setup',
+    q:'Can we manage bonus plans with complex formulas based on company and individual performance?',
+    s:'Variable Pay supports formula-based bonus plans combining financial metrics, KPIs, and individual performance.',
+    approach:'Design bonus plan. Define business goals with weights. Create payout formula.',
+    tags:['Bonus','Variable Pay'],
+    tech:`<ol><li>In <b>Admin Center → Variable Pay → Plan Setup</b>. Define Business Goals: Revenue (40%), EBITDA (30%)</li><li>Set payout curves (threshold 50%, target 100%, stretch 200%). Add Individual Modifier by performance</li><li>Calculate: Business Results × Individual Modifier × Target Bonus = Payout. Export to payroll</li></ol><div class="source">Source: SAP SF Variable Pay — Formula Design (COMP Admin Guide 6.2)</div>`
+  },
+  { cat:'comp-stock', f:'amber', level:'Configuration + External Integration',
+    q:'Can SF track equity grants like RSUs, stock options, and long-term incentive plans?',
+    s:'Compensation includes LTI support. Track equity grants, vesting schedules, balances. Full cap-table needs external platforms.',
+    approach:'Configure LTI award types. Track grant date, shares, vesting schedule, FMV. Integrate external equity platforms.',
+    tags:['Equity','LTI','Stock Options'],
+    tech:`<ol><li>In <b>Admin Center → Compensation → Award Types</b>, create: RSU, Stock Option, Performance Shares, SAR</li><li>Define: grant date, shares, grant price (FMV), vesting schedule (e.g., 25%/year over 4 years)</li><li>Managers grant in <b>Compensation Worksheet</b>. Vesting updates auto. Export to payroll for tax</li><li>Limitation: no cap table or SEC filings — integrate Shareworks, Equity Online, Global Shares</li></ol><div class="source">Source: SAP SF Compensation — LTI & Equity (COMP Admin Guide 8.1)</div>`
+  },
+  { cat:'lms-catalog', f:'green', level:'Configuration',
+    q:'Can we create a course catalog with both internal training and external content like LinkedIn Learning?',
+    s:'SF Learning supports internal courses, external integrations, and blended learning. Content Marketplace connects major providers.',
+    approach:'Create courses and programs. Integrate external content via Content Marketplace or custom API.',
+    tags:['Course Catalog','Content Integration'],
+    tech:`<ol><li>Go to <b>Admin Center → Learning → Courses</b> → <b>Create Course</b>. Types: e-Learning (SCORM), Instructor-Led, Virtual, Video, URL</li><li>For external: browse <b>Content Marketplace</b> (LinkedIn Learning, Coursera). Import or sync catalog</li><li>Organize into <b>Programs</b> and <b>Curricula</b>. Set visibility by department, job code</li></ol><div class="source">Source: SAP SF Learning — Course Administration (LMS Admin Guide 3.1)</div>`
+  },
+  { cat:'lms-assign', f:'green', level:'Configuration',
+    q:'Can we auto-assign mandatory training based on job role, country, or compliance requirements?',
+    s:'Assignment profiles automatically push required courses based on employee attributes — job code, department, country.',
+    approach:'Create assignment profiles with conditions. Set due dates, recurring schedules, escalation.',
+    tags:['Auto-Assignment','Compliance Training'],
+    tech:`<ol><li>In <b>Admin Center → Learning → Assignment Profiles</b>. Set target: Country=UK AND Job contains "Engineer"</li><li>Add courses. Set due dates ("30 days from hire" or "annually Jan 1st"). Configure recurrence</li><li>Set escalation: notify employee → manager → HR at intervals. New hires auto-assigned within 24h</li></ol><div class="source">Source: SAP SF Learning — Assignment Profiles (LMS Admin Guide 4.3)</div>`
+  },
+  { cat:'lms-ext', f:'green', level:'Configuration',
+    q:'Can we integrate external content providers like LinkedIn Learning, Coursera, or Udemy into SF Learning?',
+    s:'Content Marketplace has pre-built integrations for major providers. Custom content via AICC/xAPI/URL courses.',
+    approach:'Browse Content Marketplace to connect providers. For unsupported ones, create External URL courses with xAPI tracking.',
+    tags:['Content Integration','LinkedIn Learning'],
+    tech:`<ol><li>Go to <b>Admin Center → Learning → Content Marketplace</b>. Browse: LinkedIn Learning, Coursera, Pluralsight, Udemy</li><li>Click <b>Connect</b>. Enter API credentials. Import curated courses or enable full sync</li><li>Completion data flows back. Tip: curate 50-100 courses — don't import full catalog</li></ol><div class="source">Source: SAP SF Learning — Content Marketplace (LMS Admin Guide 3.4)</div>`
+  },
+  { cat:'scdp-nom', f:'green', level:'Configuration',
+    q:'Can managers nominate employees as successors for key positions?',
+    s:'Succession Management allows managers to nominate successors. Evaluate on readiness and potential. HR runs talent reviews.',
+    approach:'Identify critical positions. Managers nominate. HR validates via talent reviews and builds successor pools.',
+    tags:['Succession Planning','Talent Nominations'],
+    tech:`<ol><li>Define <b>Critical Positions</b> in <b>Admin Center → Succession → Position Settings</b></li><li>Managers access <b>Succession → My Team</b>. Nominate successors. Rate: Readiness (Ready Now, 1-2yr, 3-5yr) and Impact of Loss</li><li>Nominees appear on <b>Succession Org Chart</b>. HR runs <b>Talent Reviews</b>. Dashboard shows bench strength</li></ol><div class="source">Source: SAP SF Succession — Nomination & Planning (SCDP Admin Guide 3.1)</div>`
+  },
+  { cat:'scdp-pool', f:'green', level:'Configuration',
+    q:'Can we create and manage talent pools for future leadership and critical roles?',
+    s:'Talent Pools group high-potential employees by role or competency. Support targeted development and succession planning.',
+    approach:'Create pools in Succession. Add members manually or via rule-based criteria. Use for development and nominations.',
+    tags:['Talent Pools','HiPo'],
+    tech:`<ol><li>Go to <b>Admin Center → Succession → Talent Pools</b> → <b>Create Pool</b></li><li>Add members: manual or <b>Rule-Based</b> (performance=Exceeds AND job level≥3)</li><li>Pool Dashboard: readiness heatmap, diversity stats. Members highlighted as pre-vetted in succession nominations</li></ol><div class="source">Source: SAP SF Succession — Talent Pools (SCDP Admin Guide 4.1)</div>`
+  },
+  { cat:'scdp-dev', f:'green', level:'Configuration',
+    q:'Can employees have development plans linked to their career goals and competency gaps?',
+    s:'Development Plans connect career aspirations, competency gaps, and learning activities. Include goals, courses, mentoring.',
+    approach:'Enable Development Plans in RBP. Employees and managers build plans with activities and target dates.',
+    tags:['Development Plans','Career Pathing'],
+    tech:`<ol><li>Enable <b>Development Plan</b> in <b>Admin Center → Development → Configuration</b>. Configure templates</li><li>Employee creates plan: career goal, competency gaps, activities (courses, mentoring, rotations, certifications)</li><li>Manager reviews. Integration: performance goals and LMS completions sync into the plan</li></ol><div class="source">Source: SAP SF Development — Plan Configuration (SCDP Admin Guide 5.2)</div>`
+  },
 ];
 
 // ═══════════════════════════════════════════
@@ -925,6 +1139,11 @@ function init() {
   initTheme();
   renderCategories();
   filterEntries();
+  const queryEl = document.getElementById('client-query');
+  if (queryEl) {
+    queryEl.addEventListener('input', function() { searchQuery = this.value.trim().toLowerCase(); filterEntries(); });
+    queryEl.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); document.getElementById('content').scrollIntoView({ behavior: 'smooth' }); } });
+  }
 }
 
 function initTheme() {
@@ -958,20 +1177,49 @@ function renderCategories() {
   const list = document.getElementById('category-list');
   const counts = {};
   for (const e of ENTRIES) counts[e.cat] = (counts[e.cat] || 0) + 1;
-  list.innerHTML = `
-    <div class="cat-item active" data-cat="all" onclick="selectCategory('all', this)">
-      <span class="icon">📋</span> All Topics <span class="count">${ENTRIES.length}</span></div>
-  ` + CATEGORIES.map(c => `
-    <div class="cat-item" data-cat="${c.id}" onclick="selectCategory('${c.id}', this)">
-      <span class="icon">${c.icon}</span> ${c.name} <span class="count">${counts[c.id]||0}</span></div>
-  `).join('');
+  const modules = {};
+  for (const c of CATEGORIES) {
+    if (!modules[c.module]) modules[c.module] = { cats: [], total: 0, icon: c.modIcon };
+    modules[c.module].cats.push(c);
+    modules[c.module].total += (counts[c.id] || 0);
+  }
+  let html = `<div class="cat-item active" data-cat="all" onclick="selectCategory('all', this)">
+    <span class="icon">🏠</span> All Modules <span class="count">${ENTRIES.length}</span></div>`;
+  for (const [modName, modData] of Object.entries(modules)) {
+    html += `<div class="module-header" onclick="toggleModule(this)" data-module="${modName}">
+      <span class="mod-icon">${modData.icon}</span>${modName}
+      <span class="mod-count">${modData.total}</span>
+      <span class="mod-chevron">▸</span></div>
+    <div class="module-categories" data-module="${modName}">`;
+    for (const c of modData.cats) {
+      html += `<div class="cat-item" data-cat="${c.id}" onclick="event.stopPropagation();selectCategory('${c.id}', this)">
+        <span class="icon">${c.icon}</span> ${c.name} <span class="count">${counts[c.id]||0}</span></div>`;
+    }
+    html += `</div>`;
+  }
+  list.innerHTML = html;
+  setTimeout(() => {
+    const ecHeader = document.querySelector('.module-header[data-module="Employee Central"]');
+    if (ecHeader) toggleModule(ecHeader);
+  }, 100);
+}
+
+function toggleModule(header) {
+  const moduleName = header.getAttribute('data-module');
+  const categories = document.querySelector(`.module-categories[data-module="${moduleName}"]`);
+  if (!categories) return;
+  const isOpen = categories.classList.contains('open');
+  document.querySelectorAll('.module-categories.open').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.module-header.open').forEach(h => h.classList.remove('open'));
+  if (!isOpen) { categories.classList.add('open'); header.classList.add('open'); }
 }
 
 function selectCategory(id, el) {
   activeCategory = id;
   document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('active-cat-label').textContent = id === 'all' ? 'All Topics' : (CATEGORIES.find(c => c.id === id)?.name || id);
+  const cat = CATEGORIES.find(c => c.id === id);
+  document.getElementById('active-cat-label').textContent = id === 'all' ? 'All Modules' : (cat ? cat.module + ' › ' + cat.name : id);
   filterEntries();
 }
 
@@ -997,19 +1245,23 @@ function toggleTechDetails() {
 }
 
 function filterEntries() {
-  searchQuery = document.getElementById('search-box').value.toLowerCase();
+  const sidebarQ = document.getElementById('search-box').value.toLowerCase();
+  const clientQ = document.getElementById('client-query') ? document.getElementById('client-query').value.toLowerCase() : '';
+  searchQuery = sidebarQ || clientQ;
   let filtered = ENTRIES;
   if (activeCategory !== 'all') filtered = filtered.filter(e => e.cat === activeCategory);
   if (activeFeas !== 'all') filtered = filtered.filter(e => e.f === activeFeas);
   if (searchQuery) {
-    const q = searchQuery;
-    filtered = filtered.filter(e =>
-      e.q.toLowerCase().includes(q) || e.s.toLowerCase().includes(q) ||
-      e.approach.toLowerCase().includes(q) || e.tags.some(t => t.toLowerCase().includes(q)) ||
-      (e.tech && e.tech.toLowerCase().includes(q))
-    );
+    const terms = searchQuery.split(/\s+/).filter(t => t.length > 0);
+    filtered = filtered.filter(e => {
+      const haystack = [e.q, e.s, e.approach, ...e.tags, e.tech || ''].join(' ').toLowerCase();
+      return terms.some(t => haystack.includes(t));
+    });
   }
   document.getElementById('result-count').textContent = `${filtered.length} item${filtered.length !== 1 ? 's' : ''}`;
+  const qmc = document.getElementById('query-match-count');
+  if (qmc && searchQuery) { qmc.textContent = `${filtered.length} match${filtered.length !== 1 ? 'es' : ''}`; }
+  else if (qmc) { qmc.textContent = ''; }
   renderEntries(filtered);
 }
 

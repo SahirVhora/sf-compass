@@ -1,16 +1,16 @@
 # SF Compass
 
-### Instant feasibility answers for SAP SuccessFactors Employee Central. Built for client sessions.
+### Instant feasibility answers for SAP SuccessFactors. All 8 modules. Built for client sessions.
 
 ---
 
 ## What it does
 
-Every SF consultant knows the moment — the client leans forward and asks *"Can we do this in Employee Central?"*
+Every SF consultant knows the moment — the client leans forward and asks *"Can we do this in SuccessFactors?"*
 
-SF Compass answers that question instantly. Type your client's question, get a color-coded feasibility answer in plain English. Toggle one switch, and you see exactly how to build it — menu paths, field names, rule types, all sourced from the SAP SF Implementation Workbook.
+SF Compass answers that question instantly. Type your client's question, get a color-coded feasibility answer in plain English. Toggle one switch, and you see exactly how to build it — menu paths, field names, rule types, all sourced from SF implementation workbooks.
 
-**74 customization scenarios across 12 EC domains.** No dependencies. No server. One HTML file.
+**94 customization scenarios across 8 SF modules.** No dependencies. No server. One HTML file.
 
 ---
 
@@ -23,40 +23,49 @@ SF Compass gives you **two modes in one tool**:
 | Mode | What the client sees | What you see |
 |------|---------------------|--------------|
 | **Client-ready** (default) | Plain-English feasibility + approach | Same — keeps everyone aligned |
-| **Implementation Steps** (toggle ON) | Hidden | Numbered technical steps with exact Admin Center paths, field IDs, rule types, and SAP workbook references |
+| **Implementation Steps** (toggle ON) | Hidden | Numbered technical steps with exact Admin Center paths, field IDs, rule types, and workbook references |
+
+---
+
+## Modules covered (94 scenarios)
+
+### Employee Central (67)
+Foundation Objects (7) · Position Management (6) · Employee Data Model (9) · Business Rules (7) · Workflows & Approvals (6) · Event Reasons (4) · UI & Self-Service (5) · Time & Attendance (6) · Compliance & Localization (7)
+
+### Recruiting (4)
+Requisitions · Candidate Management · Offer Letters · Career Site
+
+### Onboarding (3)
+Onboarding Processes · Document Collection · Compliance Forms
+
+### Performance & Goals (4)
+Performance Forms · Goal Management · Calibration · 360 Reviews
+
+### Compensation (3)
+Base Salary · Variable Pay · Equity / Long-Term Incentives
+
+### Learning (3)
+Course Catalog · Assignments · External Content Integration
+
+### Succession (3)
+Talent Nominations · Talent Pools · Development Plans
+
+### Platform (17)
+Integrations · Reporting & Analytics · Data Import & Migration
 
 ---
 
 ## Features
 
-- 🔍 **Instant search** — press `/` and type. Searches questions, summaries, tags, and technical steps simultaneously
+- 🎯 **Client Query panel** — paste a client's full question, matches across all 94 scenarios as you type
+- 🏗 **Collapsible sidebar** — 8 modules as top-level accordion items, click to expand and see categories
 - 🟢🟡🟠🔴 **4-level feasibility** — Full / Partial / Workaround / Limited — color-coded throughout
-- ⚙ **Implementation Steps toggle** — prominent purple pill with "PRO" badge; reveals exact configuration steps when you need them
-- ☀☾ **Apple-inspired theme system** — dark mode by default, light mode with one click, auto-detects your OS preference
+- ⚙ **Implementation Steps toggle** — prominent pill button reveals exact configuration steps
+- ☀☾ **Premium dual theme** — dark mode (Linear-inspired navy + gold), light mode (warm parchment tones)
 - 📱 **Responsive** — works on laptop during sessions, tablet on the go
-- 🔖 **Filter by domain** — 12 EC categories in the sidebar with entry counts
-- 🏷 **Feasibility filter** — narrow to "Full support only" when scoping what's achievable
+- 🔖 **Filter by module/category** — sidebar with entry counts, click to narrow
+- 🏷 **Feasibility filter** — narrow to "Full support only" when scoping
 - 💾 **Remembers preferences** — theme choice saved locally
-
----
-
-## Coverage
-
-| Domain | Scenarios |
-|--------|-----------|
-| Foundation Objects | 7 |
-| Position Management | 6 |
-| Employee Data Model | 9 |
-| Business Rules | 7 |
-| Workflows & Approvals | 6 |
-| Event Reasons | 4 |
-| UI & Self-Service | 5 |
-| Reporting & Analytics | 6 |
-| Integrations | 6 |
-| Compliance & Localization | 7 |
-| Time & Attendance | 6 |
-| Data Import & Migration | 5 |
-| **Total** | **74** |
 
 ---
 
@@ -78,13 +87,7 @@ python3 -m http.server 8899
 | `/` | Focus search bar |
 | `Esc` | Clear / close |
 | Click card | Expand full detail |
-| `Space` | Not used (reserved) |
-
----
-
-## Screenshots
-
-> Open `index.html` in your browser to see it live. Dark and light themes both included.
+| `Enter` (in query) | Jump to results |
 
 ---
 
@@ -93,18 +96,8 @@ python3 -m http.server 8899
 - Single HTML file — CSS + JS inline
 - Zero dependencies, zero build step, zero npm
 - Runs offline, works in any modern browser
-- CSS custom properties for theming — clean light/dark switch with smooth transitions
+- CSS custom properties for theming — premium light/dark switch with smooth transitions
 - No analytics, no tracking, no external requests
-
----
-
-## Roadmap
-
-- [ ] RCM (Recruiting) module
-- [ ] ONB (Onboarding) module
-- [ ] LMS (Learning) module
-- [ ] Export as PDF for offline session packs
-- [ ] Multi-select comparison mode (compare 2-3 scenarios side by side)
 
 ---
 
