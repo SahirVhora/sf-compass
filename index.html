@@ -99,6 +99,16 @@ body {
 }
 .sidebar-header h1 span { color: var(--accent); -webkit-text-fill-color: var(--accent); }
 .sidebar-header .subtitle { font-size: 11px; color: var(--dim); margin-top: 3px; font-weight: 400; }
+.header-banner {
+  display: block; margin-top: 10px; padding: 6px 10px;
+  background: linear-gradient(135deg, rgba(200,168,78,0.08), rgba(91,141,239,0.06));
+  border: 1px solid var(--border); border-radius: 6px;
+  font-size: 11px; color: var(--dim); text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  line-height: 1.4;
+}
+.header-banner b { color: var(--text2); }
+.header-banner:hover { border-color: var(--accent); background: rgba(200,168,78,0.1); color: var(--text2); }
 
 /* ── THEME TOGGLE ── */
 .theme-toggle-btn {
@@ -463,6 +473,7 @@ body {
     <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme">☀</button>
     <h1><span>SF</span> Compass</h1>
     <div class="subtitle">94 scenarios · 8 SF modules</div>
+    <a href="https://sahirvhora.github.io/sf-value-navigator/" class="header-banner">💡 <b>Building the business case?</b> Map value realisation →</a>
   </div>
   <input type="text" id="search-box" placeholder="Search by keyword, tag, or topic..." oninput="filterEntries()">
   <div class="category-list" id="category-list"></div>
@@ -1562,9 +1573,5 @@ document.addEventListener('keydown', (e) => {
 
 init();
 </script>
-<div style="text-align:center;padding:12px 20px;background:var(--surface);border-top:1px solid var(--border);margin-top:20px;font-size:13px;color:var(--dim)">
-  💡 <b>Building the business case?</b> Map value realisation at
-  <a href="https://sahirvhora.github.io/sf-value-navigator/" style="color:var(--blue);font-weight:600">SF Value Navigator →</a>
-</div>
 </body>
 </html>
