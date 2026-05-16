@@ -399,22 +399,23 @@ body {
 
 @media (max-width: 768px) {
   body { flex-direction: column; }
-  #sidebar { width: 100%; min-width: 0; max-height: 40vh; }
+  #sidebar { width: 100%; min-width: 0; max-height: 32vh; }
   #main { flex: 1; }
   .detail-grid { grid-template-columns: 1fr; }
   .traceability-grid { grid-template-columns: 1fr; }
   .query-panel { margin: 0 14px 12px; padding: 12px 14px; }
-  .query-panel textarea { min-height: 88px; font-size: 14px; }
+  .query-panel textarea { min-height: 72px; font-size: 14px; }
   .query-panel .query-hint { flex-direction: column; align-items: flex-start; }
-  .toolbar { gap: 10px; padding: 10px 14px; align-items: stretch; }
+  .toolbar { gap: 8px; padding: 8px 14px; align-items: stretch; }
   .toolbar .active-cat,
   .toolbar .result-count { white-space: normal; }
   .toolbar .result-count { margin-left: 0; align-self: flex-start; }
   .feasibility-filter { width: 100%; flex-wrap: wrap; }
-  .feas-btn { min-height: 34px; }
+  .feas-btn { min-height: 32px; }
   .tech-toggle-row { width: 100%; margin-left: 0; flex-wrap: wrap; gap: 8px; }
   .tech-toggle-row > .feas-btn { flex: 1 1 140px; }
   .tech-pill { width: 100%; justify-content: center; }
+  .tech-pill .pill-badge { display: none; }
   #content { padding: 14px; }
   .entry { padding: 14px 16px; }
   .entry-header { gap: 12px; }
@@ -438,9 +439,12 @@ body {
   body { height: 100dvh; }
   .sidebar-header { padding: 18px 14px 14px; }
   .sidebar-header h1 { font-size: 15px; padding-right: 38px; }
+  #sidebar { max-height: 28vh; }
   #search-box { margin: 12px; }
   .category-list { padding: 4px 6px; }
-  .toolbar { padding: 10px 12px; }
+  .query-panel { margin: 0 12px 10px; padding: 10px 12px; }
+  .query-panel textarea { min-height: 64px; }
+  .toolbar { padding: 8px 12px; }
   .feasibility-filter { gap: 6px; background: transparent; padding: 0; }
   .feas-btn { flex: 1 1 calc(50% - 6px); }
   .tech-toggle-row > .feas-btn { flex: 1 1 calc(50% - 6px); }
