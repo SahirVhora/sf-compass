@@ -396,6 +396,8 @@ body {
       <button class="feas-btn" data-feas="red" onclick="setFeasFilter('red', this)">Limited</button>
     </div>
     <div class="tech-toggle-row">
+      <button class="feas-btn" onclick="exportScenarioPack()" title="Download the current filtered scenarios as a workshop pack">Export Pack</button>
+      <button class="feas-btn" onclick="copyScenarioSummary()" title="Copy the current filtered scenarios as a plain-English summary">Copy Summary</button>
       <div class="tech-pill" id="tech-pill" onclick="toggleTechDetails()">
         <span class="pill-icon">⚙</span>
         <span id="tech-label">Implementation Steps</span>
@@ -1263,6 +1265,75 @@ function filterEntries() {
   if (qmc && searchQuery) { qmc.textContent = `${filtered.length} match${filtered.length !== 1 ? 'es' : ''}`; }
   else if (qmc) { qmc.textContent = ''; }
   renderEntries(filtered);
+}
+
+function getVisibleEntries() {
+  const sidebarQ = document.getElementById('search-box').value.toLowerCase();
+  const clientQ = document.getElementById('client-query') ? document.getElementById('client-query').value.toLowerCase() : '';
+  const q = sidebarQ || clientQ;
+  let filtered = ENTRIES;
+  if (activeCategory !== 'all') filtered = filtered.filter(e => e.cat === activeCategory);
+  if (activeFeas !== 'all') filtered = filtered.filter(e => e.f === activeFeas);
+  if (q) {
+    const terms = q.split(/\s+/).filter(t => t.length > 0);
+    filtered = filtered.filter(e => {
+      const haystack = [e.q, e.s, e.approach, ...e.tags, e.tech || ''].join(' ').toLowerCase();
+      return terms.some(t => haystack.includes(t));
+    });
+  }
+  return filtered;
+}
+
+function scenarioText(e, idx) {
+  const feasLabels = { green:'Fully Supported', amber:'Partially Supported', orange:'Workaround Required', red:'Limited / Not Supported' };
+  const category = CATEGORIES.find(c => c.id === e.cat)?.name || e.cat;
+  const cleanTech = (e.tech || 'Implementation steps not captured yet.')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return [
+    `${idx + 1}. ${e.q}`,
+    `Feasibility: ${feasLabels[e.f]}`,
+    `Effort: ${e.level}`,
+    `Category: ${category}`,
+    `Tags: ${e.tags.join(', ')}`,
+    `Summary: ${e.s}`,
+    `Approach: ${e.approach}`,
+    techMode ? `Implementation notes: ${cleanTech}` : null
+  ].filter(Boolean).join('\n');
+}
+
+function exportScenarioPack() {
+  const entries = getVisibleEntries();
+  const generated = new Date().toISOString().slice(0, 10);
+  const body = [
+    'SF Compass Scenario Pack',
+    `Generated: ${generated}`,
+    `Scenario count: ${entries.length}`,
+    '',
+    ...entries.map(scenarioText)
+  ].join('\n\n---\n\n');
+  const blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sf-compass-scenario-pack-${generated}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function copyScenarioSummary() {
+  const entries = getVisibleEntries().slice(0, 12);
+  const body = [
+    `SF Compass summary (${entries.length} shown)`,
+    ...entries.map((e, i) => scenarioText(e, i))
+  ].join('\n\n');
+  try {
+    await navigator.clipboard.writeText(body);
+    alert('Scenario summary copied.');
+  } catch {
+    alert('Copy failed. Use Export Pack instead.');
+  }
 }
 
 function renderEntries(entries) {

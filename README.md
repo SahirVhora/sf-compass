@@ -102,3 +102,9 @@ python3 -m http.server 8899
 ---
 
 Built for SF consultants who need answers during the session, not after it.
+
+## Latest Enhancement
+
+- **Scenario Pack export** — consultants can now export the currently filtered feasibility scenarios as a plain-text workshop pack.
+- **Copy Summary** — copies the visible scenario set for quick paste into client notes, proposals, or follow-up emails.
+- **Implementation-aware output** — when Implementation Steps are toggled on, exported packs include technical notes as well as client-ready summaries.
