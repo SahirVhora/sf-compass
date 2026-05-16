@@ -313,7 +313,7 @@ body {
 .traceability-panel {
   margin-top: 16px;
   padding: 14px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
 }
@@ -335,7 +335,7 @@ body {
   color: var(--dim); display: block; font-size: 9px; text-transform: uppercase;
   letter-spacing: 0.6px; margin-bottom: 4px; font-weight: 600;
 }
-.traceability-value { color: var(--text); line-height: 1.5; }
+.traceability-value { color: var(--text); line-height: 1.5; overflow-wrap: anywhere; word-break: break-word; }
 .confidence-chip {
   display: inline-flex;
   align-items: center;
@@ -388,7 +388,7 @@ body {
 .query-panel textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,168,78,0.1); }
 .query-panel textarea::placeholder { color: var(--dim2); }
 .query-panel .query-hint {
-  font-size: 10px; color: var(--dim2); margin-top: 6px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; color: var(--dim2); margin-top: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
 }
 .query-match-count { color: var(--accent2); font-weight: 600; }
 
@@ -403,9 +403,52 @@ body {
   #main { flex: 1; }
   .detail-grid { grid-template-columns: 1fr; }
   .traceability-grid { grid-template-columns: 1fr; }
-  .toolbar { gap: 8px; padding: 10px 14px; }
+  .query-panel { margin: 0 14px 12px; padding: 12px 14px; }
+  .query-panel textarea { min-height: 88px; font-size: 14px; }
+  .query-panel .query-hint { flex-direction: column; align-items: flex-start; }
+  .toolbar { gap: 10px; padding: 10px 14px; align-items: stretch; }
+  .toolbar .active-cat,
+  .toolbar .result-count { white-space: normal; }
+  .toolbar .result-count { margin-left: 0; align-self: flex-start; }
+  .feasibility-filter { width: 100%; flex-wrap: wrap; }
+  .feas-btn { min-height: 34px; }
+  .tech-toggle-row { width: 100%; margin-left: 0; flex-wrap: wrap; gap: 8px; }
+  .tech-toggle-row > .feas-btn { flex: 1 1 140px; }
+  .tech-pill { width: 100%; justify-content: center; }
   #content { padding: 14px; }
+  .entry { padding: 14px 16px; }
+  .entry-header { gap: 12px; }
+  .feasibility-badge { width: 30px; height: 30px; border-radius: 8px; font-size: 13px; }
+  .entry-question { font-size: 13px; line-height: 1.5; }
+  .entry-subtitle { line-height: 1.4; }
+  .tag { font-size: 9px; padding: 3px 7px; }
+  .entry-detail { margin-top: 14px; padding-top: 14px; }
+  .entry-detail p,
+  .detail-item,
+  .traceability-item,
+  .traceability-value { font-size: 12px; }
+  .tech-section { padding: 14px; }
+  .tech-section ol { font-size: 12px; line-height: 1.7; }
+  .tech-section code,
+  .tech-section .source { overflow-wrap: anywhere; word-break: break-word; }
   .theme-toggle-btn { top: 10px; right: 10px; }
+}
+
+@media (max-width: 560px) {
+  body { height: 100dvh; }
+  .sidebar-header { padding: 18px 14px 14px; }
+  .sidebar-header h1 { font-size: 15px; padding-right: 38px; }
+  #search-box { margin: 12px; }
+  .category-list { padding: 4px 6px; }
+  .toolbar { padding: 10px 12px; }
+  .feasibility-filter { gap: 6px; background: transparent; padding: 0; }
+  .feas-btn { flex: 1 1 calc(50% - 6px); }
+  .tech-toggle-row > .feas-btn { flex: 1 1 calc(50% - 6px); }
+  #content { padding: 12px; }
+  .entry { padding: 13px 14px; border-radius: 9px; }
+  .traceability-panel { padding: 12px; border-radius: 10px; }
+  .tech-section { padding: 12px; }
+  .expand-hint { margin-top: 8px; }
 }
 </style>
 </head>
