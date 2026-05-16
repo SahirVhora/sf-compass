@@ -310,6 +310,59 @@ body {
   letter-spacing: 0.6px; margin-bottom: 2px; font-weight: 600;
 }
 .detail-item .value { font-weight: 600; color: var(--text); }
+.traceability-panel {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.traceability-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+.traceability-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+}
+.traceability-item { font-size: 12px; }
+.traceability-item label {
+  color: var(--dim); display: block; font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.6px; margin-bottom: 4px; font-weight: 600;
+}
+.traceability-value { color: var(--text); line-height: 1.5; }
+.confidence-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  width: fit-content;
+  border: 1px solid transparent;
+}
+.confidence-chip.high {
+  color: #7dd3a8;
+  background: rgba(125, 211, 168, 0.12);
+  border-color: rgba(125, 211, 168, 0.28);
+}
+.confidence-chip.medium {
+  color: #f3cf7a;
+  background: rgba(243, 207, 122, 0.12);
+  border-color: rgba(243, 207, 122, 0.28);
+}
+.confidence-chip.low {
+  color: #f1a3a3;
+  background: rgba(241, 163, 163, 0.12);
+  border-color: rgba(241, 163, 163, 0.28);
+}
 .expand-hint {
   font-size: 11px; color: var(--accent2); cursor: pointer; margin-top: 6px;
   display: inline-block; font-weight: 500; transition: color 0.15s;
@@ -349,6 +402,7 @@ body {
   #sidebar { width: 100%; min-width: 0; max-height: 40vh; }
   #main { flex: 1; }
   .detail-grid { grid-template-columns: 1fr; }
+  .traceability-grid { grid-template-columns: 1fr; }
   .toolbar { gap: 8px; padding: 10px 14px; }
   #content { padding: 14px; }
   .theme-toggle-btn { top: 10px; right: 10px; }
@@ -1336,6 +1390,41 @@ async function copyScenarioSummary() {
   }
 }
 
+function extractSourceMeta(entry) {
+  const tech = entry.tech || '';
+  const sourceMatch = tech.match(/<div class="source">Source:\s*([^<]+)<\/div>/i);
+  const source = sourceMatch ? sourceMatch[1].trim() : 'Scenario library guidance';
+  const lessonMatch = source.match(/Lesson\s+([0-9.]+)/i);
+  return {
+    source,
+    lesson: lessonMatch ? `Lesson ${lessonMatch[1]}` : 'General reference'
+  };
+}
+
+function inferConfidence(entry, sourceMeta) {
+  const source = sourceMeta.source.toLowerCase();
+  if (source.includes('implementation workbook') || source.includes('help portal')) {
+    return 'High Confidence';
+  }
+  if (
+    source.includes('product documentation') ||
+    source.includes('best practices') ||
+    source.includes('standard') ||
+    source.includes('community') ||
+    source.includes('field notes') ||
+    source.includes('kb')
+  ) {
+    return 'Medium Confidence';
+  }
+  return entry.f === 'green' ? 'Medium Confidence' : 'Low Confidence';
+}
+
+function buildRationale(entry, sourceMeta) {
+  const tagSummary = (entry.tags || []).slice(0, 3).join(', ');
+  const category = CATEGORIES.find(c => c.id === entry.cat)?.name || entry.cat || 'implementation';
+  return `Answer is grounded in ${category} guidance${tagSummary ? `, tagged for ${tagSummary}` : ''}, and anchored to ${sourceMeta.lesson}.`;
+}
+
 function renderEntries(entries) {
   const content = document.getElementById('content');
   if (!entries.length) {
@@ -1345,7 +1434,12 @@ function renderEntries(entries) {
   const feasLabels = { green:'Fully Supported', amber:'Partially Supported', orange:'Workaround Required', red:'Limited / Not Supported' };
   const feasIcons = { green:'✓', amber:'◐', orange:'⚒', red:'✗' };
 
-  content.innerHTML = entries.map((e, i) => `
+  content.innerHTML = entries.map((e, i) => {
+    const sourceMeta = extractSourceMeta(e);
+    const confidence = inferConfidence(e, sourceMeta);
+    const confidenceClass = confidence.toLowerCase().split(' ')[0];
+    const rationale = buildRationale(e, sourceMeta);
+    return `
     <div class="entry${techMode ? ' tech-visible' : ''}" id="entry-${i}" onclick="toggleEntry(${i})">
       <div class="entry-header">
         <div class="feasibility-badge ${e.f}">${feasIcons[e.f]}</div>
@@ -1358,6 +1452,27 @@ function renderEntries(entries) {
           <div class="entry-detail">
             <h4>Summary</h4><p>${e.s}</p>
             <h4>Approach</h4><p>${e.approach}</p>
+            <div class="traceability-panel">
+              <div class="traceability-title">Answer Traceability</div>
+              <div class="traceability-grid">
+                <div class="traceability-item">
+                  <label>Confidence</label>
+                  <div class="traceability-value"><span class="confidence-chip ${confidenceClass}">${confidence}</span></div>
+                </div>
+                <div class="traceability-item">
+                  <label>Primary Reference</label>
+                  <div class="traceability-value">${sourceMeta.source}</div>
+                </div>
+                <div class="traceability-item">
+                  <label>Why This Answer</label>
+                  <div class="traceability-value">${rationale}</div>
+                </div>
+                <div class="traceability-item">
+                  <label>Decision Basis</label>
+                  <div class="traceability-value">Feasibility is ${feasLabels[e.f]} and effort is ${e.level} for this implementation pattern.</div>
+                </div>
+              </div>
+            </div>
             <div class="tech-section">
               <h4>⚙ Technical Implementation Steps</h4>
               ${e.tech || '<p style="color:var(--dim)">Detailed steps coming soon.</p>'}
@@ -1372,7 +1487,8 @@ function renderEntries(entries) {
         </div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function highlight(text) {
