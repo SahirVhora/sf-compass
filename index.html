@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Instant feasibility answers for SAP SuccessFactors Employee Central. 74 customization scenarios - search, filter, and get implementation steps during client sessions. Free, no login, single-file tool.">
-<meta name="keywords" content="SAP SuccessFactors, Employee Central, EC implementation, SF consulting, HRIS customization, SF consultant tool, SAP SF EC, SuccessFactors feasibility, EC configuration guide, SAP HR, SuccessFactors Employee Central customization, SF implementation guide, EC business rules, MDF foundation objects, Position Management, SAP consulting tool, SuccessFactors consultant">
+<meta name="description" content="SF Compass is a SAP SuccessFactors consulting hub with 94 feasibility scenarios, implementation guidance, and links to supplementary tools for release impact, pay transparency, value realisation, data quality, and object sync.">
+<meta name="keywords" content="SAP SuccessFactors, SuccessFactors consulting tools, SF Compass, Employee Central, EC implementation, SAP SF, HRIS, SAP HR, release impact, pay transparency, position management, data quality, value realisation, object sync, SF consultant tool">
 <meta name="author" content="SF Compass">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://sahirvhora.github.io/sf-compass/">
@@ -12,8 +12,8 @@
 <!-- Open Graph / LinkedIn / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sahirvhora.github.io/sf-compass/">
-<meta property="og:title" content="SF Compass - SAP SuccessFactors EC Implementation Reference">
-<meta property="og:description" content="74 EC customization scenarios at your fingertips. Client-friendly answers by default, technical implementation steps when you need them. Built for SF consultants.">
+<meta property="og:title" content="SF Compass - SAP SuccessFactors Consulting Hub">
+<meta property="og:description" content="SAP SuccessFactors consulting hub: 94 feasibility scenarios, client-ready answers, implementation steps, and linked supplementary tools for SF consultants.">
 <meta property="og:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,11 +22,11 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://sahirvhora.github.io/sf-compass/">
-<meta name="twitter:title" content="SF Compass - SAP SuccessFactors EC Implementation Reference">
-<meta name="twitter:description" content="74 EC customization scenarios at your fingertips. Client-friendly answers by default, technical implementation steps when you need them.">
+<meta name="twitter:title" content="SF Compass - SAP SuccessFactors Consulting Hub">
+<meta name="twitter:description" content="94 SAP SuccessFactors feasibility scenarios, client-ready answers, implementation steps, and linked supplementary tools.">
 <meta name="twitter:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
 
-<title>SF Compass - EC Implementation Reference</title>
+<title>SF Compass - SAP SuccessFactors Consulting Hub</title>
 <style>
 /* ── THEME SYSTEM ── */
 :root, [data-theme="dark"] {
@@ -407,6 +407,29 @@ body {
 .empty-state h3 { font-size: 17px; color: var(--text); margin-bottom: 8px; font-weight: 600; }
 .empty-state p { font-size: 13px; color: var(--dim2); max-width: 400px; margin: 0 auto; line-height: 1.6; }
 
+/* ── TOOL SUITE PANEL ── */
+.suite-panel {
+  margin: 0 20px 16px 20px; background: linear-gradient(135deg, rgba(200,168,78,0.06), rgba(91,141,239,0.04));
+  border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.suite-header { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 12px; }
+.suite-kicker { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 4px; }
+.suite-title { font-size: 15px; color: var(--text); font-weight: 700; letter-spacing: -0.2px; }
+.suite-copy { font-size: 12px; color: var(--text2); line-height: 1.55; margin-top: 4px; max-width: 760px; }
+.suite-badge { font-size: 10px; color: var(--green); border: 1px solid rgba(63,185,107,0.28); background: rgba(63,185,107,0.08); border-radius: 999px; padding: 5px 9px; white-space: nowrap; font-weight: 700; }
+.tool-grid { display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 8px; }
+.tool-card {
+  display: block; text-decoration: none; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; min-height: 112px;
+}
+.tool-card:hover { transform: translateY(-1px); border-color: var(--accent); box-shadow: var(--shadow-sm); }
+.tool-card .tool-name { font-size: 12px; font-weight: 750; margin-bottom: 5px; color: var(--accent2); }
+.tool-card .tool-for { font-size: 9px; text-transform: uppercase; letter-spacing: 0.55px; color: var(--dim); font-weight: 800; margin-bottom: 5px; }
+.tool-card .tool-problem { font-size: 11px; color: var(--text2); line-height: 1.45; }
+.tool-card .tool-arrow { font-size: 10px; color: var(--dim); margin-top: 8px; }
+
 @media (max-width: 768px) {
   body { flex-direction: column; }
   #sidebar { width: 100%; min-width: 0; max-height: 32vh; }
@@ -416,6 +439,10 @@ body {
   .query-panel { margin: 0 14px 12px; padding: 12px 14px; }
   .query-panel textarea { min-height: 72px; font-size: 14px; }
   .query-panel .query-hint { flex-direction: column; align-items: flex-start; }
+  .suite-panel { margin: 0 14px 12px; padding: 13px 14px; }
+  .suite-header { flex-direction: column; gap: 8px; }
+  .tool-grid { grid-template-columns: 1fr; }
+  .tool-card { min-height: 0; }
   .toolbar { gap: 8px; padding: 8px 14px; align-items: stretch; }
   .toolbar .active-cat,
   .toolbar .result-count { white-space: normal; }
@@ -497,6 +524,49 @@ body {
       <span class="query-match-count" id="query-match-count"></span>
     </div>
   </div>
+
+  <section class="suite-panel" aria-label="SAP SuccessFactors supplementary tool suite">
+    <div class="suite-header">
+      <div>
+        <div class="suite-kicker">SAP SF Supplementary Tools</div>
+        <div class="suite-title">One front door for feasibility, value, release impact, compliance readiness, and data quality</div>
+        <div class="suite-copy">Use SF Compass during client sessions, then jump to the right specialist tool when the question needs evidence, testing actions, pay-transparency readiness, or data-quality checks.</div>
+      </div>
+      <div class="suite-badge">Zero employee data extraction</div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="https://sahirvhora.github.io/sf-release-update/" target="_blank" rel="noopener">
+        <div class="tool-name">Release Update</div>
+        <div class="tool-for">For release leads</div>
+        <div class="tool-problem">Turns SAP release notes into impact categories and follow-up testing actions.</div>
+        <div class="tool-arrow">Open tool →</div>
+      </a>
+      <a class="tool-card" href="https://sahirvhora.github.io/sf-pay-transparency/" target="_blank" rel="noopener">
+        <div class="tool-name">Pay Transparency</div>
+        <div class="tool-for">For reward and HRIS teams</div>
+        <div class="tool-problem">Frames EU Pay Transparency readiness across job, pay, reporting, and evidence workflows.</div>
+        <div class="tool-arrow">Open tool →</div>
+      </a>
+      <a class="tool-card" href="https://sahirvhora.github.io/sf-value-navigator/" target="_blank" rel="noopener">
+        <div class="tool-name">Value Navigator</div>
+        <div class="tool-for">For sponsors</div>
+        <div class="tool-problem">Connects SF capabilities to value realisation, adoption, and measurable outcomes.</div>
+        <div class="tool-arrow">Open tool →</div>
+      </a>
+      <a class="tool-card" href="https://github.com/SahirVhora/sf-position-integrity-checker" target="_blank" rel="noopener">
+        <div class="tool-name">Position Integrity</div>
+        <div class="tool-for">For EC data teams</div>
+        <div class="tool-problem">Validates position hierarchy, incumbency, mandatory fields, and configuration risks.</div>
+        <div class="tool-arrow">View repo →</div>
+      </a>
+      <a class="tool-card" href="https://github.com/SahirVhora/SAPSF_ObjectSync" target="_blank" rel="noopener">
+        <div class="tool-name">Object Sync</div>
+        <div class="tool-for">For technical teams</div>
+        <div class="tool-problem">Supports controlled foundation-object synchronisation between SF environments.</div>
+        <div class="tool-arrow">View repo →</div>
+      </a>
+    </div>
+  </section>
   <div class="toolbar">
     <span class="active-cat" id="active-cat-label">All Modules</span>
     <span class="result-count" id="result-count"></span>
