@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SAP SuccessFactors Consulting Lab by Sahir Vhora - a premium portfolio hub linking SF Compass, release readiness, pay transparency, position integrity, value realisation, OData automation, and practical consulting tools.">
+<meta name="description" content="Instant feasibility answers for SAP SuccessFactors. 94 scenarios across 8 SF modules - search, filter, and get implementation steps during client sessions. Free, no login, single-file tool.">
 <meta name="keywords" content="SAP SuccessFactors, SF consulting portfolio, Employee Central, RBP, position management, pay transparency, release readiness, OData, HRIS, SAP SF tools, SuccessFactors consultant, implementation guide, data quality, consulting lab">
 <meta name="author" content="SF Compass">
 <meta name="robots" content="index, follow">
@@ -12,8 +12,8 @@
 <!-- Open Graph / LinkedIn / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sahirvhora.github.io/sf-compass/">
-<meta property="og:title" content="SF Compass - SAP SuccessFactors Consulting Lab">
-<meta property="og:description" content="Premium SAP SuccessFactors consulting portfolio hub with practical tools for feasibility, release readiness, pay transparency, position integrity, value realisation, and OData automation.">
+<meta property="og:title" content="SF Compass - SAP SuccessFactors Implementation Reference">
+<meta property="og:description" content="94 SAP SuccessFactors scenarios at your fingertips. Client-friendly answers by default, technical implementation steps when you need them.">
 <meta property="og:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,11 +22,11 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://sahirvhora.github.io/sf-compass/">
-<meta name="twitter:title" content="SF Compass - SAP SuccessFactors Consulting Lab">
-<meta name="twitter:description" content="Premium SAP SuccessFactors consulting portfolio hub with practical tools for feasibility, release readiness, pay transparency, position integrity, value realisation, and OData automation.">
+<meta name="twitter:title" content="SF Compass - SAP SuccessFactors Implementation Reference">
+<meta name="twitter:description" content="94 SAP SuccessFactors scenarios at your fingertips. Client-friendly answers by default, technical implementation steps when you need them.">
 <meta name="twitter:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
 
-<title>SF Compass - SAP SuccessFactors Consulting Lab</title>
+<title>SF Compass - SAP SuccessFactors Implementation Reference</title>
 <style>
 /* -- THEME SYSTEM -- */
 :root, [data-theme="dark"] {
@@ -381,147 +381,6 @@ body {
 
 
 
-/* -- PORTFOLIO HUB -- */
-.portfolio-hub {
-  margin: 18px 20px 14px;
-  padding: 1px;
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 8% 0%, rgba(224,196,110,0.20), transparent 34%),
-    radial-gradient(circle at 92% 18%, rgba(91,141,239,0.14), transparent 32%),
-    linear-gradient(135deg, rgba(200,168,78,0.45), rgba(91,141,239,0.18), rgba(255,255,255,0.04));
-  box-shadow: 0 26px 70px rgba(0,0,0,0.32);
-}
-.hub-inner {
-  border-radius: 21px;
-  background: linear-gradient(145deg, rgba(17,22,32,0.96), rgba(9,13,20,0.94));
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 22px;
-  position: relative;
-  overflow: hidden;
-}
-[data-theme="light"] .hub-inner { background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(248,246,242,0.96)); }
-.hub-inner:before {
-  content: '';
-  position: absolute;
-  inset: -40% -10% auto auto;
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, rgba(200,168,78,0.12), transparent 62%);
-  pointer-events: none;
-}
-.hub-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border: 1px solid rgba(200,168,78,0.24);
-  border-radius: 999px;
-  color: var(--accent2);
-  background: rgba(200,168,78,0.08);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.hub-top { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); gap: 22px; position: relative; z-index: 1; }
-.hub-copy h2 {
-  margin-top: 12px;
-  max-width: 760px;
-  font-size: clamp(28px, 4vw, 52px);
-  line-height: 0.98;
-  letter-spacing: -1.8px;
-  color: var(--text);
-}
-.hub-copy h2 span { color: var(--accent2); }
-.hub-copy p {
-  max-width: 760px;
-  margin-top: 14px;
-  color: var(--text2);
-  font-size: 14px;
-  line-height: 1.65;
-}
-.hub-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-.hub-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border2);
-  color: var(--text);
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  background: rgba(255,255,255,0.04);
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-.hub-btn.primary { background: linear-gradient(135deg, var(--accent), #8b6f22); color: #10131a; border-color: rgba(224,196,110,0.5); }
-.hub-btn:hover { transform: translateY(-1px); border-color: var(--accent); background: rgba(200,168,78,0.10); }
-.hub-scorecard {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: rgba(255,255,255,0.035);
-  padding: 16px;
-  align-self: start;
-  backdrop-filter: blur(16px);
-}
-.hub-scorecard .score-title { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; }
-.score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
-.score-item { padding: 12px; border-radius: 14px; background: rgba(0,0,0,0.16); border: 1px solid var(--border); }
-[data-theme="light"] .score-item { background: rgba(255,255,255,0.72); }
-.score-item b { display: block; color: var(--accent2); font-size: 22px; line-height: 1; font-family: 'SF Mono', 'Cascadia Code', monospace; }
-.score-item span { display: block; margin-top: 5px; color: var(--dim); font-size: 10px; line-height: 1.35; }
-.tool-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 20px;
-  position: relative;
-  z-index: 1;
-}
-.tool-card {
-  position: relative;
-  min-height: 138px;
-  padding: 15px;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.022));
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--text);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.tool-card:after {
-  content: '';
-  position: absolute;
-  inset: auto -30px -42px auto;
-  width: 120px;
-  height: 120px;
-  border-radius: 999px;
-  background: var(--glow, rgba(200,168,78,0.12));
-  filter: blur(10px);
-}
-.tool-card:hover { transform: translateY(-3px); border-color: rgba(200,168,78,0.55); box-shadow: 0 18px 42px rgba(0,0,0,0.22); }
-.tool-card .tool-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.tool-card .tool-icon { font-size: 22px; }
-.tool-card .tool-status { font-size: 9px; letter-spacing: 0.7px; text-transform: uppercase; color: var(--accent2); border: 1px solid rgba(200,168,78,0.22); border-radius: 999px; padding: 4px 7px; background: rgba(200,168,78,0.07); }
-.tool-card h3 { margin-top: 14px; font-size: 14px; letter-spacing: -0.2px; }
-.tool-card p { margin-top: 8px; color: var(--dim); font-size: 11px; line-height: 1.55; }
-.hub-note {
-  margin-top: 14px;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  color: var(--dim);
-  font-size: 11px;
-  line-height: 1.55;
-  position: relative;
-  z-index: 1;
-}
-.hub-note b { color: var(--text2); }
-@media (max-width: 1120px) { .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .hub-top { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .portfolio-hub { margin: 14px; } .hub-inner { padding: 16px; } .tool-grid { grid-template-columns: 1fr; } .hub-copy h2 { font-size: 30px; } }
 
 /* -- CLIENT QUERY INPUT -- */
 .query-panel {
@@ -616,8 +475,8 @@ body {
   <div class="sidebar-header">
     <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme">☀</button>
     <h1><span>SF</span> Compass</h1>
-    <div class="subtitle">SAP SF Consulting Lab · 8 tools</div>
-    <a href="https://github.com/SahirVhora?tab=repositories&q=sf" class="header-banner">✨ <b>Portfolio hub</b> practical SF tools for delivery, advisory, and governance -></a>
+    <div class="subtitle">94 scenarios · 8 SF modules</div>
+    <a href="https://sahirvhora.github.io/sf-value-navigator/" class="header-banner">💡 <b>Building the business case?</b> Map value realisation -></a>
   </div>
   <input type="text" id="search-box" placeholder="Search by keyword, tag, or topic..." oninput="filterEntries()">
   <div class="category-list" id="category-list"></div>
@@ -634,58 +493,6 @@ body {
 
 <div id="main">
 
-  <section class="portfolio-hub" aria-label="SAP SuccessFactors Consulting Lab">
-    <div class="hub-inner">
-      <div class="hub-top">
-        <div class="hub-copy">
-          <div class="hub-eyebrow">SAP SuccessFactors Consulting Lab</div>
-          <h2>Practical SF tools for <span>delivery, governance, and advisory visibility.</span></h2>
-          <p>One premium front door for the SAP SuccessFactors toolkit: workshop feasibility answers, release readiness, pay transparency, position integrity, value realisation, and controlled OData automation. Built to show hands-on consulting depth, not slideware.</p>
-          <div class="hub-actions">
-            <a class="hub-btn primary" href="https://github.com/SahirVhora?tab=repositories&q=sf" target="_blank" rel="noopener">View GitHub toolkit</a>
-            <a class="hub-btn" href="https://sahirvhora.github.io/sf-release-update/" target="_blank" rel="noopener">Release tracker</a>
-            <a class="hub-btn" href="https://sahirvhora.github.io/sf-pay-transparency/" target="_blank" rel="noopener">Pay transparency</a>
-          </div>
-        </div>
-        <aside class="hub-scorecard">
-          <div class="score-title">Portfolio signal</div>
-          <div class="score-grid">
-            <div class="score-item"><b>94</b><span>consulting scenarios</span></div>
-            <div class="score-item"><b>8</b><span>SF modules covered</span></div>
-            <div class="score-item"><b>6</b><span>public SF tools linked</span></div>
-            <div class="score-item"><b>0</b><span>employee data extracted</span></div>
-          </div>
-        </aside>
-      </div>
-      <div class="tool-grid">
-        <a class="tool-card" style="--glow:rgba(224,196,110,0.15)" href="https://sahirvhora.github.io/sf-compass/">
-          <div class="tool-meta"><span class="tool-icon">🧭</span><span class="tool-status">Hub</span></div>
-          <h3>SF Compass</h3><p>Fast feasibility answers and implementation guidance for live client sessions.</p>
-        </a>
-        <a class="tool-card" style="--glow:rgba(91,141,239,0.16)" href="https://sahirvhora.github.io/sf-release-update/" target="_blank" rel="noopener">
-          <div class="tool-meta"><span class="tool-icon">🚦</span><span class="tool-status">Live</span></div>
-          <h3>Release Readiness</h3><p>Turns SAP What's New updates into action, review, and test priorities.</p>
-        </a>
-        <a class="tool-card" style="--glow:rgba(224,90,90,0.14)" href="https://sahirvhora.github.io/sf-pay-transparency/" target="_blank" rel="noopener">
-          <div class="tool-meta"><span class="tool-icon">⚖️</span><span class="tool-status">EU 2026</span></div>
-          <h3>Pay Transparency</h3><p>Readiness prototype for reward, HRIS data, disclosure, reporting, and evidence.</p>
-        </a>
-        <a class="tool-card" style="--glow:rgba(63,185,107,0.15)" href="https://sahirvhora.github.io/sf-position-integrity-checker/" target="_blank" rel="noopener">
-          <div class="tool-meta"><span class="tool-icon">🏗️</span><span class="tool-status">CLI + UI</span></div>
-          <h3>Position Integrity</h3><p>Validates position hierarchy and data quality risks before payroll, reorg, and cutover.</p>
-        </a>
-        <a class="tool-card" style="--glow:rgba(139,124,240,0.16)" href="https://sahirvhora.github.io/sf-value-navigator/" target="_blank" rel="noopener">
-          <div class="tool-meta"><span class="tool-icon">📈</span><span class="tool-status">Advisory</span></div>
-          <h3>Value Navigator</h3><p>Maps HR pain points into SuccessFactors roadmap, business case, and adoption value.</p>
-        </a>
-        <a class="tool-card" style="--glow:rgba(91,141,239,0.14)" href="https://sahirvhora.github.io/SAPSF_ObjectSync/" target="_blank" rel="noopener">
-          <div class="tool-meta"><span class="tool-icon">🔁</span><span class="tool-status">OData</span></div>
-          <h3>SAPSF ObjectSync</h3><p>Controlled foundation-object synchronisation for PRD-to-lower tenant governance.</p>
-        </a>
-      </div>
-      <div class="hub-note"><span>🔒</span><span><b>Consulting-safe positioning:</b> static tools, public demos, no credentials required for this hub, and no employee data leaves a tenant.</span></div>
-    </div>
-  </section>
 
   <div class="query-panel" id="query-panel">
     <label>🎯 Client Query / Issue</label>
