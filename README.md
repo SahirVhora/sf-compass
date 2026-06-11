@@ -94,3 +94,7 @@ SF Compass is the front door to a suite of 10 free, open tools for SAP SuccessFa
 | [Pay Transparency](https://github.com/SahirVhora/sf-pay-transparency) | EU Pay Transparency Directive readiness check | [Site](https://sahirvhora.github.io/sf-pay-transparency/) |
 | [Value Navigator](https://github.com/SahirVhora/sf-value-navigator) | Value realisation consulting framework | [Site](https://sahirvhora.github.io/sf-value-navigator/) |
 | [Agent Skills](https://github.com/SahirVhora/sf-agent-skills) | AI skills for SF consultants - config health, migration readiness | [Site](https://sahirvhora.github.io/sf-agent-skills/) |
+
+## Tenant Findings Viewer
+
+[findings.html](https://sahirvhora.github.io/sf-compass/findings.html) loads findings JSON files produced by suite tools (Config Debt Radar's `config_debt_findings.json`, Position Integrity Checker's `position_integrity_findings_*.json`) and combines them into one filterable tenant health view. 100% client-side - files never leave the browser. All emitters share the `sf-compass-findings/v1` schema.
