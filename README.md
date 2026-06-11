@@ -76,3 +76,21 @@ python3 -m http.server 8899
 | Tracking | None |
 
 Built for SAP SuccessFactors consultants who need useful answers during the session, not after it.
+
+## The SF Compass Suite
+
+SF Compass is the front door to a suite of 10 free, open tools for SAP SuccessFactors consultants.
+
+**New to the suite? Start here:** run the [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) against a metadata export to get a config debt picture in minutes, then validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/SAPSF_ObjectSync).
+
+| Tool | What it does | Live |
+|---|---|---|
+| [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) | Scan EC configuration debt - CLI, dashboard, MCP server for AI agents | CLI |
+| [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker) | Validate position data integrity - HTML and Excel reports | [Site](https://sahirvhora.github.io/sf-position-integrity-checker/) |
+| [ObjectSync](https://github.com/SahirVhora/SAPSF_ObjectSync) | Sync OM foundation objects PRD to Dev - CLI, library, web UI | [Site](https://sahirvhora.github.io/SAPSF_ObjectSync/) |
+| [Config Compare](https://github.com/SahirVhora/sf-config-compare) | Compare metadata and picklists across tenants | [Site](https://sahirvhora.github.io/sf-config-compare/) |
+| [Release Tracker](https://github.com/SahirVhora/sf-release-update) | Live tracker for 1H/2H release changes | [Site](https://sahirvhora.github.io/sf-release-update/) |
+| [Impact Brief](https://github.com/SahirVhora/sf-impact-brief) | Personalised release impact briefs with tiered action plans | [Site](https://sahirvhora.github.io/sf-impact-brief/) |
+| [Pay Transparency](https://github.com/SahirVhora/sf-pay-transparency) | EU Pay Transparency Directive readiness check | [Site](https://sahirvhora.github.io/sf-pay-transparency/) |
+| [Value Navigator](https://github.com/SahirVhora/sf-value-navigator) | Value realisation consulting framework | [Site](https://sahirvhora.github.io/sf-value-navigator/) |
+| [Agent Skills](https://github.com/SahirVhora/sf-agent-skills) | AI skills for SF consultants - config health, migration readiness | [Site](https://sahirvhora.github.io/sf-agent-skills/) |

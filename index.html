@@ -468,6 +468,27 @@ body {
   .tech-section { padding: 12px; }
   .expand-hint { margin-top: 8px; }
 }
+
+/* ---- SF Compass suite directory ---- */
+.suite-block { border-top: 1px solid var(--border); padding: 8px 14px 10px; }
+.suite-block summary {
+  cursor: pointer; list-style: none; font-size: 11px; font-weight: 600;
+  color: var(--text2); padding: 4px 0; display: flex; align-items: center; gap: 6px;
+}
+.suite-block summary::-webkit-details-marker { display: none; }
+.suite-block summary::after { content: '▸'; margin-left: auto; color: var(--dim2); transition: transform 0.15s ease; }
+.suite-block[open] summary::after { transform: rotate(90deg); }
+.suite-block a {
+  display: block; padding: 4px 0 4px 8px; font-size: 11px; line-height: 1.5;
+  color: var(--text2); text-decoration: none; border-left: 2px solid var(--border);
+  margin: 2px 0;
+}
+.suite-block a:hover { color: var(--text); border-left-color: var(--purple); }
+.suite-block a b { display: block; font-size: 11px; }
+.suite-block a span { font-size: 10px; color: var(--dim2); }
+.suite-block .suite-start {
+  font-size: 10px; color: var(--dim2); margin: 6px 0 4px; line-height: 1.5;
+}
 </style>
 </head>
 <body>
@@ -481,6 +502,19 @@ body {
   </div>
   <input type="text" id="search-box" placeholder="Search by keyword, tag, or topic..." oninput="filterEntries()">
   <div class="category-list" id="category-list"></div>
+  <details class="suite-block">
+    <summary>🧰 SF Compass Suite - 10 tools</summary>
+    <div class="suite-start">New here? Start with the Debt Radar scan, then check position integrity, then sync fixes with ObjectSync.</div>
+    <a href="https://github.com/SahirVhora/sf-config-debt-radar"><b>Config Debt Radar</b><span>Scan EC configuration debt - CLI, dashboard, MCP server</span></a>
+    <a href="https://sahirvhora.github.io/sf-position-integrity-checker/"><b>Position Integrity Checker</b><span>Validate position data - HTML and Excel reports</span></a>
+    <a href="https://sahirvhora.github.io/SAPSF_ObjectSync/"><b>ObjectSync</b><span>Sync OM foundation objects PRD to Dev</span></a>
+    <a href="https://sahirvhora.github.io/sf-config-compare/"><b>Config Compare</b><span>Compare metadata and picklists across tenants</span></a>
+    <a href="https://sahirvhora.github.io/sf-release-update/"><b>Release Tracker</b><span>Live 1H/2H release change tracker</span></a>
+    <a href="https://sahirvhora.github.io/sf-impact-brief/"><b>Impact Brief</b><span>Personalised release impact briefs</span></a>
+    <a href="https://sahirvhora.github.io/sf-pay-transparency/"><b>Pay Transparency</b><span>EU Pay Transparency Directive readiness</span></a>
+    <a href="https://sahirvhora.github.io/sf-value-navigator/"><b>Value Navigator</b><span>Value realisation consulting framework</span></a>
+    <a href="https://sahirvhora.github.io/sf-agent-skills/"><b>Agent Skills</b><span>AI skills for SF consultants</span></a>
+  </details>
   <div class="sidebar-footer">
     <div class="legend">
       <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Full</div>
