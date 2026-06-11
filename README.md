@@ -81,13 +81,13 @@ Built for SAP SuccessFactors consultants who need useful answers during the sess
 
 SF Compass is the front door to a suite of 10 free, open tools for SAP SuccessFactors consultants.
 
-**New to the suite? Start here:** run the [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) against a metadata export to get a config debt picture in minutes, then validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/SAPSF_ObjectSync).
+**New to the suite? Start here:** run the [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) against a metadata export to get a config debt picture in minutes, then validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/sf-object-sync).
 
 | Tool | What it does | Live |
 |---|---|---|
 | [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) | Scan EC configuration debt - CLI, dashboard, MCP server for AI agents | CLI |
 | [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker) | Validate position data integrity - HTML and Excel reports | [Site](https://sahirvhora.github.io/sf-position-integrity-checker/) |
-| [ObjectSync](https://github.com/SahirVhora/SAPSF_ObjectSync) | Sync OM foundation objects PRD to Dev - CLI, library, web UI | [Site](https://sahirvhora.github.io/SAPSF_ObjectSync/) |
+| [ObjectSync](https://github.com/SahirVhora/sf-object-sync) | Sync OM foundation objects PRD to Dev - CLI, library, web UI | [Site](https://sahirvhora.github.io/sf-object-sync/) |
 | [Config Compare](https://github.com/SahirVhora/sf-config-compare) | Compare metadata and picklists across tenants | [Site](https://sahirvhora.github.io/sf-config-compare/) |
 | [Release Tracker](https://github.com/SahirVhora/sf-release-update) | Live tracker for 1H/2H release changes | [Site](https://sahirvhora.github.io/sf-release-update/) |
 | [Impact Brief](https://github.com/SahirVhora/sf-impact-brief) | Personalised release impact briefs with tiered action plans | [Site](https://sahirvhora.github.io/sf-impact-brief/) |
