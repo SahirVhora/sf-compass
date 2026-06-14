@@ -2,6 +2,14 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
+<!-- GitHub Pages ignores the _headers file (a Netlify/Cloudflare convention),
+     so security headers must be set via meta. 'unsafe-inline' is required
+     because the app's logic and styles are inline; the policy still blocks
+     external/injected scripts, plugins, and base-tag hijacking. Note:
+     frame-ancestors / X-Frame-Options cannot be set via meta - they need a
+     real HTTP header (i.e. host on Cloudflare Pages to get clickjacking protection). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Instant feasibility answers for SAP SuccessFactors. 94 scenarios across 8 SF modules - search, filter, and get implementation steps during client sessions. Free, no login, single-file tool.">
 <meta name="keywords" content="SAP SuccessFactors, SF consulting portfolio, Employee Central, RBP, position management, pay transparency, release readiness, OData, HRIS, SAP SF tools, SuccessFactors consultant, implementation guide, data quality, consulting lab">
@@ -28,6 +36,7 @@
 
 <title>SF Compass - SAP SuccessFactors Implementation Reference</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="sitemap" type="application/xml" href="sitemap.xml">
 <style>
 /* -- THEME SYSTEM -- */
 :root, [data-theme="dark"] {
@@ -1303,18 +1312,30 @@ function init() {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem('sf-compass-theme');
-  if (saved) {
-    setTheme(saved);
-  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    setTheme('light');
+  try {
+    const saved = localStorage.getItem('sf-compass-theme');
+    if (saved) {
+      setTheme(saved);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setTheme('light');
+    }
+  } catch (e) {
+    console.warn('SF Compass: theme init failed (localStorage blocked)', e);
   }
   // Listen for system changes
-  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('sf-compass-theme')) {
-      setTheme(e.matches ? 'light' : 'dark');
-    }
-  });
+  try {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+      try {
+        if (!localStorage.getItem('sf-compass-theme')) {
+          setTheme(e.matches ? 'light' : 'dark');
+        }
+      } catch (e) {
+        console.warn('SF Compass: theme auto-switch failed', e);
+      }
+    });
+  } catch (e) {
+    console.warn('SF Compass: could not listen to prefers-color-scheme', e);
+  }
 }
 
 function toggleTheme() {
@@ -1324,7 +1345,11 @@ function toggleTheme() {
 
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('sf-compass-theme', theme);
+  try {
+    localStorage.setItem('sf-compass-theme', theme);
+  } catch (e) {
+    console.warn('SF Compass: could not persist theme preference', e);
+  }
   const btn = document.querySelector('.theme-toggle-btn');
   if (btn) btn.textContent = theme === 'light' ? '☾' : '☀';
 }

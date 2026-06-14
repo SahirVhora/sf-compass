@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- GitHub Pages ignores _headers; set CSP via meta. 'unsafe-inline' is
+     required for the inline app logic/styles. findings.html loads JSON via
+     client-side file upload (FileReader), so connect-src 'self' is safe. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SF Compass - Tenant Findings Viewer</title>
 <meta name="description" content="Load findings JSON from any SF Compass suite tool (Config Debt Radar, Position Integrity Checker) and review them in one combined tenant health view. 100% client-side.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://sahirvhora.github.io/sf-compass/findings.html">
+<meta property="og:url" content="https://sahirvhora.github.io/sf-compass/findings.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
 <style>
 :root {
   --bg: #090d14; --bg2: #0d1119; --surface: #111620; --surface2: #171c28;
