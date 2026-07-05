@@ -22,10 +22,10 @@ Type a client question, search across 94 scenarios, and get:
 
 | Module | Coverage |
 |---|---:|
-| Employee Central | 67 scenarios |
+| Employee Central | 57 scenarios |
 | Recruiting | 4 scenarios |
 | Onboarding | 3 scenarios |
-| Performance and Goals | 4 scenarios |
+| Performance | 4 scenarios |
 | Compensation | 3 scenarios |
 | Learning | 3 scenarios |
 | Succession | 3 scenarios |
