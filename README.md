@@ -79,13 +79,12 @@ Built for SAP SuccessFactors consultants who need useful answers during the sess
 
 ## The SF Compass Suite
 
-SF Compass is the front door to a suite of 10 free, open tools for SAP SuccessFactors consultants.
+SF Compass is the front door to a suite of 8 free, open tools for SAP SuccessFactors consultants.
 
-**New to the suite? Start here:** run the [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) against a metadata export to get a config debt picture in minutes, then validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/sf-object-sync).
+**New to the suite? Start here:** validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/sf-object-sync), then compare configuration across tenants with [Config Compare](https://github.com/SahirVhora/sf-config-compare).
 
 | Tool | What it does | Live |
 |---|---|---|
-| [Config Debt Radar](https://github.com/SahirVhora/sf-config-debt-radar) | Scan EC configuration debt - CLI, dashboard, MCP server for AI agents | CLI |
 | [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker) | Validate position data integrity - HTML and Excel reports | [Site](https://sahirvhora.github.io/sf-position-integrity-checker/) |
 | [ObjectSync](https://github.com/SahirVhora/sf-object-sync) | Sync OM foundation objects PRD to Dev - CLI, library, web UI | [Site](https://sahirvhora.github.io/sf-object-sync/) |
 | [Config Compare](https://github.com/SahirVhora/sf-config-compare) | Compare metadata and picklists across tenants | [Site](https://sahirvhora.github.io/sf-config-compare/) |
@@ -94,7 +93,3 @@ SF Compass is the front door to a suite of 10 free, open tools for SAP SuccessFa
 | [Pay Transparency](https://github.com/SahirVhora/sf-pay-transparency) | EU Pay Transparency Directive readiness check | [Site](https://sahirvhora.github.io/sf-pay-transparency/) |
 | [Value Navigator](https://github.com/SahirVhora/sf-value-navigator) | Value realisation consulting framework | [Site](https://sahirvhora.github.io/sf-value-navigator/) |
 | [Agent Skills](https://github.com/SahirVhora/sf-agent-skills) | AI skills for SF consultants - config health, migration readiness | [Site](https://sahirvhora.github.io/sf-agent-skills/) |
-
-## Tenant Findings Viewer
-
-[findings.html](https://sahirvhora.github.io/sf-compass/findings.html) loads findings JSON files produced by suite tools (Config Debt Radar's `config_debt_findings.json`, Position Integrity Checker's `position_integrity_findings_*.json`) and combines them into one filterable tenant health view. 100% client-side - files never leave the browser. All emitters share the `sf-compass-findings/v1` schema.
