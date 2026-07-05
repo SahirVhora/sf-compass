@@ -79,7 +79,7 @@ Built for SAP SuccessFactors consultants who need useful answers during the sess
 
 ## The SF Compass Suite
 
-SF Compass is the front door to a suite of 8 free, open tools for SAP SuccessFactors consultants.
+SF Compass is the front door to a suite of 7 free, open tools for SAP SuccessFactors consultants.
 
 **New to the suite? Start here:** validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/sf-object-sync), then compare configuration across tenants with [Config Compare](https://github.com/SahirVhora/sf-config-compare).
 
@@ -92,4 +92,3 @@ SF Compass is the front door to a suite of 8 free, open tools for SAP SuccessFac
 | [Impact Brief](https://github.com/SahirVhora/sf-impact-brief) | Personalised release impact briefs with tiered action plans | [Site](https://sahirvhora.github.io/sf-impact-brief/) |
 | [Pay Transparency](https://github.com/SahirVhora/sf-pay-transparency) | EU Pay Transparency Directive readiness check | [Site](https://sahirvhora.github.io/sf-pay-transparency/) |
 | [Value Navigator](https://github.com/SahirVhora/sf-value-navigator) | Value realisation consulting framework | [Site](https://sahirvhora.github.io/sf-value-navigator/) |
-| [Agent Skills](https://github.com/SahirVhora/sf-agent-skills) | AI skills for SF consultants - config health, migration readiness | [Site](https://sahirvhora.github.io/sf-agent-skills/) |
