@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Instant feasibility answers for SAP SuccessFactors. 94 scenarios across 8 SF modules - search, filter, and get implementation steps during client sessions. Free, no login, single-file tool.">
+<meta name="description" content="An open SAP SuccessFactors transformation assurance platform: assess configuration risk, design safely, validate data, control change and measure value.">
 <meta name="keywords" content="SAP SuccessFactors, SF consulting portfolio, Employee Central, RBP, position management, pay transparency, release readiness, OData, HRIS, SAP SF tools, SuccessFactors consultant, implementation guide, data quality, consulting lab">
 <meta name="author" content="SF Compass">
 <meta name="robots" content="index, follow">
@@ -20,8 +20,8 @@
 <!-- Open Graph / LinkedIn / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sahirvhora.github.io/sf-compass/">
-<meta property="og:title" content="SF Compass - SAP SuccessFactors Implementation Reference">
-<meta property="og:description" content="94 SAP SuccessFactors scenarios at your fingertips. Client-friendly answers by default, technical implementation steps when you need them.">
+<meta property="og:title" content="SF Compass - SAP SuccessFactors Transformation Assurance">
+<meta property="og:description" content="A governed toolkit for assessing, designing, validating and measuring SAP SuccessFactors transformation.">
 <meta property="og:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,11 +30,11 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://sahirvhora.github.io/sf-compass/">
-<meta name="twitter:title" content="SF Compass - SAP SuccessFactors Implementation Reference">
-<meta name="twitter:description" content="94 SAP SuccessFactors scenarios at your fingertips. Client-friendly answers by default, technical implementation steps when you need them.">
+<meta name="twitter:title" content="SF Compass - SAP SuccessFactors Transformation Assurance">
+<meta name="twitter:description" content="A governed toolkit for assessing, designing, validating and measuring SAP SuccessFactors transformation.">
 <meta name="twitter:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
 
-<title>SF Compass - SAP SuccessFactors Implementation Reference</title>
+<title>SF Compass - SAP SuccessFactors Transformation Assurance</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="sitemap" type="application/xml" href="sitemap.xml">
 <style>
@@ -498,6 +498,20 @@ body {
 .suite-block .suite-start {
   font-size: 10px; color: var(--dim2); margin: 6px 0 4px; line-height: 1.5;
 }
+.assurance-strip {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+  background: var(--border); border-bottom: 1px solid var(--border);
+}
+.assurance-stage {
+  display: block; background: var(--surface); padding: 9px 12px;
+  color: var(--text2); text-decoration: none; min-width: 0;
+}
+.assurance-stage:hover { background: var(--surface2); }
+.assurance-stage b { display: block; color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; }
+.assurance-stage span { display: block; margin-top: 2px; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 900px) {
+  .assurance-strip { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -506,14 +520,14 @@ body {
   <div class="sidebar-header">
     <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme">☀</button>
     <h1><span>SF</span> Compass</h1>
-    <div class="subtitle">94 scenarios · 8 SF modules</div>
+    <div class="subtitle">Transformation assurance · 94 scenarios</div>
     <a href="https://sahirvhora.github.io/sf-value-navigator/" class="header-banner">💡 <b>Building the business case?</b> Map value realisation -></a>
   </div>
   <input type="text" id="search-box" placeholder="Search by keyword, tag, or topic..." oninput="filterEntries()">
   <div class="category-list" id="category-list"></div>
   <details class="suite-block">
-    <summary>🧰 SF Compass Suite - 7 tools</summary>
-    <div class="suite-start">New here? Start with position integrity, then sync fixes with ObjectSync, then compare configuration across tenants.</div>
+    <summary>🧰 Transformation Assurance Suite</summary>
+    <div class="suite-start">Assess risk, design safely, validate data, control change and demonstrate value—with human approval at consequential decisions.</div>
     <a href="https://sahirvhora.github.io/sf-position-integrity-checker/"><b>Position Integrity Checker</b><span>Validate position data - HTML and Excel reports</span></a>
     <a href="https://sahirvhora.github.io/sf-object-sync/"><b>ObjectSync</b><span>Sync OM foundation objects PRD to Dev</span></a>
     <a href="https://sahirvhora.github.io/sf-config-compare/"><b>Config Compare</b><span>Compare metadata and picklists across tenants</span></a>
@@ -544,6 +558,14 @@ body {
       <span class="query-match-count" id="query-match-count"></span>
     </div>
   </div>
+
+  <nav class="assurance-strip" aria-label="Transformation assurance lifecycle">
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-config-debt-radar/"><b>1 · Assess</b><span>Configuration risk</span></a>
+    <a class="assurance-stage" href="#" onclick="document.getElementById('client-query').focus(); return false;"><b>2 · Design</b><span>Feasibility guidance</span></a>
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-position-integrity-checker/"><b>3 · Validate</b><span>Position integrity</span></a>
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-config-compare/"><b>4 · Control</b><span>Tenant drift</span></a>
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-value-navigator/"><b>5 · Measure</b><span>Value realisation</span></a>
+  </nav>
 
   <div class="toolbar">
     <span class="active-cat" id="active-cat-label">All Modules</span>
