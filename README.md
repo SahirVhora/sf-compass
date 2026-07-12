@@ -1,10 +1,22 @@
 # SF Compass
 
-SAP SuccessFactors consulting reference for fast feasibility answers and implementation guidance during client sessions.
+An open SAP SuccessFactors **Transformation Assurance Platform** for assessing configuration risk, designing safely, validating data, controlling change, and measuring value.
 
 Live site: https://sahirvhora.github.io/sf-compass/
 
-## What it does
+## The transformation assurance lifecycle
+
+| Stage | Decision supported | Primary tool |
+|---|---|---|
+| Assess | Where are configuration and governance risks concentrated? | Config Debt Radar |
+| Design | Is the requirement feasible, and what controls are needed? | SF Compass |
+| Validate | Is position and foundation data internally consistent? | Position Integrity Checker |
+| Control | What changed across tenants, and was it expected? | Config Compare / Change Ledger |
+| Measure | Which outcomes and benefits should the programme track? | Value Navigator |
+
+The tools provide decision support and evidence. Consequential configuration changes and remediation remain subject to named human approval.
+
+## Workshop reference
 
 SF Compass helps SAP SuccessFactors consultants answer client questions during workshops and design sessions.
 
@@ -79,7 +91,7 @@ Built for SAP SuccessFactors consultants who need useful answers during the sess
 
 ## The SF Compass Suite
 
-SF Compass is the front door to a suite of 7 free, open tools for SAP SuccessFactors consultants.
+SF Compass is the front door to a suite of open transformation-assurance tools for SAP SuccessFactors consultants and HR transformation teams.
 
 **New to the suite? Start here:** validate position data with the [Position Integrity Checker](https://github.com/SahirVhora/sf-position-integrity-checker), then move clean configuration between tenants with [ObjectSync](https://github.com/SahirVhora/sf-object-sync), then compare configuration across tenants with [Config Compare](https://github.com/SahirVhora/sf-config-compare).
 
