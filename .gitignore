@@ -4,3 +4,6 @@ Thumbs.db
 node_modules/
 .env
 *.log
+
+# Generated Pages artifact
+_site/
