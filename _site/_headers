@@ -1,0 +1,8 @@
+# NOTE: This _headers file is Netlify/Cloudflare Pages convention only.
+# GitHub Pages ignores it entirely — these headers are NOT served.
+# Security headers are set via <meta http-equiv> tags in the HTML files instead.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' data: https:; connect-src 'self' https:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

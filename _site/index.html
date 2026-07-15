@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<!-- GitHub Pages ignores the _headers file (a Netlify/Cloudflare convention),
+     so security headers must be set via meta. 'unsafe-inline' is required
+     because the app's logic and styles are inline; the policy still blocks
+     external/injected scripts, plugins, and base-tag hijacking. Note:
+     frame-ancestors / X-Frame-Options cannot be set via meta - they need a
+     real HTTP header (i.e. host on Cloudflare Pages to get clickjacking protection). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="An open SAP SuccessFactors transformation assurance platform: assess configuration risk, design safely, validate data, control change and measure value.">
+<meta name="keywords" content="SAP SuccessFactors, SF consulting portfolio, Employee Central, RBP, position management, pay transparency, release readiness, OData, HRIS, SAP SF tools, SuccessFactors consultant, implementation guide, data quality, consulting lab">
+<meta name="author" content="SF Compass">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://sahirvhora.github.io/sf-compass/">
+
+<!-- Open Graph / LinkedIn / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sahirvhora.github.io/sf-compass/">
+<meta property="og:title" content="SF Compass - SAP SuccessFactors Transformation Assurance">
+<meta property="og:description" content="A governed toolkit for assessing, designing, validating and measuring SAP SuccessFactors transformation.">
+<meta property="og:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="SF Compass">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://sahirvhora.github.io/sf-compass/">
+<meta name="twitter:title" content="SF Compass - SAP SuccessFactors Transformation Assurance">
+<meta name="twitter:description" content="A governed toolkit for assessing, designing, validating and measuring SAP SuccessFactors transformation.">
+<meta name="twitter:image" content="https://sahirvhora.github.io/sf-compass/preview.png">
+
+<title>SF Compass - SAP SuccessFactors Transformation Assurance</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="sitemap" type="application/xml" href="sitemap.xml">
+<style>
+/* -- THEME SYSTEM -- */
+:root, [data-theme="dark"] {
+  --bg: #090d14; --bg2: #0d1119; --surface: #111620; --surface2: #171c28;
+  --border: #1c212b; --border2: #252b36;
+  --text: #e6e9f0; --text2: #c5c9d4; --dim: #5f6675; --dim2: #3d4350;
+  --accent: #c8a84e; --accent2: #e0c46e;
+  --green: #3fb96b; --amber: #d4a434; --orange: #e07b3c; --red: #e05151;
+  --purple: #8b7cf0; --blue: #5b8def;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.25); --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.45);
+  --tech-bg: #0f131c; --tech-border: var(--purple);
+  --tag-bg: rgba(91,141,239,0.08); --tag-border: rgba(91,141,239,0.1);
+  --search-bg: var(--bg); --feas-bg: var(--bg);
+  --pill-bg-from: #151a24; --pill-bg-to: #1a1f2b; --pill-border: #262d3a;
+  --pill-active-bg-from: rgba(139,124,240,0.2); --pill-active-bg-to: rgba(91,141,239,0.1);
+  --entry-hover-border: #2a3040;
+  --detail-text: #b8bcc6; --tech-text: #a8adb8;
+  --scrollbar-thumb: var(--border);
+  --sidebar-header-gradient: linear-gradient(180deg, rgba(200,168,78,0.04) 0%, transparent 100%);
+  --h1-gradient: linear-gradient(135deg, #e6e9f0 0%, #c0c5d0 100%);
+  --theme-icon: '☀';
+}
+[data-theme="light"] {
+  --bg: #f8f6f2; --bg2: #f0ede8; --surface: #ffffff; --surface2: #faf9f6;
+  --border: #e8e4dc; --border2: #dcd7ce;
+  --text: #1a1815; --text2: #3d3831; --dim: #7a7368; --dim2: #a0988a;
+  --accent: #b8941e; --accent2: #7a5f0e;
+  --green: #287a3e; --amber: #a67c18; --orange: #bc5a26; --red: #c93030;
+  --purple: #5b4fd4; --blue: #4a68cc;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05); --shadow-md: 0 4px 14px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.09);
+  --tech-bg: #f5f2ec; --tech-border: var(--purple);
+  --tag-bg: rgba(74,104,204,0.05); --tag-border: rgba(74,104,204,0.1);
+  --search-bg: #f0ede8; --feas-bg: #f0ede8;
+  --pill-bg-from: #f5f2ec; --pill-bg-to: #efece5; --pill-border: #dcd7ce;
+  --pill-active-bg-from: rgba(91,79,212,0.1); --pill-active-bg-to: rgba(74,104,204,0.06);
+  --entry-hover-border: #d4cec2;
+  --detail-text: #4a4540; --tech-text: #4a4540;
+  --scrollbar-thumb: #d4cec2;
+  --sidebar-header-gradient: linear-gradient(180deg, rgba(184,148,30,0.06) 0%, transparent 100%);
+  --h1-gradient: linear-gradient(135deg, #1a1815 0%, #5a5142 100%);
+  --theme-icon: '☾';
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { transition: background 0.4s ease; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+  display: flex; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+::selection { background: rgba(200,168,78,0.25); color: var(--text); }
+
+/* -- SIDEBAR -- */
+#sidebar {
+  width: 300px; min-width: 300px; max-width: 300px; background: var(--surface);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.sidebar-header {
+  padding: 22px 18px 16px; border-bottom: 1px solid var(--border);
+  background: var(--sidebar-header-gradient); position: relative;
+  transition: border-color 0.4s ease;
+}
+.sidebar-header h1 {
+  font-size: 16px; font-weight: 700; letter-spacing: -0.3px;
+  background: var(--h1-gradient);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sidebar-header h1 span { color: var(--accent); -webkit-text-fill-color: var(--accent); }
+.sidebar-header .subtitle { font-size: 11px; color: var(--dim); margin-top: 3px; font-weight: 400; }
+.header-banner {
+  display: block; margin-top: 10px; padding: 6px 10px;
+  background: linear-gradient(135deg, rgba(200,168,78,0.08), rgba(91,141,239,0.06));
+  border: 1px solid var(--border); border-radius: 6px;
+  font-size: 11px; color: var(--text2); text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  line-height: 1.4;
+}
+.header-banner b { color: var(--accent); }
+.header-banner:hover { border-color: var(--accent); background: rgba(200,168,78,0.1); }
+
+/* -- THEME TOGGLE -- */
+.theme-toggle-btn {
+  position: absolute; top: 16px; right: 14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--surface2);
+  color: var(--dim); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.theme-toggle-btn:hover {
+  border-color: var(--accent); color: var(--accent2);
+  box-shadow: 0 0 16px rgba(200,168,78,0.15);
+  transform: rotate(15deg);
+}
+.theme-toggle-btn:active { transform: scale(0.92) rotate(0deg); }
+
+#search-box {
+  margin: 14px; padding: 11px 14px; background: var(--search-bg);
+  border: 1.5px solid var(--border); border-radius: 8px;
+  color: var(--text); font-size: 13px; font-family: inherit;
+  outline: none; transition: all 0.3s ease;
+}
+#search-box:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,168,78,0.1); }
+#search-box::placeholder { color: var(--dim2); }
+
+.category-list { flex: 1; overflow-y: auto; padding: 6px 8px; }
+.cat-item {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px; cursor: pointer;
+  font-size: 13px; border-radius: 6px; margin-bottom: 2px;
+  transition: all 0.2s ease; color: var(--dim); font-weight: 450;
+}
+.cat-item:hover { background: rgba(128,128,128,0.06); color: var(--text); }
+.cat-item.active {
+  background: rgba(200,168,78,0.08); color: var(--accent2); font-weight: 550;
+  box-shadow: inset 1px 0 0 var(--accent);
+}
+.cat-item .icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.module-header {
+  font-size: 11px; letter-spacing: 0.8px;
+  color: var(--dim); padding: 12px 14px 8px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: all 0.2s ease; user-select: none;
+  border-radius: 6px; margin: 2px 6px;
+}
+.module-header:hover { color: var(--accent2); background: rgba(200,168,78,0.04); }
+.module-header .mod-icon { font-size: 15px; width: 22px; text-align: center; }
+.module-header .mod-chevron {
+  margin-left: auto; font-size: 10px; transition: transform 0.25s ease;
+  opacity: 0.5;
+}
+.module-header.open .mod-chevron { transform: rotate(90deg); opacity: 1; }
+.module-header .mod-count {
+  font-size: 10px; background: var(--border); padding: 2px 8px;
+  border-radius: 10px; font-weight: 500; color: var(--dim2);
+}
+.module-categories {
+  overflow: hidden; max-height: 0; transition: max-height 0.35s ease;
+}
+.module-categories.open { max-height: 600px; }
+.module-categories .cat-item { padding-left: 28px; }
+.cat-item .count {
+  margin-left: auto; font-size: 10px; background: var(--border); padding: 3px 8px;
+  border-radius: 10px; font-weight: 500;
+}
+
+.sidebar-footer {
+  padding: 12px 14px; border-top: 1px solid var(--border); font-size: 10px;
+  color: var(--dim2); display: flex; align-items: center; gap: 8px;
+  transition: border-color 0.4s ease;
+}
+.legend { display: flex; gap: 8px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 3px; }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* -- MAIN -- */
+#main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: var(--bg); transition: background 0.4s ease; }
+.toolbar {
+  padding: 12px 20px; border-bottom: 1px solid var(--border); display: flex;
+  align-items: center; gap: 12px; background: var(--surface); flex-shrink: 0; flex-wrap: wrap;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.toolbar .active-cat {
+  font-size: 14px; font-weight: 600; white-space: nowrap;
+  color: var(--text); letter-spacing: -0.2px;
+}
+.toolbar .result-count {
+  font-size: 11px; color: var(--dim2); background: var(--feas-bg); padding: 4px 10px;
+  border-radius: 10px; margin-left: auto; white-space: nowrap;
+}
+.feasibility-filter { display: flex; gap: 4px; background: var(--feas-bg); padding: 3px; border-radius: 8px; }
+.feas-btn {
+  padding: 6px 12px; border-radius: 6px; border: none; background: transparent;
+  color: var(--dim); font-size: 11px; cursor: pointer; font-family: inherit;
+  font-weight: 500; transition: all 0.2s ease;
+}
+.feas-btn:hover { color: var(--text); background: rgba(128,128,128,0.06); }
+.feas-btn.active {
+  background: var(--accent); color: #fff; font-weight: 600;
+  box-shadow: 0 2px 8px rgba(200,168,78,0.25);
+}
+[data-theme="light"] .feas-btn.active { color: #fff; }
+
+/* -- TECH PILL -- */
+.tech-toggle-row { display: flex; align-items: center; margin-left: 14px; position: relative; }
+.tech-pill {
+  display: flex; align-items: center; gap: 8px; padding: 8px 16px;
+  border-radius: 22px; cursor: pointer;
+  background: linear-gradient(135deg, var(--pill-bg-from), var(--pill-bg-to));
+  border: 1.5px solid var(--pill-border); font-family: inherit; font-size: 12px;
+  font-weight: 600; color: var(--dim); transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  user-select: none; position: relative;
+}
+.tech-pill:hover { border-color: var(--purple); color: var(--text2); box-shadow: 0 0 20px rgba(139,124,240,0.1); }
+.tech-pill.active {
+  background: linear-gradient(135deg, var(--pill-active-bg-from), var(--pill-active-bg-to));
+  border-color: var(--purple); color: var(--purple);
+  box-shadow: 0 0 28px rgba(139,124,240,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.tech-pill .pill-icon { font-size: 15px; transition: transform 0.3s; }
+.tech-pill.active .pill-icon { transform: rotate(12deg); }
+.tech-pill .pill-indicator {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--border2); transition: all 0.3s;
+}
+.tech-pill.active .pill-indicator { background: var(--purple); box-shadow: 0 0 10px var(--purple); }
+.tech-pill .pill-badge {
+  position: absolute; top: -7px; right: -6px;
+  background: var(--purple); color: #fff; font-size: 8px; font-weight: 700;
+  padding: 2px 7px; border-radius: 8px; letter-spacing: 0.5px;
+  animation: pulse-badge 2.5s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
+
+/* -- CONTENT -- */
+#content { flex: 0 0 auto; overflow: visible; padding: 24px 24px 24px 20px; }
+#content::-webkit-scrollbar { width: 6px; }
+#content::-webkit-scrollbar-track { background: transparent; }
+#content::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+.entry {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 18px 22px; margin-bottom: 10px; transition: all 0.2s ease; cursor: pointer;
+  position: relative;
+}
+.entry:hover { border-color: var(--entry-hover-border); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+.entry.expanded {
+  border-color: var(--accent); box-shadow: var(--shadow-md), 0 0 0 1px rgba(200,168,78,0.1);
+}
+.entry-header { display: flex; align-items: flex-start; gap: 16px; }
+.feasibility-badge {
+  width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; font-size: 15px; flex-shrink: 0; margin-top: 1px; font-weight: 700;
+}
+.feasibility-badge.green { background: rgba(63,185,107,0.12); color: var(--green); }
+.feasibility-badge.amber { background: rgba(212,164,52,0.12); color: var(--amber); }
+.feasibility-badge.orange { background: rgba(224,123,60,0.12); color: var(--orange); }
+.feasibility-badge.red { background: rgba(224,81,81,0.12); color: var(--red); }
+
+.entry-body { flex: 1; min-width: 0; }
+.entry-question { font-size: 14px; font-weight: 600; line-height: 1.45; margin-bottom: 4px; letter-spacing: -0.15px; }
+.entry-subtitle { font-size: 11px; color: var(--dim); margin-bottom: 8px; font-weight: 450; }
+.entry-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+.tag {
+  font-size: 10px; padding: 3px 9px; border-radius: 4px; font-weight: 500;
+  background: var(--tag-bg); color: var(--blue); border: 1px solid var(--tag-border);
+}
+.tag.green { background: rgba(63,185,107,0.08); color: var(--green); border-color: rgba(63,185,107,0.12); }
+.tag.amber { background: rgba(212,164,52,0.08); color: var(--amber); border-color: rgba(212,164,52,0.12); }
+.tag.orange { background: rgba(224,123,60,0.08); color: var(--orange); border-color: rgba(224,123,60,0.12); }
+.tag.red { background: rgba(224,81,81,0.08); color: var(--red); border-color: rgba(224,81,81,0.12); }
+
+/* -- EXPANDED -- */
+.entry-detail { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); transition: border-color 0.4s ease; }
+.entry.expanded .entry-detail { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+.entry-detail h4 {
+  font-size: 11px; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.6px;
+  margin: 16px 0 6px; font-weight: 600;
+}
+.entry-detail h4:first-child { margin-top: 0; }
+.entry-detail p { font-size: 13px; line-height: 1.65; color: var(--detail-text); margin-bottom: 8px; }
+
+/* -- TECH SECTION -- */
+.tech-section {
+  display: none; margin-top: 14px; padding: 16px 18px; background: var(--tech-bg);
+  border-radius: 8px; border-left: 3px solid var(--tech-border);
+  box-shadow: inset 0 1px 0 rgba(128,128,128,0.04);
+  transition: background 0.4s ease;
+}
+.tech-visible .tech-section { display: block; animation: fadeIn 0.25s ease; }
+.tech-section h4 { color: var(--purple); font-size: 11px; letter-spacing: 0.6px; margin-bottom: 10px; }
+.tech-section ol { margin: 0 0 0 18px; font-size: 12px; color: var(--tech-text); line-height: 1.8; }
+.tech-section ol li { margin-bottom: 5px; padding-left: 2px; }
+.tech-section ol li::marker { color: var(--purple); font-weight: 600; }
+.tech-section code {
+  background: rgba(139,124,240,0.1); color: var(--purple); padding: 2px 7px; border-radius: 4px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11px; font-weight: 500;
+}
+.tech-section .source { font-size: 10px; color: var(--dim2); margin-top: 12px; font-style: italic; }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+.detail-item { font-size: 12px; }
+.detail-item label {
+  color: var(--dim); display: block; font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.6px; margin-bottom: 2px; font-weight: 600;
+}
+.detail-item .value { font-weight: 600; color: var(--text); }
+.traceability-panel {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.traceability-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+.traceability-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+}
+.traceability-item { font-size: 12px; }
+.traceability-item label {
+  color: var(--dim); display: block; font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.6px; margin-bottom: 4px; font-weight: 600;
+}
+.traceability-value { color: var(--text); line-height: 1.5; overflow-wrap: anywhere; word-break: break-word; }
+.confidence-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  width: fit-content;
+  border: 1px solid transparent;
+}
+.confidence-chip.high {
+  color: #7dd3a8;
+  background: rgba(125, 211, 168, 0.12);
+  border-color: rgba(125, 211, 168, 0.28);
+}
+.confidence-chip.medium {
+  color: #f3cf7a;
+  background: rgba(243, 207, 122, 0.12);
+  border-color: rgba(243, 207, 122, 0.28);
+}
+.confidence-chip.low {
+  color: #f1a3a3;
+  background: rgba(241, 163, 163, 0.12);
+  border-color: rgba(241, 163, 163, 0.28);
+}
+.expand-hint {
+  font-size: 11px; color: var(--accent2); cursor: pointer; margin-top: 6px;
+  display: inline-block; font-weight: 500; transition: color 0.15s;
+}
+.expand-hint:hover { color: var(--accent); }
+
+
+
+
+/* -- CLIENT QUERY INPUT -- */
+.query-panel {
+  margin: 0 20px 16px 20px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.query-panel label {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; display: block;
+}
+.query-panel textarea {
+  width: 100%; background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 8px; color: var(--text); font-family: inherit; font-size: 13px;
+  padding: 10px 14px; resize: vertical; min-height: 56px; max-height: 140px;
+  outline: none; transition: border-color 0.3s ease; line-height: 1.5;
+}
+.query-panel textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,168,78,0.1); }
+.query-panel textarea::placeholder { color: var(--dim2); }
+.query-panel .query-hint {
+  font-size: 10px; color: var(--dim2); margin-top: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+}
+.query-match-count { color: var(--accent2); font-weight: 600; }
+
+.empty-state { text-align: center; padding: 80px 20px; color: var(--dim); }
+.empty-state .icon { font-size: 52px; margin-bottom: 20px; opacity: 0.6; }
+.empty-state h3 { font-size: 17px; color: var(--text); margin-bottom: 8px; font-weight: 600; }
+.empty-state p { font-size: 13px; color: var(--dim2); max-width: 400px; margin: 0 auto; line-height: 1.6; }
+
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  #sidebar { width: 100%; min-width: 0; max-height: 32vh; }
+  #main { flex: 1; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .traceability-grid { grid-template-columns: 1fr; }
+  .query-panel { margin: 0 14px 12px; padding: 12px 14px; }
+  .query-panel textarea { min-height: 72px; font-size: 14px; }
+  .query-panel .query-hint { flex-direction: column; align-items: flex-start; }
+  .toolbar { gap: 8px; padding: 8px 14px; align-items: stretch; }
+  .toolbar .active-cat,
+  .toolbar .result-count { white-space: normal; }
+  .toolbar .result-count { margin-left: 0; align-self: flex-start; }
+  .feasibility-filter { width: 100%; flex-wrap: wrap; }
+  .feas-btn { min-height: 32px; }
+  .tech-toggle-row { width: 100%; margin-left: 0; flex-wrap: wrap; gap: 8px; }
+  .tech-toggle-row > .feas-btn { flex: 1 1 140px; }
+  .tech-pill { width: 100%; justify-content: center; }
+  .tech-pill .pill-badge { display: none; }
+  #content { padding: 14px; }
+  .entry { padding: 14px 16px; }
+  .entry-header { gap: 12px; }
+  .feasibility-badge { width: 30px; height: 30px; border-radius: 8px; font-size: 13px; }
+  .entry-question { font-size: 13px; line-height: 1.5; }
+  .entry-subtitle { line-height: 1.4; }
+  .tag { font-size: 9px; padding: 3px 7px; }
+  .entry-detail { margin-top: 14px; padding-top: 14px; }
+  .entry-detail p,
+  .detail-item,
+  .traceability-item,
+  .traceability-value { font-size: 12px; }
+  .tech-section { padding: 14px; }
+  .tech-section ol { font-size: 12px; line-height: 1.7; }
+  .tech-section code,
+  .tech-section .source { overflow-wrap: anywhere; word-break: break-word; }
+  .theme-toggle-btn { top: 10px; right: 10px; }
+}
+
+@media (max-width: 560px) {
+  body { height: 100dvh; }
+  .sidebar-header { padding: 18px 14px 14px; }
+  .sidebar-header h1 { font-size: 15px; padding-right: 38px; }
+  #sidebar { max-height: 28vh; }
+  #search-box { margin: 12px; }
+  .category-list { padding: 4px 6px; }
+  .query-panel { margin: 0 12px 10px; padding: 10px 12px; }
+  .query-panel textarea { min-height: 64px; }
+  .toolbar { padding: 8px 12px; }
+  .feasibility-filter { gap: 6px; background: transparent; padding: 0; }
+  .feas-btn { flex: 1 1 calc(50% - 6px); }
+  .tech-toggle-row > .feas-btn { flex: 1 1 calc(50% - 6px); }
+  #content { padding: 12px; }
+  .entry { padding: 13px 14px; border-radius: 9px; }
+  .traceability-panel { padding: 12px; border-radius: 10px; }
+  .tech-section { padding: 12px; }
+  .expand-hint { margin-top: 8px; }
+}
+
+/* ---- SF Compass suite directory ---- */
+.suite-block { border-top: 1px solid var(--border); padding: 8px 14px 10px; }
+.suite-block summary {
+  cursor: pointer; list-style: none; font-size: 11px; font-weight: 600;
+  color: var(--text2); padding: 4px 0; display: flex; align-items: center; gap: 6px;
+}
+.suite-block summary::-webkit-details-marker { display: none; }
+.suite-block summary::after { content: '▸'; margin-left: auto; color: var(--dim2); transition: transform 0.15s ease; }
+.suite-block[open] summary::after { transform: rotate(90deg); }
+.suite-block a {
+  display: block; padding: 4px 0 4px 8px; font-size: 11px; line-height: 1.5;
+  color: var(--text2); text-decoration: none; border-left: 2px solid var(--border);
+  margin: 2px 0;
+}
+.suite-block a:hover { color: var(--text); border-left-color: var(--purple); }
+.suite-block a b { display: block; font-size: 11px; }
+.suite-block a span { font-size: 10px; color: var(--dim2); }
+.suite-block .suite-start {
+  font-size: 10px; color: var(--dim2); margin: 6px 0 4px; line-height: 1.5;
+}
+.assurance-strip {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+  background: var(--border); border-bottom: 1px solid var(--border);
+}
+.assurance-stage {
+  display: block; background: var(--surface); padding: 9px 12px;
+  color: var(--text2); text-decoration: none; min-width: 0;
+}
+.assurance-stage:hover { background: var(--surface2); }
+.assurance-stage b { display: block; color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; }
+.assurance-stage span { display: block; margin-top: 2px; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 900px) {
+  .assurance-strip { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div class="sidebar-header">
+    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark theme" aria-label="Toggle theme">☀</button>
+    <h1><span>SF</span> Compass</h1>
+    <div class="subtitle">Transformation assurance · 94 scenarios</div>
+    <a href="https://sahirvhora.github.io/sf-value-navigator/" class="header-banner">💡 <b>Building the business case?</b> Map value realisation -></a>
+  </div>
+  <input type="text" id="search-box" placeholder="Search by keyword, tag, or topic..." oninput="filterEntries()">
+  <div class="category-list" id="category-list"></div>
+  <details class="suite-block">
+    <summary>🧰 Transformation Assurance Suite</summary>
+    <div class="suite-start">Assess risk, design safely, validate data, control change and demonstrate value—with human approval at consequential decisions.</div>
+    <a href="https://sahirvhora.github.io/sf-position-integrity-checker/"><b>Position Integrity Checker</b><span>Validate position data - HTML and Excel reports</span></a>
+    <a href="https://sahirvhora.github.io/sf-object-sync/"><b>ObjectSync</b><span>Sync OM foundation objects PRD to Dev</span></a>
+    <a href="https://sahirvhora.github.io/sf-config-compare/"><b>Config Compare</b><span>Compare metadata and picklists across tenants</span></a>
+    <a href="https://sahirvhora.github.io/sf-release-update/"><b>Release Tracker</b><span>Live 1H/2H release change tracker</span></a>
+    <a href="https://sahirvhora.github.io/sf-impact-brief/"><b>Impact Brief</b><span>Personalised release impact briefs</span></a>
+    <a href="https://sahirvhora.github.io/sf-pay-transparency/"><b>Pay Transparency</b><span>EU Pay Transparency Directive readiness</span></a>
+    <a href="https://sahirvhora.github.io/sf-value-navigator/"><b>Value Navigator</b><span>Value realisation consulting framework</span></a>
+  </details>
+  <div class="sidebar-footer">
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Full</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span> Partial</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--orange)"></span> Workaround</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Limited</div>
+    </div>
+    <div style="font-size:10px">SF Compass · 94 items</div>
+  </div>
+</div>
+
+<div id="main">
+
+
+  <div class="query-panel" id="query-panel">
+    <label>🎯 Client Query / Issue</label>
+    <textarea id="client-query" placeholder="Paste your client's question or issue here... e.g., 'Client wants matrix reporting for UK team plus country-specific statutory fields for Germany and France'"></textarea>
+    <div class="query-hint">
+      <span>Matches across all 94 scenarios automatically as you type</span>
+      <span class="query-match-count" id="query-match-count"></span>
+    </div>
+  </div>
+
+  <nav class="assurance-strip" aria-label="Transformation assurance lifecycle">
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-config-debt-radar/"><b>1 · Assess</b><span>Configuration risk</span></a>
+    <a class="assurance-stage" href="#" onclick="document.getElementById('client-query').focus(); return false;"><b>2 · Design</b><span>Feasibility guidance</span></a>
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-position-integrity-checker/"><b>3 · Validate</b><span>Position integrity</span></a>
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-config-compare/"><b>4 · Control</b><span>Tenant drift</span></a>
+    <a class="assurance-stage" href="https://sahirvhora.github.io/sf-value-navigator/"><b>5 · Measure</b><span>Value realisation</span></a>
+  </nav>
+
+  <div class="toolbar">
+    <span class="active-cat" id="active-cat-label">All Modules</span>
+    <span class="result-count" id="result-count"></span>
+    <div class="feasibility-filter" id="feas-filter">
+      <button class="feas-btn active" data-feas="all" onclick="setFeasFilter('all', this)">All</button>
+      <button class="feas-btn" data-feas="green" onclick="setFeasFilter('green', this)">Full</button>
+      <button class="feas-btn" data-feas="amber" onclick="setFeasFilter('amber', this)">Partial</button>
+      <button class="feas-btn" data-feas="orange" onclick="setFeasFilter('orange', this)">Workaround</button>
+      <button class="feas-btn" data-feas="red" onclick="setFeasFilter('red', this)">Limited</button>
+    </div>
+    <div class="tech-toggle-row">
+      <button class="feas-btn" onclick="exportScenarioPack()" title="Download the current filtered scenarios as a workshop pack">Export Pack</button>
+      <button class="feas-btn" onclick="copyScenarioSummary()" title="Copy the current filtered scenarios as a plain-English summary">Copy Summary</button>
+      <div class="tech-pill" id="tech-pill" onclick="toggleTechDetails()">
+        <span class="pill-icon">⚙</span>
+        <span id="tech-label">Implementation Steps</span>
+        <span class="pill-indicator"></span>
+        <span class="pill-badge">PRO</span>
+      </div>
+    </div>
+  </div>
+  <div id="content"></div>
+</div>
+
+<script>
+const CATEGORIES = [
+  { id: 'foundation', name: 'Foundation Objects', icon: '🏛', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'position', name: 'Position Management', icon: '📊', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'employee', name: 'Employee Data Model', icon: '👤', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'rules', name: 'Business Rules', icon: '⚙', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'workflow', name: 'Workflows & Approvals', icon: '🔄', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'events', name: 'Event Reasons', icon: '📋', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'ui', name: 'UI & Self-Service', icon: '🖥', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'time', name: 'Time & Attendance', icon: '⏱', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'compliance', name: 'Compliance & Localization', icon: '🛡', module: 'Employee Central', modIcon: '🧩' },
+  { id: 'rcm-req', name: 'Requisitions', icon: '📝', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'rcm-cand', name: 'Candidate Management', icon: '👥', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'rcm-offer', name: 'Offer Letters', icon: '✉️', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'rcm-career', name: 'Career Site', icon: '🌐', module: 'Recruiting', modIcon: '🎯' },
+  { id: 'onb-proc', name: 'Onboarding Processes', icon: '🚀', module: 'Onboarding', modIcon: '🌟' },
+  { id: 'onb-doc', name: 'Document Collection', icon: '📄', module: 'Onboarding', modIcon: '🌟' },
+  { id: 'onb-comp', name: 'Compliance Forms', icon: '✅', module: 'Onboarding', modIcon: '🌟' },
+  { id: 'pmgm-form', name: 'Performance Forms', icon: '📋', module: 'Performance', modIcon: '📈' },
+  { id: 'pmgm-goal', name: 'Goal Management', icon: '🎯', module: 'Performance', modIcon: '📈' },
+  { id: 'pmgm-calib', name: 'Calibration', icon: '⚖️', module: 'Performance', modIcon: '📈' },
+  { id: 'pmgm-360', name: '360 Reviews', icon: '🔄', module: 'Performance', modIcon: '📈' },
+  { id: 'comp-base', name: 'Base Salary', icon: '💰', module: 'Compensation', modIcon: '💎' },
+  { id: 'comp-var', name: 'Variable Pay', icon: '📊', module: 'Compensation', modIcon: '💎' },
+  { id: 'comp-stock', name: 'Equity / Long-Term', icon: '📈', module: 'Compensation', modIcon: '💎' },
+  { id: 'lms-catalog', name: 'Course Catalog', icon: '📚', module: 'Learning', modIcon: '🎓' },
+  { id: 'lms-assign', name: 'Assignments', icon: '📌', module: 'Learning', modIcon: '🎓' },
+  { id: 'lms-ext', name: 'External Content', icon: '🔗', module: 'Learning', modIcon: '🎓' },
+  { id: 'scdp-nom', name: 'Talent Nominations', icon: '⭐', module: 'Succession', modIcon: '🌱' },
+  { id: 'scdp-pool', name: 'Talent Pools', icon: '🏊', module: 'Succession', modIcon: '🌱' },
+  { id: 'scdp-dev', name: 'Development Plans', icon: '🌱', module: 'Succession', modIcon: '🌱' },
+  { id: 'integration', name: 'Integrations', icon: '🔗', module: 'Platform', modIcon: '⚡' },
+  { id: 'reporting', name: 'Reporting & Analytics', icon: '📈', module: 'Platform', modIcon: '⚡' },
+  { id: 'data', name: 'Data Import & Migration', icon: '📥', module: 'Platform', modIcon: '⚡' },
+];
+
+// DATA: q=client question, s=summary, f=feasibility, level=effort, tags, approach=business explanation, tech=implementation steps
+const ENTRIES = [
+
+  // ═══ FOUNDATION OBJECTS ═══
+  { cat:'foundation', f:'green', level:'Configuration',
+    q:'Can we create custom Foundation Objects beyond the standard ones?',
+    s:'Custom Foundation Objects (generic objects) are fully supported in MDF. You can define fields, associations, validations, and UIs for them.',
+    approach:'Create via Configure Object Definitions. Define fields, associate with standard FOs, and expose via custom portlets if needed.',
+    tags:['MDF','Custom Objects'],
+    tech:`<ol><li>Navigate to <code>Admin Center -> Configure Object Definitions</code></li><li>Click <b>Create New</b> -> select <b>Generic Object</b></li><li>Define the object code (e.g., <code>cust_Project</code>), label, and base object type</li><li>Add custom fields under the <b>Fields</b> tab - set data types, lengths, and required flags</li><li>Under <b>Associations</b>, create links to standard FOs (Department, Location, etc.) using valid association types</li><li>Save the object. To expose it in the UI, create a custom portlet via <code>Manage Business Configuration</code></li><li>Assign UI permissions via RBP -> <code>Manage Permission Roles</code> -> grant access to the new object</li></ol><div class="source">Source: SAP SF Implementation Workbook - MDF Foundation Objects (Lesson 3.2)</div>`
+  },
+  { cat:'foundation', f:'green', level:'Configuration',
+    q:'Can we add custom fields to standard Foundation Objects like Location or Department?',
+    s:'All standard Foundation Objects support custom fields via MDF extensions. These fields can be used in business rules and reports.',
+    approach:'Add fields directly through the object definition in Configure Object Definitions. Propagate to downstream records if needed via rules.',
+    tags:['MDF','Custom Fields'],
+    tech:`<ol><li>Go to <code>Admin Center -> Configure Object Definitions</code></li><li>Search for the standard object (e.g., <code>Department</code>, <code>Location</code>)</li><li>Click <b>Take Action -> Make Correction</b> to unlock the object</li><li>Under the <b>Fields</b> section, click <b>Add Field</b></li><li>Define field attributes: ID (e.g., <code>custDeptRegion</code>), label, data type (String/Number/Date/Boolean/Enum)</li><li>Set field properties: Required, Visible, and any picklist if Enum type</li><li>Save. If this FO needs propagation to employee records, configure a <b>Propagation Data Model</b> or use a business rule on FO save</li><li>Test: navigate to <code>Manage Data</code> -> open a Department record -> verify the new field appears and saves correctly</li></ol><div class="source">Source: SAP SF Implementation Workbook - MDF Extensions (Lesson 3.4)</div>`
+  },
+  { cat:'foundation', f:'green', level:'Configuration',
+    q:'Can we associate two Foundation Objects that are not linked out of the box?',
+    s:'You can create custom associations between any two MDF objects - standard-to-standard, standard-to-custom, or custom-to-custom.',
+    approach:'Define a new association in the parent object definition. Use the association in business rules for field propagation and UI visibility.',
+    tags:['MDF','Associations'],
+    tech:`<ol><li>Open the parent object in <code>Configure Object Definitions</code></li><li>Under the <b>Associations</b> tab, click <b>Add Association</b></li><li>Set the association type: <code>One-to-One</code> or <code>One-to-Many</code></li><li>Select the destination object (the child FO), set the foreign key field name</li><li>Choose the multiplicity: Composite (child is owned) or Association (linked reference)</li><li>Save. Use the association in business rules via the path expression: <code>Object.Field.Association.Field</code></li><li>To display associated data in a portlet, configure a <b>related object section</b> in the portlet definition</li></ol><div class="source">Source: SAP SF Implementation Workbook - MDF Associations (Lesson 3.5)</div>`
+  },
+  { cat:'foundation', f:'green', level:'Configuration',
+    q:'Can we set up a Legal Entity structure that spans multiple countries with different compliance rules?',
+    s:'Fully supported. Each Legal Entity can be country-specific with its own statutory settings. The corporate structure can reflect the actual org hierarchy.',
+    approach:'Configure each Legal Entity with the correct country code, currency, and statutory settings. Use propagation to cascade data to child entities.',
+    tags:['Legal Entities','Multi-Country'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Data</code> -> search for <b>Legal Entity</b></li><li>Create a parent Legal Entity representing the global/corporate entity (country = HQ location)</li><li>For each country subsidiary, create a child Legal Entity with the correct country code, currency, and statutory ID</li><li>Link child LE to parent LE using the <b>Parent Legal Entity</b> association field</li><li>Configure country-specific settings: in <code>Company Settings</code> -> set default country-specific fields and validations per legal entity</li><li>Assign employees to the correct LE via Job Info. Business rules can auto-derive LE based on Location or Department</li></ol><div class="source">Source: SAP SF Implementation Workbook - Legal Entity Configuration (Lesson 2.1)</div>`
+  },
+  { cat:'foundation', f:'green', level:'RBP Configuration',
+    q:'Can we restrict who can view or edit certain Foundation Object records?',
+    s:'Yes, via RBP (Role-Based Permissions). You can scope access to specific FO instances by department, location, legal entity, or custom criteria.',
+    approach:'Define permission roles with targeted scoping. Use "Granted" vs "Restricted" access for fine control. Test with the Permission Debug tool.',
+    tags:['RBP','Security'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Permission Roles</code></li><li>Select or create the target role (e.g., <code>HR_Manager_Germany</code>)</li><li>Under <b>Permission Grants</b>, add a grant for the Foundation Object type</li><li>In the grant detail, set <b>Access Type = Read</b> (or Write for edit access)</li><li>Under <b>Target Population</b>, scope by the FO's attributes: e.g., <code>Legal Entity = Germany</code> or <code>Department = Sales</code></li><li>Set <b>Granted</b> for records matching the scope, <b>Restricted</b> for everything else</li><li>Use <code>Admin Center -> Permission Debug</code> to test what a specific user sees</li></ol><div class="source">Source: SAP SF Implementation Workbook - RBP Configuration (Lesson 8.3)</div>`
+  },
+  { cat:'foundation', f:'amber', level:'Configuration + Rules',
+    q:'Can Foundation Object changes automatically propagate to employee records?',
+    s:'Yes, using propagation rules or business rules. When a FO field changes, the change ripples to associated employee Job Info records.',
+    approach:'Set up propagation in the FO definition for direct attributes. For complex logic, use business rules triggered on FO save.',
+    tags:['Propagation','Business Rules'],
+    tech:`<ol><li>Option A (simple): In <code>Configure Object Definitions</code>, open the FO -> <b>Propagation</b> tab -> add propagation rules. Standard attributes (e.g., Cost Center changing when Department moves) can be propagated here</li><li>Option B (complex): Create an <b>onSave</b> business rule on the FO object. Use the rule to find associated employee records and update their Job Info</li><li>In the business rule: use <code>For Each</code> loop to iterate through employees linked to the FO, use <code>Set Field</code> to update Job Info fields</li><li>Common pitfall: propagation rules fire asynchronously - there can be a delay before employee records update. Test timing in a sandbox tenant</li></ol><div class="source">Source: SAP SF Implementation Workbook - Propagation & Business Rules (Lesson 5.6)</div>`
+  },
+  { cat:'foundation', f:'orange', level:'Workaround',
+    q:'Can we soft-delete Foundation Object records instead of permanently removing them?',
+    s:'SF does not natively support soft-delete for FOs. Records are active or deleted. A common workaround uses a custom status field.',
+    approach:'Add a custom "Status" field (Active/Inactive/Archived) and filter it in reports and UI visibility rules.',
+    tags:['Data Management'],
+    tech:`<ol><li>Add a custom field <code>status</code> (Enum type) to the FO via <code>Configure Object Definitions</code></li><li>Define picklist values: <code>Active</code>, <code>Inactive</code>, <code>Archived</code></li><li>Create a business rule on the FO that hides records with status=Inactive from UI views (filter in portlet configuration)</li><li>In reports, add a filter: <code>Status ≠ Archived</code> as the default view</li><li>Note: standard delete operation still permanently removes the record. This only provides a UI-level soft-delete</li></ol><div class="source">Source: SAP SF Community - Custom Status Field Pattern (KB Article 2847513)</div>`
+  },
+
+  // ═══ POSITION MANAGEMENT ═══
+  { cat:'position', f:'amber', level:'Configuration',
+    q:'Can we set up matrix reporting where an employee reports to multiple managers?',
+    s:'SF supports matrix relationships through additional relationships on the position, not multiple direct managers. The primary manager remains on Job Info.',
+    approach:'Use the Position Relationship object to define matrix/dotted-line connections. These appear on the org chart and can drive workflows.',
+    tags:['Matrix','Relationships'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Data</code> -> <b>Position Relationship</b></li><li>Create a new relationship record: select the employee's position as the <b>Source Position</b></li><li>Set <b>Relationship Type</b> = <code>Matrix</code> (or a custom relationship type if defined)</li><li>Set the <b>Target Position</b> to the matrix manager's position</li><li>The matrix relationship now appears in the org chart under "Other Relationships"</li><li>To drive workflows based on matrix relationships: create a business rule that reads the Position Relationship via association and routes approvals to the matrix manager</li><li>Limitation: the primary <code>Reports To</code> field on Job Info can only hold one manager. Matrix relationships are supplementary</li></ol><div class="source">Source: SAP SF Implementation Workbook - Position Management (Lesson 4.3)</div>`
+  },
+  { cat:'position', f:'green', level:'Configuration',
+    q:'Can we manage positions that are budgeted but not yet filled?',
+    s:'Yes, positions exist independently of incumbents. A position can be vacant while still participating in hierarchy, budgeting, and headcount planning.',
+    approach:'Create positions normally; they remain vacant until an employee is hired/transferred into them. Use position-to-headcount reports to track filled vs. open.',
+    tags:['Vacant Positions','Headcount'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Positions</code> -> <b>Create New Position</b></li><li>Fill in the position attributes: job code, department, location, FTE, pay grade, etc.</li><li>Leave the incumbent blank - the position is now <b>Vacant</b></li><li>The position appears in the hierarchy immediately. To see vacancies, run the <b>Position Headcount</b> report in Report Center</li><li>For requisition creation: in Recruiting, select <b>Create Requisition from Position</b> to link a new hire to the vacant position</li></ol><div class="source">Source: SAP SF Implementation Workbook - Position Management (Lesson 2.4)</div>`
+  },
+  { cat:'position', f:'green', level:'Configuration + Import',
+    q:'Can we do mass updates to positions - like reassigning 500 positions to a new department?',
+    s:'Yes, via mass change tools or import. Standard position import templates support bulk updates.',
+    approach:'Use the Position Import template for bulk field updates. For complex reorganizations, use the Manage Positions mass change tool.',
+    tags:['Mass Changes','Reorg'],
+    tech:`<ol><li>Download the Position Import template: <code>Admin Center -> Import Employee Data</code> -> download <b>Position</b> template</li><li>Populate the CSV with: Position ID, effective date, and only the fields to change (Department, Cost Center, Location, etc.)</li><li>Use <code>Import Employee Data</code> to upload -> validate -> import. Validate-only mode catches errors before committing</li><li>For effective-dated changes: each row represents a time slice - ensure date ranges do not overlap</li><li>Alternative for interactive reorg: <code>Manage Positions -> Mass Change</code> tool - select multiple positions and update attributes in bulk</li></ol><div class="source">Source: SAP SF Implementation Workbook - Data Import (Lesson 7.2)</div>`
+  },
+  { cat:'position', f:'green', level:'Standard',
+    q:'Can position data automatically sync to other modules like Recruiting or Succession?',
+    s:'Yes, positions are the central spine of SF. A position is immediately available in Recruiting for requisitions and in Succession for talent nomination.',
+    approach:'No additional config needed. Positions created in EC auto-sync. Ensure the position has correct attributes for downstream module usage.',
+    tags:['Position Sync','Cross-Module'],
+    tech:`<ol><li>The sync is automatic - no configuration step required. When a position is created or updated in EC, it is instantly available across all SF modules</li><li>Key fields that downstream modules depend on: <code>Job Code</code> (maps to role profile), <code>Department</code> (org structure), <code>Location</code> (geography for requisitions), <code>FTE</code> (for headcount planning)</li><li>To verify: go to Recruiting -> Create Requisition -> search for the position. It should appear in the position picker</li><li>If a position does NOT appear: check that the position <code>Status = Active</code> and <code>Available for Recruiting = Yes</code></li></ol><div class="source">Source: SAP SF Standard - Position-to-Recruiting integration is out-of-box (no config needed)</div>`
+  },
+  { cat:'position', f:'green', level:'Configuration',
+    q:'Can we restrict certain positions from appearing in the internal career site?',
+    s:'Yes. A position field controls recruiting visibility. RBP permissions can also restrict which roles see specific positions.',
+    approach:'Set the "Available for Recruiting" flag on the position. Use RBP target-scoping to limit position visibility by department/location.',
+    tags:['Visibility','RBP'],
+    tech:`<ol><li>In <code>Manage Positions</code>, open the position. Set <b>Available for Recruiting = No</b> to hide it from the internal career site</li><li>The position still exists in EC and the hierarchy - it just won't appear in job search results or requisition creation</li><li>For finer control via RBP: in <code>Manage Permission Roles</code>, scope the position grant by Department/Location to restrict which roles can view certain position pools</li></ol><div class="source">Source: SAP SF Implementation Workbook - RBP & Position Visibility (Lesson 8.4)</div>`
+  },
+  { cat:'position', f:'green', level:'Configuration',
+    q:'Can we have positions with no defined FTE or working hours?',
+    s:'Yes, all position attributes (FTE, working hours, pay grade) are optional. A position can be created with minimal data and enriched later.',
+    approach:'Create the position leaving FTE blank. Some downstream processes may require FTE for accurate calculations - plan accordingly.',
+    tags:['Position Attributes'],
+    tech:`<ol><li>When creating a position via <code>Manage Positions</code>, simply leave the <b>FTE</b> and <b>Standard Weekly Hours</b> fields empty</li><li>The position saves successfully with these fields blank - there is no mandatory validation</li><li>Caveat: Headcount reports and compensation planning will show blank/inaccurate values if FTE is missing. Consider setting a default (e.g., 1.0) for reporting accuracy</li><li>If using Time Management, missing working hours will block timesheet generation - set these before going live with Time Sheet</li></ol><div class="source">Source: SAP SF Implementation Workbook - Position Attributes (Lesson 2.3)</div>`
+  },
+
+  // ═══ EMPLOYEE DATA MODEL ═══
+  { cat:'employee', f:'green', level:'Configuration',
+    q:'Can we add custom fields to the Job Information record?',
+    s:'Job Info is the most extensible HRIS element in EC. Custom fields participate in business rules, workflows, and reports.',
+    approach:'Add custom HRIS fields via Manage Business Configuration. Use the "Job Information" HRIS element. Fields can be country-specific or global.',
+    tags:['Job Info','Custom Fields'],
+    tech:`<ol><li>Navigate to <code>Admin Center -> Manage Business Configuration</code></li><li>Select the <b>Job Information</b> HRIS element</li><li>Click <b>Add Field</b> -> choose the field type (String, Number, Date, Boolean, Enum, Picklist)</li><li>Define the field ID (e.g., <code>custJobLevel</code>), label, and data type</li><li>Set <b>Country</b> scope: leave blank for global, or select a country for country-specific visibility</li><li>Under field properties: set Required, Editable, and Visibility flags</li><li>Save. The field now appears in the Job Info portlet (based on the portlet layout configuration)</li><li>Add the field to the portlet layout: <code>Configure People Profile</code> -> Job Info portlet -> drag the new field into position</li></ol><div class="source">Source: SAP SF Implementation Workbook - HRIS Element Configuration (Lesson 3.1)</div>`
+  },
+  { cat:'employee', f:'green', level:'Configuration',
+    q:'Can we track custom employment types beyond Permanent, Temporary, and Contractor?',
+    s:'The standard employment type picklist is extensible. Add values like "Intern", "Apprentice", "Consultant", "Seasonal", etc.',
+    approach:'Extend the employment type picklist in Manage Data. Map custom types to standard categories for payroll and benefits integration.',
+    tags:['Employment Types','Picklists'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Data</code> -> search for <b>Picklist</b></li><li>Find the picklist named <code>employmentType</code> (or search by the field on Job Info)</li><li>Click <b>Add Value</b> - enter the new employment type (e.g., <code>Intern</code>, <code>Apprentice</code>)</li><li>Set the <b>External Code</b> - this is the value stored in the database. Use a consistent naming convention</li><li>Map the new value to the correct <b>Employee Class</b>: Employee or Contingent Worker - this drives payroll, benefits, and time eligibility</li><li>Test: create a new hire with the custom employment type -> verify the employee appears correctly in payroll feed and benefits eligibility</li></ol><div class="source">Source: SAP SF Implementation Workbook - Picklist Management (Lesson 3.8)</div>`
+  },
+  { cat:'employee', f:'green', level:'Configuration + Rules',
+    q:'Can we make certain Job Info fields mandatory based on country or legal entity?',
+    s:'Yes, using business rules with country/legal-entity conditions. Different countries can have different mandatory field sets.',
+    approach:'Create an onSave business rule that checks country/legal entity and validates required fields for each context.',
+    tags:['Field Validation','Country-Specific'],
+    tech:`<ol><li>Create a new <b>Business Rule</b> in <code>Admin Center -> Configure Business Rules</code></li><li>Set <b>Rule Type = onSave</b>, <b>Base Object = Job Information</b></li><li>Add an <b>If</b> condition: <code>Job Information.Country = "Germany"</code></li><li>Inside the If block, for each mandatory field, add a <b>Raise Error</b> action with condition <code>Field is null</code></li><li>Add additional If blocks for other countries with different mandatory field sets</li><li>Assign the rule to the Job Information HRIS element in <code>Manage Business Configuration</code></li><li>Test: create a German employee, leave a mandatory field blank -> the error message should block save</li></ol><div class="source">Source: SAP SF Implementation Workbook - Business Rules (Lesson 5.2)</div>`
+  },
+  { cat:'employee', f:'green', level:'Configuration',
+    q:'Can we capture an employee\'s previous employment history directly in EC?',
+    s:'EC has a standard Previous Employment portlet. Custom fields can be added for additional data points.',
+    approach:'Enable the Previous Employment portlet in People Profile. Add custom fields if needed for extra details.',
+    tags:['Previous Employment'],
+    tech:`<ol><li>Ensure the <b>Previous Employment</b> portlet is enabled in <code>Configure People Profile</code></li><li>The portlet captures: Employer Name, Start Date, End Date, Job Title, Reason for Leaving (standard fields)</li><li>To add custom fields: go to <code>Manage Business Configuration</code> -> select <b>Previous Employment</b> HRIS element -> add custom fields (e.g., <code>Reference Contact</code>, <code>Eligible for Rehire</code>)</li><li>Add the custom fields to the portlet layout via <code>Configure People Profile</code></li></ol><div class="source">Source: SAP SF Implementation Workbook - Employee Data Model (Lesson 2.6)</div>`
+  },
+  { cat:'employee', f:'amber', level:'Configuration + Setup',
+    q:'Can EC handle concurrent employment - where one person holds two active jobs?',
+    s:'EC supports Global Assignments and Concurrent Employment. These are separate employment records linked to one person.',
+    approach:'Enable Global Assignment / Concurrent Employment in Company Settings. Each employment is independent with its own pay, time, and benefits records.',
+    tags:['Concurrent Employment','Global Assignment'],
+    tech:`<ol><li>Enable in <code>Admin Center -> Company Settings</code>: turn on <b>Global Assignment</b> and/or <b>Concurrent Employment</b></li><li>For Global Assignment (expat): use <code>Manage Global Assignments</code> to create a host-country assignment linked to the home-country employment</li><li>For Concurrent Employment (two parallel jobs): from the employee profile, select <b>Add Concurrent Employment</b> -> this creates a second, independent employment record</li><li>Each employment record has its own Job Info, Pay, Time, and Benefits. Cross-record business rules may need updates</li><li>Test payroll integration: ensure ECP or external payroll can distinguish between employments for separate tax/pay calculations</li></ol><div class="source">Source: SAP SF Implementation Workbook - Global Assignments (Lesson 6.5)</div>`
+  },
+  { cat:'employee', f:'green', level:'Configuration',
+    q:'Can we prevent certain HRIS fields from being editable once they are initially saved?',
+    s:'Use field-level "Read-Only After First Save" or enforce via business rules that block edits.',
+    approach:'In Manage Business Configuration, set field properties to "Editable: No" after initial entry. Or use an onChange rule for conditional blocking.',
+    tags:['Field Protection'],
+    tech:`<ol><li>In <code>Manage Business Configuration</code>, select the HRIS element -> open the field</li><li>Set <b>Editable = No</b> in the field properties. This makes the field read-only for all edits after the first save</li><li>For conditional locking (e.g., only lock after a certain status is reached): create an <b>onChange</b> business rule</li><li>In the rule: <code>If Field is not null AND Employee Status = "Active" Then Raise Error "This field cannot be modified"</code></li><li>Note: admins with full HRIS write permission can bypass field-level edit restrictions - this is a UX guard, not a security control</li></ol><div class="source">Source: SAP SF Implementation Workbook - Field Configuration (Lesson 3.3)</div>`
+  },
+  { cat:'employee', f:'orange', level:'Workaround (MDF)',
+    q:'Can we track employee assets like laptops, phones, and access cards in EC?',
+    s:'No standard Asset Management portlet. Build as a custom MDF object with employee association, display in a custom portlet.',
+    approach:'Create a custom MDF object "Employee Asset" with fields for asset type, serial, issue/return dates. Expose via custom portlet.',
+    tags:['Asset Tracking','Custom Portlet'],
+    tech:`<ol><li>Create a custom MDF object <code>cust_EmployeeAsset</code> via <code>Configure Object Definitions</code></li><li>Add fields: <code>assetType</code> (Enum: Laptop, Phone, Badge, etc.), <code>serialNumber</code>, <code>issueDate</code>, <code>returnDate</code>, <code>condition</code></li><li>Create an association: Employee/User -> <code>cust_EmployeeAsset</code> (One-to-Many)</li><li>Build a custom portlet in <code>Manage Business Configuration</code> -> set the base object to <code>cust_EmployeeAsset</code></li><li>Configure the portlet to show the asset fields and grant view/edit permissions via RBP</li><li>Limitation: no automated workflows for issue/return approval - these must be built as separate workflow rules</li></ol><div class="source">Source: SAP SF Community - Custom Object Pattern for Asset Tracking (KB 3120578)</div>`
+  },
+  { cat:'employee', f:'red', level:'Separate Module Required',
+    q:'Can EC track benefits enrollment and eligibility?',
+    s:'EC alone does not manage benefits. SAP SuccessFactors Benefits is a separate module. For full benefits: purchase and implement SF Benefits.',
+    approach:'For full benefits: SF Benefits module. For lightweight tracking: custom fields on Job Info or a custom MDF object - no enrollment workflow or carrier integration.',
+    tags:['Benefits'],
+    tech:`<ol><li>For full benefits management: license and implement <b>SAP SuccessFactors Benefits</b> (separate module)</li><li>The Benefits module provides: enrollment workflows, eligibility rules, carrier integration, evidence of insurability, and open enrollment</li><li>Lightweight alternative: add custom fields on Job Info for benefit plan type, enrollment date, and coverage level - but this has no validation, no workflow, and no carrier feed</li><li>Integration: if benefits are managed externally, use the SF Integration Center or ODATA API to export employee demographic data to the benefits provider</li></ol><div class="source">Source: SAP SF Product Documentation - Benefits Module Overview</div>`
+  },
+  { cat:'employee', f:'green', level:'Configuration',
+    q:'Can we add emergency contact fields and make them mandatory?',
+    s:'EC has a standard Emergency Contact portlet. It supports multiple contacts per employee. You can make it mandatory via business rules.',
+    approach:'Enable the Emergency Contact portlet in People Profile. Add a business rule that validates at least one contact exists before allowing certain transactions.',
+    tags:['Emergency Contacts'],
+    tech:`<ol><li>Enable the <b>Emergency Contacts</b> portlet in <code>Configure People Profile</code></li><li>Employees can add contacts via self-service - name, relationship, phone numbers, address</li><li>To enforce mandatory contact: create an <b>onSave</b> rule on Job Info that counts the employee's emergency contacts and raises an error if count = 0</li><li>Alternative: use the <b>People Profile completeness</b> configuration to flag missing emergency contacts on the employee's homepage</li></ol><div class="source">Source: SAP SF Implementation Workbook - People Profile Configuration (Lesson 6.2)</div>`
+  },
+
+  // ═══ BUSINESS RULES ═══
+  { cat:'rules', f:'green', level:'Business Rules',
+    q:'Can we auto-populate fields based on other fields - like setting cost center from department?',
+    s:'Yes, the most common use of business rules. OnSave/onChange rules can read the department, look up its default cost center, and auto-populate.',
+    approach:'Create an onChange rule on the HRIS element. Use Set Field actions to populate derived fields referencing FO data.',
+    tags:['Auto-Population','Defaulting'],
+    tech:`<ol><li>Create a new rule in <code>Admin Center -> Configure Business Rules</code></li><li>Set <b>Rule Type = onChange</b>, <b>Base Object = Job Information</b>, <b>Trigger Field = Department</b></li><li>Add an <b>If</b> condition: <code>Job Information.Department is not null</code></li><li>Inside the If: <code>Set Field -> Job Information.Cost Center = Job Information.Department.Default Cost Center</code></li><li>The path expression traverses the association: Employee -> Job Info -> Department FO -> reads the "Default Cost Center" field from the Department record</li><li>Assign the rule to Job Info in <code>Manage Business Configuration</code></li><li>Test: change the Department on an employee -> Cost Center should auto-populate immediately</li></ol><div class="source">Source: SAP SF Implementation Workbook - Business Rules (Lesson 5.3)</div>`
+  },
+  { cat:'rules', f:'green', level:'Business Rules',
+    q:'Can we validate that two fields are consistent - like pay grade matching job code?',
+    s:'Yes, business rules can compare any fields and raise validation errors for cross-field consistency checks.',
+    approach:'Create an onSave rule. Use Raise Error when fields are inconsistent. The error blocks save until the conflict resolves.',
+    tags:['Validation','Cross-Field'],
+    tech:`<ol><li>Create an <b>onSave</b> rule on <b>Job Information</b></li><li>Add an <b>If</b> condition: <code>Job Information.Pay Grade does not match Job Information.Job Code.Valid Pay Grades</code></li><li>Inside the If: <b>Raise Error</b> with a user-friendly message like "The selected Pay Grade is not valid for this Job Code. Please choose from the allowed pay grades."</li><li>The rule can reference a picklist, an associated FO, or a lookup table to determine valid combinations</li><li>Optionally add a <b>Warn</b> action instead of <b>Raise Error</b> for soft validation (user can override after seeing the warning)</li></ol><div class="source">Source: SAP SF Implementation Workbook - Validation Rules (Lesson 5.4)</div>`
+  },
+  { cat:'rules', f:'green', level:'Business Rules',
+    q:'Can business rules reference data from Foundation Objects during employee data entry?',
+    s:'Yes, rules can traverse associations from the employee -> department -> location -> legal entity and read any field on those objects.',
+    approach:'Use path expressions like Employee.Job Information.Department.Cost Center to traverse object relationships.',
+    tags:['FO Lookups'],
+    tech:`<ol><li>In the business rule, use the <b>Path Browser</b> to explore available associations from the base object</li><li>Full path example: <code>Job Information.Department.Location.Legal Entity.Country</code></li><li>Each "dot" in the path follows an association defined in the object model</li><li>Rules can read any field on the final object in the chain (String, Number, Date, Boolean, Picklist - all supported)</li><li>Limitation: rules can read from one-to-one associations directly. For one-to-many associations, use <b>For Each</b> loops</li></ol><div class="source">Source: SAP SF Implementation Workbook - Business Rule Path Expressions (Lesson 5.5)</div>`
+  },
+  { cat:'rules', f:'green', level:'Business Rules',
+    q:'Can we trigger a business rule only for specific countries or employee groups?',
+    s:'Yes, rules can be scoped by country, legal entity, employee class, or any field. One HRIS element can have multiple rules, each targeting different populations.',
+    approach:'Add an If condition at the top of the rule checking country, legal entity, or other attributes. Only matching records execute the rule.',
+    tags:['Rule Scoping'],
+    tech:`<ol><li>In the business rule, add an <b>If</b> block as the first action</li><li>Set the condition: <code>Job Information.Country = "France"</code> or <code>Employee Class = "Employee"</code></li><li>Place all subsequent actions inside this If block - they only execute when the condition is true</li><li>Add <b>Else If</b> blocks for additional countries/groups with different logic</li><li>Assign all rules to the same HRIS element in <code>Manage Business Configuration</code>. Each rule evaluates independently - only the one matching the condition fires</li></ol><div class="source">Source: SAP SF Implementation Workbook - Rule Scoping (Lesson 5.1)</div>`
+  },
+  { cat:'rules', f:'amber', level:'Business Rules + Workflow',
+    q:'Can business rules send email notifications when certain conditions are met?',
+    s:'Yes, rules can trigger email via "Send Email" action, but options are limited. For richer notifications, use workflow rules instead.',
+    approach:'For simple alerts: use Send Email in business rules. For structured notifications with templates, routing, and escalation: create a workflow.',
+    tags:['Notifications'],
+    tech:`<ol><li>For simple email: in the business rule, add a <b>Send Email</b> action. Configure: recipient (by role/relationship/email), subject, and body (plain text only)</li><li>Limitation of Send Email in business rules: no HTML formatting, no attachments, no CC/BCC, limited recipient resolution</li><li>For professional notifications: create a <b>Workflow</b> instead. Add an <b>Email Step</b> with full HTML template, CC/BCC, and attachment support</li><li>Trigger the workflow from the business rule using <b>Trigger Workflow</b> action, or configure the workflow to trigger directly on record save</li></ol><div class="source">Source: SAP SF Implementation Workbook - Notifications & Workflows (Lesson 7.3)</div>`
+  },
+  { cat:'rules', f:'orange', level:'Workaround',
+    q:'Can we create rules that run on a schedule - like a daily check for expiring visas?',
+    s:'Business rules only fire on user-triggered events (save, change, import). Scheduled execution requires Integration Center with ODATA.',
+    approach:'Build an Integration Center job that queries employees with expiring records and outputs a report or email. Schedule it to run daily.',
+    tags:['Scheduled Rules','Integration Center'],
+    tech:`<ol><li>Go to <code>Admin Center -> Integration Center</code> -> <b>Create New Integration</b></li><li>Select <b>ODATA</b> as the source type. Build a query filtering employees where <code>visaExpiryDate ≤ Today + 30 days</code></li><li>Add the desired output fields: employee name, ID, visa type, expiry date, manager email</li><li>Set destination: <b>Email</b> -> configure the recipient list (HR team, managers)</li><li>Schedule the integration: daily at 6:00 AM. The integration runs server-side without any user action</li><li>Limitation: this is read-only notification. Automatically updating records (e.g., setting a status flag) on schedule is not possible without external orchestration</li></ol><div class="source">Source: SAP SF Implementation Workbook - Integration Center (Lesson 9.4)</div>`
+  },
+  { cat:'rules', f:'green', level:'Business Rules',
+    q:'Can we default the pay frequency based on the country selected on Job Info?',
+    s:'Yes, standard use case for onChange business rules. When country changes, the rule sets the appropriate pay frequency.',
+    approach:'Create an onChange rule triggered by the Country field. Use If/Else conditions to set pay frequency by country.',
+    tags:['Defaulting','Country Logic'],
+    tech:`<ol><li>Create a new business rule with <b>Rule Type = onChange</b>, <b>Base Object = Job Information</b>, <b>Trigger Field = Country</b></li><li>Add <b>If</b> blocks for each country: <code>If Country = "UK" -> Set Pay Frequency = "Monthly"</code>, <code>If Country = "Germany" -> Set Pay Frequency = "Monthly"</code>, <code>If Country = "USA" -> Set Pay Frequency = "Bi-Weekly"</code></li><li>Assign the rule to the Job Information HRIS element. When a user changes country, pay frequency auto-updates</li><li>If the user manually overrides pay frequency, you can add a second rule or condition to respect manual overrides</li></ol><div class="source">Source: SAP SF Implementation Workbook - Business Rules (Lesson 5.7)</div>`
+  },
+
+  // ═══ WORKFLOWS & APPROVALS ═══
+  { cat:'workflow', f:'green', level:'Workflow Configuration',
+    q:'Can we set up custom approval workflows for employee data changes?',
+    s:'Yes, standard workflow capability. Define workflow groups, steps, and approval chains for Job Info changes, compensation, and personal data.',
+    approach:'Create a workflow definition. Add approval steps. Configure dynamic approver determination based on employee attributes.',
+    tags:['Approvals','Manager Approval'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Workflow Groups</code> -> <b>Create New Group</b></li><li>Define the group: name (e.g., "Job Info Changes"), base object (Job Information), and trigger event (onSave)</li><li>Add a <b>Workflow Step</b> of type <b>Approval</b>. Set the approver: Manager, HR Manager, Role-based, or Rule-based</li><li>For rule-based approvers: create a business rule that returns the approver's user ID based on the employee's department, job level, or location</li><li>Configure step settings: timeout (auto-approve after N days), escalation, and whether the approver can delegate</li><li>Attach the workflow group to the HRIS element in <code>Manage Business Configuration</code> -> select the workflow under the element's workflow assignment</li></ol><div class="source">Source: SAP SF Implementation Workbook - Workflow Configuration (Lesson 7.1)</div>`
+  },
+  { cat:'workflow', f:'green', level:'Workflow Configuration',
+    q:'Can we have dynamic approver routing based on department or type of change?',
+    s:'Yes, dynamic approver determination is a core workflow feature. Route to different people based on department, job level, or any field value.',
+    approach:'Define Dynamic Approver rules using business rules. Different conditions can route to different approvers.',
+    tags:['Dynamic Routing'],
+    tech:`<ol><li>In the workflow step, set <b>Approver Determination = Rule-based</b></li><li>Create a business rule of type <b>Workflow Step Approver</b></li><li>In the rule: add If conditions based on the employee's attributes. Example: <code>If Department = "Engineering" -> return VP Engineering user ID</code>, <code>Else -> return HR Director user ID</code></li><li>The rule must return a valid user ID. Use the <b>Return</b> action with the user lookup</li><li>Assign this rule to the workflow step in the workflow group configuration</li></ol><div class="source">Source: SAP SF Implementation Workbook - Dynamic Approver Rules (Lesson 7.2)</div>`
+  },
+  { cat:'workflow', f:'green', level:'Workflow Configuration',
+    q:'Can we configure multi-step workflows - manager -> HR -> department head?',
+    s:'Yes, multi-step workflows are standard. Each step has its own approver rules, timeouts, and escalation paths.',
+    approach:'Define sequenced workflow steps. Set approvers, timeouts, and escalation (auto-approve, escalate, or send reminder) per step.',
+    tags:['Multi-Step','Escalation'],
+    tech:`<ol><li>In the workflow group, add multiple steps in sequence</li><li>Step 1: <b>Manager Approval</b> - approver = Direct Manager, timeout = 3 days, escalate to next step on timeout</li><li>Step 2: <b>HR Review</b> - approver = HR Manager (role-based), timeout = 2 days</li><li>Step 3: <b>Department Head Approval</b> - approver = rule-based (returns department head via FO lookup)</li><li>For each step, configure: <b>On Timeout</b> behavior (Auto-Approve, Auto-Reject, Escalate, or Do Nothing)</li><li>Add <b>Notification Steps</b> between approval steps to inform stakeholders without requiring action</li></ol><div class="source">Source: SAP SF Implementation Workbook - Multi-Step Workflows (Lesson 7.4)</div>`
+  },
+  { cat:'workflow', f:'green', level:'User Setting',
+    q:'Can employees delegate workflow approvals when out of office?',
+    s:'Yes, delegation is standard. Users set up delegation periods with dates and specify which workflows to delegate.',
+    approach:'Each user enables delegation from their profile settings. No admin configuration needed.',
+    tags:['Delegation'],
+    tech:`<ol><li>User navigates to: <b>Profile -> Settings -> Workflow Delegation</b></li><li>Clicks <b>Add Delegation Period</b></li><li>Selects: delegate (who will approve on their behalf), start/end dates, and which workflow types to delegate</li><li>The delegate receives an automatic notification. During the period, all specified workflows route to the delegate instead</li><li>Audit trail: the approval record shows "Approved by [Delegate] on behalf of [Original Approver]"</li><li>Admin monitoring: use <code>Manage Workflow Delegation</code> report in Report Center to view all active delegations</li></ol><div class="source">Source: SAP SF Standard - Workflow Delegation (no admin config required)</div>`
+  },
+  { cat:'workflow', f:'green', level:'Workflow Configuration',
+    q:'Can workflows send notifications to non-approvers - like informing HR when a change completes?',
+    s:'Yes, workflows can include "Notify" steps. Notifications go to anyone: roles, individuals, or distribution lists.',
+    approach:'Add a Send Notification step after the final approval. Configure recipients by role, relationship, or email.',
+    tags:['Notifications','CC'],
+    tech:`<ol><li>In the workflow group, add a step of type <b>Send Notification</b></li><li>Place it after the final approval step in the sequence</li><li>Configure recipients: by role (HR Manager, Payroll Admin), by relationship (employee's HRBP), or by fixed email</li><li>Set the email template: subject, body (supports HTML and field placeholders like <code>{{Employee.Name}}</code>, <code>{{Effective.Date}}</code>)</li><li>The notification fires automatically when the prior approval step completes - no user action triggers it</li></ol><div class="source">Source: SAP SF Implementation Workbook - Workflow Notifications (Lesson 7.5)</div>`
+  },
+  { cat:'workflow', f:'green', level:'Standard',
+    q:'Can we track the full history of who approved what and when - for audit?',
+    s:'Every workflow step logs: who acted, what action they took, timestamp, and comments. Available in Workflow Audit Report.',
+    approach:'Use the standard Workflow Audit report. Each approval/rejection/timeout is logged with full details. On by default.',
+    tags:['Audit Trail'],
+    tech:`<ol><li>Navigate to <code>Report Center -> Workflow Audit Report</code></li><li>Filter by: employee, workflow type, date range, approver, or status (approved/rejected/timeout)</li><li>The report shows: request date, approver, action, timestamp, comments, and delegation status</li><li>For per-record view: open the employee's Job Info -> <b>Change History</b> tab -> each change shows the associated workflow approval trail</li><li>Data retention: workflow audit data follows the standard SF data retention policy (configured in <code>Data Retention Management</code>)</li></ol><div class="source">Source: SAP SF Standard - Workflow Audit (on by default, no config needed)</div>`
+  },
+
+  // ═══ EVENT REASONS ═══
+  { cat:'events', f:'green', level:'Configuration',
+    q:'Can we create custom event reasons beyond standard ones like Hire, Transfer, Termination?',
+    s:'The event reason picklist is fully extensible. Add reasons like "Rehire - Boomerang", "Transfer - Project Assignment", or "Termination - Mutual Agreement".',
+    approach:'Add values to the event reason picklist. Map each reason to the parent event for correct system behavior.',
+    tags:['Event Reasons','Picklists'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Data</code> -> search for <b>Picklist</b> -> find the <code>eventReason</code> picklist</li><li>Click <b>Add Value</b>. Enter the new reason (e.g., <code>Rehire - Boomerang</code>) and its external code</li><li>Set the <b>Parent Event</b> mapping: Hire, Transfer, Termination, Data Change, etc. This determines how the system treats the record</li><li>For the label: use the language pack or direct label override to set display text in each supported language</li><li>Test: create a new employee using the custom event reason -> verify the record appears correctly in reports and the event derivation table</li></ol><div class="source">Source: SAP SF Implementation Workbook - Event Reasons (Lesson 4.1)</div>`
+  },
+  { cat:'events', f:'green', level:'Configuration',
+    q:'Can we set up event derivation so the correct event reason auto-populates based on what changed?',
+    s:'Yes, this is core configuration. Event derivation rules determine which event and reason apply based on changed fields.',
+    approach:'Configure rules in Manage Data -> Event Derivation. Define conditions for each change scenario and map to event reasons.',
+    tags:['Event Derivation'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Data</code> -> search for <b>Event Derivation</b></li><li>The event derivation table lists every possible field-change combination. Each row maps: changed field(s) -> event + event reason</li><li>Add a new row: select the changed field (e.g., <code>Department</code>), then select the event (<code>Transfer</code>) and event reason (<code>Transfer - Department Change</code>)</li><li>For multi-field changes: add rows where multiple conditions are checked. The first matching row wins</li><li>Test thoroughly with a matrix of your change scenarios. A missed row means the system uses the fallback event, which may not be what you want</li></ol><div class="source">Source: SAP SF Implementation Workbook - Event Derivation (Lesson 4.2)</div>`
+  },
+  { cat:'events', f:'green', level:'Workflow Configuration',
+    q:'Can we trigger different workflows depending on the event reason selected?',
+    s:'Yes, workflows can associate with specific event reasons. Different event reasons can have completely different approval chains.',
+    approach:'In the workflow definition, set the triggering event reason. Each reason can point to a different workflow group.',
+    tags:['Conditional Workflows'],
+    tech:`<ol><li>Create separate workflow groups for each scenario (e.g., <code>Transfer_Global</code>, <code>Transfer_DeskMove</code>)</li><li>In each workflow group, under <b>Trigger Configuration</b>, set the <b>Event Reason</b> to the specific reason</li><li>The "Transfer - Global Move" workflow might have 4-step approval; "Transfer - Desk Move" might auto-approve</li><li>In <code>Manage Business Configuration</code>, attach all workflow groups to the HRIS element. The system selects the correct one based on the event reason chosen by the user</li></ol><div class="source">Source: SAP SF Implementation Workbook - Workflow & Events (Lesson 7.6)</div>`
+  },
+  { cat:'events', f:'orange', level:'Workaround',
+    q:'Can we restrict which event reasons are available to certain user groups?',
+    s:'Event reason visibility is not directly permission-controlled. Workaround: use business rules to block unauthorized users from selecting restricted reasons.',
+    approach:'Create an onSave rule that checks the user\'s role against the selected event reason. Block save with an error if not authorized.',
+    tags:['Restrictions'],
+    tech:`<ol><li>Create an <b>onSave</b> business rule on the relevant HRIS element</li><li>In the rule: check the logged-in user's role (via <code>Get User Role</code> function or by checking permission group membership)</li><li>Add condition: <code>If Event Reason = "Termination - Involuntary" AND User Role ≠ "HR Director" Then Raise Error</code></li><li>This blocks the save but does NOT hide the option from the picklist - users will see the restricted reasons but cannot use them</li><li>For a cleaner UX, also create a separate picklist filtered by role via a custom MDF UI, but this adds significant complexity</li></ol><div class="source">Source: SAP SF Community - Event Reason Restriction Pattern (KB 2984632)</div>`
+  },
+
+  // ═══ UI & SELF-SERVICE ═══
+  { cat:'ui', f:'green', level:'Configuration',
+    q:'Can we customize the People Profile - rearrange portlets, change labels, hide sections?',
+    s:'People Profile is fully configurable. Rearrange portlets, rename sections, create custom portlets, and control visibility by role using RBP.',
+    approach:'Use Configure People Profile for layout. Set label overrides in language packs. Use RBP to show/hide portlets per role.',
+    tags:['People Profile','Portlets'],
+    tech:`<ol><li>Go to <code>Admin Center -> Configure People Profile</code></li><li>Drag-and-drop portlets into the desired order. Portlets can be grouped under collapsible sections</li><li>To rename a portlet: use <code>Language Pack</code> tool -> find the portlet label key -> override the text</li><li>To hide a portlet for certain roles: configure <b>Portlet Visibility</b> via RBP. In <code>Manage Permission Roles</code> -> People Profile permissions -> uncheck portlets the role should not see</li><li>To create a custom portlet: use <code>Configure Object Definitions</code> to build a custom MDF object, then expose it as a portlet in People Profile configuration</li></ol><div class="source">Source: SAP SF Implementation Workbook - People Profile Configuration (Lesson 6.1)</div>`
+  },
+  { cat:'ui', f:'amber', level:'Configuration + Custom',
+    q:'Can we add custom buttons or quick actions to the People Profile?',
+    s:'You can add custom action buttons that trigger workflows, navigate to URLs, or launch custom apps. Rich interactive elements need custom development.',
+    approach:'Add "Take Action" links in portlet configuration. These trigger workflows or open URLs. For richer interactivity, use custom MDF UIs.',
+    tags:['Custom Actions','UX'],
+    tech:`<ol><li>In <code>Configure People Profile</code>, open a portlet's settings</li><li>Under <b>Actions</b>, add a <b>Take Action</b> link. Configure: label, visibility (always/conditional), and destination</li><li>Destination options: trigger a workflow, navigate to a URL (internal or external), or open a custom application (custom tile)</li><li>For modal-based actions (pop-up forms): build a <b>Custom MDF UI</b> via <code>Configure Object Definitions</code> -> <b>UI</b> tab -> define the form layout and actions</li><li>Custom MDF UIs can include: input fields, dropdowns, date pickers, and submit buttons. The UI can trigger business rules on submit</li></ol><div class="source">Source: SAP SF Implementation Workbook - Custom Actions & MDF UIs (Lesson 6.3)</div>`
+  },
+  { cat:'ui', f:'amber', level:'Theme Configuration',
+    q:'Can we customize the look and feel - company colors, logo, branding?',
+    s:'SF supports theme configuration (logo, primary color, background). Full CSS customization is not available - this is SaaS with a controlled UI framework.',
+    approach:'Use Theme Manager to set logo, colors, and background. Deep UI changes are not supported.',
+    tags:['Branding','Theming'],
+    tech:`<ol><li>Go to <code>Admin Center -> Company Settings -> Theme Manager</code></li><li>Upload company logo: recommended size 200×60px, PNG format with transparency</li><li>Set primary color (hex code) - this affects headers, buttons, and accent elements throughout the UI</li><li>Set background: choose from predefined patterns or upload an image (max file size 2MB)</li><li>Preview the theme before publishing. Changes apply to all users across the entire instance</li><li>Limitation: font family, card border radius, spacing, and detailed CSS-level customizations are not available. This is a multi-tenant SaaS product - the UI chrome is shared</li></ol><div class="source">Source: SAP SF Implementation Workbook - Branding & Theming (Lesson 6.4)</div>`
+  },
+  { cat:'ui', f:'orange', level:'Custom Development',
+    q:'Can we build a custom landing page dashboard for employees?',
+    s:'The standard homepage shows tiles. A fully custom dashboard requires SAP Analytics Cloud or custom tile development.',
+    approach:'For basic: configure homepage tiles. For rich dashboards: use SAP Analytics Cloud with SF data, or develop a custom tile with embedded content.',
+    tags:['Dashboard','Homepage'],
+    tech:`<ol><li>Basic: configure homepage tiles via <code>Admin Center -> Manage Homepage</code>. Available tiles: Quick Actions, To-Do, Important Links, Reports, Custom Tiles</li><li>Custom Tile: build via <code>Admin Center -> Manage Tiles</code> -> create a custom tile that embeds an external URL in an iframe. The external page can be a dashboard built in any web technology, pulling SF data via ODATA API</li><li>SAP Analytics Cloud: provision SAC, connect to SF via the standard connector, build SAC stories and pin them to the SF homepage as tiles</li><li>Note: custom tiles require hosting the embedded page on a secure (HTTPS) server accessible to all SF users</li></ol><div class="source">Source: SAP SF Implementation Workbook - Homepage & Tiles (Lesson 6.5)</div>`
+  },
+  { cat:'ui', f:'green', level:'RBP Configuration',
+    q:'Can we hide certain menu items from employees who do not need them?',
+    s:'Navigation visibility is controlled by RBP permissions. Menu items only appear if the user has the relevant permission grant.',
+    approach:'Review permission roles. Remove permission grants for modules the role should not access. The navigation adjusts automatically.',
+    tags:['Navigation','Permissions'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Permission Roles</code> -> open the target role</li><li>Under <b>Permission Grants</b>, review all grants for modules (Recruiting, Onboarding, Learning, Compensation, etc.)</li><li>Remove grants for modules the role should not see. For example: if employees should not access Recruiting, remove the "Recruiting Access" grant</li><li>The navigation updates immediately - removed modules disappear from the user's main menu</li><li>Use <code>Permission Debug</code> tool to verify a specific user sees only the intended menu items</li></ol><div class="source">Source: SAP SF Implementation Workbook - RBP Configuration (Lesson 8.2)</div>`
+  },
+
+  // ═══ REPORTING & ANALYTICS ═══
+  { cat:'reporting', f:'green', level:'Report Center',
+    q:'Can we build reports combining EC data with other SF modules like Recruiting or Learning?',
+    s:'Report Center supports cross-module reporting. Create reports that join Employee Central with Recruiting, Onboarding, Performance, Learning, and Compensation.',
+    approach:'Use Report Center -> Create Report -> Cross Module data source. Build queries joining people data across modules.',
+    tags:['Cross-Module','Joined Reports'],
+    tech:`<ol><li>Go to <code>Report Center</code> -> <b>Create Report</b></li><li>Select <b>Cross Module</b> as the data source type</li><li>Choose the modules to include: EC (always), plus RCM, ONB, LMS, PMGM, COMP, etc.</li><li>Build the query in the visual editor: select columns from each module, define joins (auto-joined on Person ID), add filters and sorting</li><li>Run the report to verify results. Save and share with appropriate permissions</li><li>Cross-module reports use the <b>Analytics Data Store</b> - data is replicated periodically, not live. Expect a latency of 2-6 hours depending on your tenant's replication schedule</li></ol><div class="source">Source: SAP SF Implementation Workbook - Report Center (Lesson 10.1)</div>`
+  },
+  { cat:'reporting', f:'green', level:'Report Center',
+    q:'Can we schedule reports to run automatically and be emailed to a distribution list?',
+    s:'Yes. Reports can be scheduled with daily/weekly/monthly recurrence and emailed to recipients.',
+    approach:'In Report Center, open the report -> Schedule -> set frequency, format, and recipients. Reports run server-side and deliver automatically.',
+    tags:['Scheduling','Distribution'],
+    tech:`<ol><li>Open the report in <code>Report Center</code></li><li>Click <b>Schedule</b> in the report toolbar</li><li>Set: frequency (Daily/Weekly/Monthly), time of day, output format (PDF/Excel/CSV), and recipient list (by role, email, or distribution list)</li><li>Optional: add a <b>bursting</b> configuration - the report splits by a field (e.g., Department) and each manager only receives their own slice</li><li>Monitor scheduled reports: <code>Admin Center -> Scheduled Job Manager</code> shows all schedules, next run times, and failure logs</li></ol><div class="source">Source: SAP SF Implementation Workbook - Report Scheduling (Lesson 10.3)</div>`
+  },
+  { cat:'reporting', f:'green', level:'Report Center',
+    q:'Can we create reports that include custom HRIS fields added to Job Info?',
+    s:'All custom HRIS fields are automatically available in Report Center as reportable columns.',
+    approach:'When building a report, custom fields appear alongside standard fields in the column picker.',
+    tags:['Custom Fields'],
+    tech:`<ol><li>When creating a report, in the <b>Column Selection</b> step, expand the HRIS element (e.g., Job Information)</li><li>Custom fields are listed under a "Custom Fields" subsection - same picker as standard fields</li><li>If a custom field does NOT appear: check that it is marked as <b>Reportable = Yes</b> in <code>Manage Business Configuration</code> -> field properties</li><li>Newly added custom fields may take up to 24 hours to appear in the Analytics Data Store (reporting data source)</li></ol><div class="source">Source: SAP SF Implementation Workbook - Report Center Custom Fields (Lesson 10.2)</div>`
+  },
+  { cat:'reporting', f:'green', level:'Standard + Report Center',
+    q:'Can we build an organizational chart report showing the full hierarchy?',
+    s:'The standard Org Chart tool provides visual hierarchy. For tabular reports, use Report Center with Direct Reports join paths.',
+    approach:'For visual: use the Org Chart from People Profile. For tabular: build a Report Center report using hierarchy expansion.',
+    tags:['Org Chart','Hierarchy'],
+    tech:`<ol><li>Visual org chart: navigate to any employee -> <b>Org Chart</b> tab. Shows direct reports and can expand down/up the hierarchy</li><li>For tabular report: in Report Center, create a report on <b>Employee Profile</b></li><li>Add columns: Name, Position, Manager Name, Department, Job Code</li><li>To expand hierarchy generations: use the <b>Hierarchy</b> join type and set the number of levels to expand (e.g., 5 levels down from a starting manager)</li><li>Filter to a specific manager's org: <code>Manager = [specific manager name]</code> or use the logged-in user's context</li></ol><div class="source">Source: SAP SF Implementation Workbook - Organizational Reporting (Lesson 10.4)</div>`
+  },
+  { cat:'reporting', f:'amber', level:'SAP Analytics Cloud Required',
+    q:'Can we create real-time dashboards that update as data changes?',
+    s:'Report Center provides reports, not live dashboards. For real-time dashboards, you need SAP Analytics Cloud connected to SF.',
+    approach:'Provision SAC and connect to SF. Build SAC stories with live or scheduled data refresh.',
+    tags:['Dashboards','SAC'],
+    tech:`<ol><li>Provision SAP Analytics Cloud tenant. Obtain the SF-to-SAC connector credentials from SAP</li><li>In SAC, go to <b>Connections</b> -> <b>Add Connection</b> -> select <b>SAP SuccessFactors</b>. Enter your SF API credentials</li><li>Build a <b>Story</b> (dashboard) in SAC using the SF data model. SAC can query SF live or use a scheduled data import</li><li>Publish the story and embed it in the SF homepage via a <b>Custom Tile</b> pointing to the SAC story URL</li><li>Live query mode provides near-real-time data but has performance limits on large datasets. Scheduled import provides better performance but has data latency</li></ol><div class="source">Source: SAP SF Implementation Workbook - SAC Integration (Lesson 11.1)</div>`
+  },
+  { cat:'reporting', f:'green', level:'Report Center',
+    q:'Can we give managers access to a report showing only their own direct reports?',
+    s:'Yes, use runtime filtering with Logged-in User context. Reports scope to show only data relevant to the person running the report.',
+    approach:'Set the report filter to "Employee -> Manager = Logged-in User" or use the "My Team" standard filter.',
+    tags:['Manager Self-Service','Security'],
+    tech:`<ol><li>In the report, add a <b>Filter</b>: <code>Manager = Logged-in User</code>. This dynamically scopes results to the person running the report</li><li>Alternative: use the <b>My Team</b> standard filter, which includes both direct and indirect reports</li><li>For broader scope (manager can see their entire org): use <b>Starting Manager = Logged-in User</b> with hierarchy expansion</li><li>Share the report with the manager role via <code>Report Permissions</code>. When they run it, they see only their team</li></ol><div class="source">Source: SAP SF Implementation Workbook - Report Security (Lesson 10.5)</div>`
+  },
+
+  // ═══ INTEGRATIONS ═══
+  { cat:'integration', f:'green', level:'Standard Integration',
+    q:'Can we integrate Employee Central with SAP Payroll (ECP)?',
+    s:'This is the most mature SF integration. EC-to-ECP syncs employee master data, pay components, and time data to Employee Central Payroll.',
+    approach:'Use the standard SAP-delivered EC-ECP Point-to-Point integration. Configure replication scenarios for master data and payroll data.',
+    tags:['ECP','Payroll'],
+    tech:`<ol><li>Ensure both EC and ECP tenants are provisioned and the integration is enabled by SAP Cloud Operations</li><li>In EC Admin Center, go to <code>Integration Center</code> -> select the pre-delivered <b>EC-to-ECP Master Data Replication</b> integration</li><li>Configure the replication scenarios: Employee Master Data, Organizational Assignment, Pay Components, Bank Details, and Time Data</li><li>Set the <b>Replication Frequency</b>: near-real-time for master data changes, scheduled for bulk syncs</li><li>Monitor replication via <code>Integration Center -> Monitor</code>. Failed records appear with error codes - resolve data issues and retry</li><li>Critical: the Payroll Control Record (PCR) in ECP must be set correctly. If the PCR is locked, payroll data will not replicate</li></ol><div class="source">Source: SAP SF Implementation Workbook - EC-ECP Integration (Lesson 9.1)</div>`
+  },
+  { cat:'integration', f:'amber', level:'Custom Integration',
+    q:'Can we integrate EC with non-SAP payroll like ADP, Ceridian, or UKG?',
+    s:'Yes, but requires middleware or custom integration. SF provides APIs to extract data; mapping to payroll format must be custom-built.',
+    approach:'Use Integration Center or ODATA API to export employee data. Build an integration layer (CPI, Boomi, MuleSoft, custom) to transform and load.',
+    tags:['Third-Party Payroll','Middleware'],
+    tech:`<ol><li>Identify all employee data fields the payroll system requires (name, address, pay components, tax info, bank details, etc.)</li><li>Build an <b>Integration Center</b> export job or use <b>ODATA API</b> to extract data from EC on a schedule</li><li>Build a middleware transformation layer: map EC field names to payroll system field names, handle data type conversions, split/add fields as needed</li><li>Deliver the transformed data to the payroll system via its API, SFTP, or flat file</li><li>Build error handling: if a record fails to load, log it, alert HRIS team, and retry</li><li>Build reconciliation: compare EC headcount to payroll headcount weekly to catch sync failures</li></ol><div class="source">Source: SAP SF Implementation Workbook - Third-Party Integrations (Lesson 9.2)</div>`
+  },
+  { cat:'integration', f:'green', level:'Integration',
+    q:'Can we sync employee data from EC to Active Directory or Azure AD?',
+    s:'Yes, this is common. Use the SF-to-AzureAD connector (Microsoft-delivered) or build custom integration via ODATA.',
+    approach:'For Azure AD: use the Microsoft Azure AD provisioning connector for SuccessFactors. For on-prem AD: build custom integration.',
+    tags:['Active Directory','IAM'],
+    tech:`<ol><li>For Azure AD: in Azure Portal, go to <b>Enterprise Applications -> SuccessFactors -> Provisioning</b>. Configure the connector with your SF API credentials</li><li>Map SF fields to AD attributes: employee ID -> AD employeeID, name -> displayName, department -> department, manager -> manager</li><li>Set provisioning scope: all employees, or filtered by employment status (Active only). Configure de-provisioning rules (disable vs. delete on termination)</li><li>For on-prem AD: build a custom integration. Use ODATA to query SF for new/changed/terminated employees, then use PowerShell to create/update/disable AD accounts</li><li>Schedule the sync to run daily or more frequently for large organizations</li></ol><div class="source">Source: SAP SF Implementation Workbook - IAM Integration (Lesson 9.3)</div>`
+  },
+  { cat:'integration', f:'green', level:'API Access',
+    q:'Can we make EC data available to external systems via API?',
+    s:'SF exposes ODATA and SFAPI (SOAP) APIs. External systems with API credentials can read EC data. Write operations are more restricted.',
+    approach:'Generate API credentials in Admin Center. Use ODATA v2/v4 for reads. SFAPI for specific operations. Respect throttling limits.',
+    tags:['ODATA','SFAPI'],
+    tech:`<ol><li>Generate API credentials: <code>Admin Center -> Manage OAuth2 Client Applications</code> -> register a new client. Note the Client ID and generate a Client Secret</li><li>Grant the client API permissions: select the entities it can access (e.g., Employee, Job Information, Department) and the access level (Read-only or Read/Write)</li><li>ODATA endpoint format: <code>https://api.successfactors.com/odata/v2/Employee?$filter=userId eq 'jdoe'</code></li><li>Rate limits: standard tenants allow 50-100 ODATA calls/second. Bulk operations should use pagination and respect throttling</li><li>For write operations: use SFAPI SOAP endpoints. Create/Update/Delete operations require the Upsert permission and strict field validation</li></ol><div class="source">Source: SAP SF Implementation Workbook - API & ODATA (Lesson 9.5)</div>`
+  },
+  { cat:'integration', f:'green', level:'ISC / Integration Center',
+    q:'Can EC push employee data to multiple downstream systems simultaneously?',
+    s:'Yes, using Integration Center. A single event (new hire, transfer, termination) can trigger multiple outbound integrations.',
+    approach:'Configure outbound integrations in Integration Center, each triggered by the same event. Add conditional logic for routing.',
+    tags:['Event-Driven','Multi-System'],
+    tech:`<ol><li>Create separate <b>Integration Center</b> outbound integrations for each target system (payroll, AD, benefits, expense system, etc.)</li><li>Set each integration's trigger: <b>Event = Employee Hire</b> (or Transfer, Termination, Data Change)</li><li>Add conditional filters: e.g., only send to the UK payroll system if <code>Country = UK</code>, only send to benefits system if <code>Employee Class = Employee</code></li><li>All matching integrations fire simultaneously when the event occurs - no sequencing or dependencies between them</li><li>Monitor all integrations from <code>Integration Center -> Monitor</code> dashboard. Each shows success/failure independently</li></ol><div class="source">Source: SAP SF Implementation Workbook - Multi-System Integration (Lesson 9.6)</div>`
+  },
+  { cat:'integration', f:'amber', level:'Integration',
+    q:'Can we integrate SF with SAP S/4HANA for financial and organizational data sync?',
+    s:'SAP provides the S/4HANA-to-SF integration package. This syncs org structure, cost centers, and employee data.',
+    approach:'Use SAP-delivered integration content for SF + S/4HANA (CPI-based). Define data ownership rules for each data element.',
+    tags:['S/4HANA','SAP ERP'],
+    tech:`<ol><li>Deploy the SAP-delivered integration package from <b>SAP API Business Hub</b> - search for "SuccessFactors Employee Central to S/4HANA integration"</li><li>The package runs on SAP Cloud Platform Integration (CPI). Configure the iflows for: Org Structure sync, Cost Center sync, Employee Master sync</li><li>Define the system of record for each data element: e.g., Department = SF is source, Cost Center = S/4HANA is source. Set one-way replication for each</li><li>Key consideration: the two systems have different data models - an SF "Department" may map to an S/4HANA "Cost Center Hierarchy Node". The mapping must be built in CPI</li><li>Test with a representative org subset before full deployment. Data mismatches (different codes, missing values) are the #1 cause of integration failures</li></ol><div class="source">Source: SAP SF Implementation Workbook - S/4HANA Integration (Lesson 11.3)</div>`
+  },
+
+  // ═══ COMPLIANCE & LOCALIZATION ═══
+  { cat:'compliance', f:'green', level:'Configuration',
+    q:'Can we configure country-specific fields that only appear for employees in that country?',
+    s:'HRIS fields can be scoped by country. When Job Info has that country, the fields automatically appear in the portlet.',
+    approach:'When creating a custom HRIS field, set the Country scope. Fields scoped to Germany only appear on records where country = Germany.',
+    tags:['Country-Specific','Field Visibility'],
+    tech:`<ol><li>In <code>Manage Business Configuration</code>, when adding a custom field, set the <b>Country</b> property to the target country (e.g., <code>Germany</code>)</li><li>The field only appears on the portlet when the employee's Job Info country matches the field's country scope</li><li>For multi-country fields: leave Country blank (global) or create separate fields per country if the label/requirements differ</li><li>Test: create a German employee -> verify the Germany-scoped fields appear. Switch country to France -> verify the fields disappear</li><li>Country-scoped fields still exist in the data model globally - they are just hidden from the UI for non-matching countries</li></ol><div class="source">Source: SAP SF Implementation Workbook - Country-Specific Configuration (Lesson 2.5)</div>`
+  },
+  { cat:'compliance', f:'green', level:'Standard',
+    q:'Can SF EC handle GDPR requirements - data retention, right to be forgotten, data export?',
+    s:'SF has built-in GDPR tools: data retention management, purge functionality, and data subject access request (DSAR) workflows.',
+    approach:'Use Data Retention Management for purge rules. Use Subject Access Request tool for DSARs.',
+    tags:['GDPR','Data Privacy'],
+    tech:`<ol><li>Configure data retention: <code>Admin Center -> Data Retention Management</code> -> define retention rules per object/entity. Example: "Delete terminated employee data 7 years after termination date"</li><li>Configure purge: <code>Admin Center -> Data Purge</code> -> schedule purge jobs based on retention rules. Purge permanently deletes data - configure carefully</li><li>For DSAR: use <code>Admin Center -> Subject Access Request</code> to generate a data export for a specific person across all SF modules</li><li>For Right to be Forgotten: use <code>Admin Center -> Data Purge</code> with the specific person ID. This is a manual admin action, not self-service</li><li>Audit trail: all purge and DSAR actions are logged. Configure <code>Read Audit</code> and <code>Change Audit</code> for additional tracking</li></ol><div class="source">Source: SAP SF Implementation Workbook - GDPR & Data Privacy (Lesson 12.1)</div>`
+  },
+  { cat:'compliance', f:'amber', level:'Configuration + Integration Center',
+    q:'Can we track visa and work permit expiry dates with notifications?',
+    s:'Common configuration. Use custom fields for visa type/expiry on Job Info or a custom portlet. Build a scheduled report for notifications.',
+    approach:'Add custom fields for visa data. Build an Integration Center scheduled job that queries expiring records and emails HR.',
+    tags:['Visa Tracking','Compliance'],
+    tech:`<ol><li>Add custom fields to Job Information: <code>visaType</code> (picklist), <code>visaNumber</code>, <code>visaIssueDate</code>, <code>visaExpiryDate</code></li><li>Add these fields to the Job Info portlet layout in <code>Configure People Profile</code></li><li>Build an Integration Center job: query employees where <code>visaExpiryDate ≤ Today + 90 days</code>. Output: employee name, visa type, expiry date, manager</li><li>Schedule the job to run weekly. Email the output to the HR compliance team and relevant managers</li><li>For automated workflows on expiry: create a business rule that flags the record when expiry is within 30 days, but the notification itself requires scheduled jobs</li></ol><div class="source">Source: SAP SF Implementation Workbook - Compliance Tracking (Lesson 12.2)</div>`
+  },
+  { cat:'compliance', f:'green', level:'RBP Configuration',
+    q:'Can we restrict data access by country - HR Germany cannot see French data?',
+    s:'Yes, RBP target scoping by country/legal entity is standard. Permission roles can be restricted to specific geographies.',
+    approach:'In the permission role, set target population to Legal Entity = Germany. Users assigned this role only see data matching that scope.',
+    tags:['Data Isolation','Country Scoping'],
+    tech:`<ol><li>In <code>Manage Permission Roles</code>, open the country-specific HR role (e.g., <code>HR_Manager_Germany</code>)</li><li>Under each permission grant, set <b>Target Population</b>: <code>Legal Entity = Germany</code> (or Country = Germany)</li><li>Set <b>Granted</b> for records matching the scope, <b>Restricted</b> for all other records</li><li>Multiple grants in the same role can cover different scopes. Example: Granted for Germany, Granted for Austria, Restricted for everything else</li><li>Test with <code>Permission Debug</code>: impersonate the HR Germany user -> search for a French employee -> should return no results or show restricted view</li></ol><div class="source">Source: SAP SF Implementation Workbook - RBP Country Scoping (Lesson 8.5)</div>`
+  },
+  { cat:'compliance', f:'orange', level:'Custom Workflow',
+    q:'Does EC support works council (Betriebsrat / CSE / OR) review workflows?',
+    s:'No built-in works council module. Build a custom workflow step or integrate with a separate case management system.',
+    approach:'Add a custom workflow step "Works Council Review" with dynamic routing to the council representative. Expect 30-50% additional effort in EU deployments.',
+    tags:['Works Council','EU Compliance'],
+    tech:`<ol><li>Create a custom workflow step of type <b>Approval</b> with label "Works Council Review"</li><li>Configure approver determination: use a business rule that looks up the works council representative from a custom Foundation Object that maps legal entities to council members</li><li>Add the step to all workflow groups covering sensitive changes: Terminations, Mass Changes, Reorganizations, and any data changes that affect employee terms and conditions</li><li>Set timeout rules carefully: works councils in Germany legally have 1-4 weeks to respond depending on the change type. Configure timeout to match the legal requirement</li><li>Document the workflow for your Betriebsrat/CSE/OR consultation. The works council must agree to the digital process as part of their formal agreement</li></ol><div class="source">Source: SAP SF Implementation Workbook - EU Works Council Configuration (Lesson 12.3)</div>`
+  },
+  { cat:'compliance', f:'amber', level:'Configuration + SAC',
+    q:'Can EC support EU Pay Transparency Directive - pay gap reports and pay justification?',
+    s:'EC stores pay data and can report on it. Full pay equity analytics require SAP Analytics Cloud or specialized pay equity tools.',
+    approach:'Ensure pay components are consistently structured. Use Report Center for basic pay gap data. For advanced analytics, use SAC or pay equity platforms.',
+    tags:['Pay Transparency','EU Directive'],
+    tech:`<ol><li>Ensure pay data consistency: all pay components must be structured and categorized (base pay, bonus, allowances) in EC Compensation or custom fields</li><li>Build a Report Center report: group by gender, job grade, and location -> show average base pay, average total comp, and headcount per group -> calculate pay gap percentages</li><li>For gap justification: add a custom field on Job Info for "pay differential justification" (e.g., tenure, performance, market adjustment, critical skill)</li><li>For advanced analytics: build a SAC story that visualizes pay gaps across the org, identifies outliers, and tracks gap closure over time</li><li>Note: the EU Directive requires reporting by 2027. SF provides data but the analytics and justification workflow layer needs additional build</li></ol><div class="source">Source: SAP SF Implementation Workbook - Pay Equity & EU Directive (Lesson 12.4)</div>`
+  },
+  { cat:'compliance', f:'green', level:'Standard',
+    q:'Can we set up audit trails to track who changed what employee data and when?',
+    s:'Yes, Change Audit and Read Audit are standard features. They log every field-level change with user, timestamp, old value, and new value.',
+    approach:'Enable Change Audit in Company Settings. View audit logs per record or via the Audit Report in Report Center.',
+    tags:['Audit Trail','Change Log'],
+    tech:`<ol><li>Enable audit: <code>Admin Center -> Company Settings -> Change Audit</code> -> turn on for all HRIS elements</li><li>Optionally enable <b>Read Audit</b> to also log who viewed employee records (GDPR-relevant)</li><li>View per record: open an employee's profile -> <b>Change History</b> tab -> select the HRIS element -> every field change is listed with before/after values, user, and timestamp</li><li>For bulk audit: use <code>Report Center -> Change Audit Report</code>. Filter by date range, user, employee, or HRIS element</li><li>Audit data storage: configure retention in <code>Data Retention Management</code>. Standard is 5-10 years depending on your policy</li></ol><div class="source">Source: SAP SF Implementation Workbook - Audit Configuration (Lesson 12.5)</div>`
+  },
+
+  // ═══ TIME & ATTENDANCE ═══
+  { cat:'time', f:'green', level:'Configuration',
+    q:'Can we create custom absence types beyond vacation, sick leave, and public holidays?',
+    s:'The Time Off module supports custom time account types like "Study Leave", "Volunteering Days", "Sabbatical", "Bereavement", etc.',
+    approach:'Define new time account types in Manage Time Off Structures. Configure accrual rules, balance limits, and booking rules.',
+    tags:['Time Off','Absence Types'],
+    tech:`<ol><li>Go to <code>Admin Center -> Manage Time Off Structures -> Time Account Types</code></li><li>Click <b>Create New</b>. Set: Account Type Name (e.g., "Study Leave"), time unit (Days/Hours), and booking rules</li><li>Configure <b>Accrual Rules</b>: how the balance accumulates (annual grant, monthly proration, tenure-based tiers, or custom formula)</li><li>Set <b>Booking Rules</b>: minimum/maximum booking per request, advance notice requirements, and whether partial-day booking is allowed</li><li>Assign the time account type to employees via <b>Time Profile</b>: go to the employee's Time Profile -> add the account type with the applicable effective date</li></ol><div class="source">Source: SAP SF Implementation Workbook - Time Off Configuration (Lesson 13.1)</div>`
+  },
+  { cat:'time', f:'green', level:'Configuration',
+    q:'Can we set up a time account that accrues based on tenure or seniority?',
+    s:'Yes, accrual rules support tenure-based tiers, job-level multipliers, and country-specific formulas.',
+    approach:'In the time account type, configure the accrual rule with formulas using tenure, FTE, and job level as variables.',
+    tags:['Accrual Rules','Time Accounts'],
+    tech:`<ol><li>In the time account type definition, under <b>Accrual Rules</b>, select <b>Custom Formula</b></li><li>Build the formula: <code>IF YearsOfService < 5 THEN 25 ELSE IF YearsOfService < 10 THEN 28 ELSE 30</code></li><li>Add FTE proration: multiply the accrual by the employee's FTE (e.g., 0.8 FTE gets 80% of the days)</li><li>Add country-specific logic: use <code>Country</code> in the formula to apply different rules per country</li><li>Test: create employees with different tenures and verify the accrual amounts match the expected values</li></ol><div class="source">Source: SAP SF Implementation Workbook - Time Off Accrual Rules (Lesson 13.2)</div>`
+  },
+  { cat:'time', f:'green', level:'Configuration',
+    q:'Can employees request partial-day absences like a 2-hour doctor appointment?',
+    s:'Time Off supports partial-day leave. Employees specify start/end times. The balance deducts in hours.',
+    approach:'Configure the time account type with Booking Unit = Hours. Set the time recording profile for partial-day bookings.',
+    tags:['Partial Day','Hourly Leave'],
+    tech:`<ol><li>In the time account type, set <b>Booking Unit = Hours</b> (not Days)</li><li>In the employee's <b>Time Profile</b>, ensure <b>Daily Working Hours</b> is set correctly (e.g., 8 hours for full-time employees)</li><li>When booking time off, the employee selects <b>Partial Day</b> and enters start and end times (e.g., 09:00-11:00)</li><li>The system calculates the deduction: 2 hours used from the balance. Remaining hours are shown in the balance display</li><li>Manager approval workflow works the same for partial-day as full-day - the request shows the time window</li></ol><div class="source">Source: SAP SF Implementation Workbook - Time Off Partial Day (Lesson 13.3)</div>`
+  },
+  { cat:'time', f:'green', level:'Standard',
+    q:'Can time-off requests automatically sync to the team calendar?',
+    s:'The Team Absence Calendar is standard. It shows all approved absences for a manager\'s direct reports.',
+    approach:'No configuration needed - the Team Absence Calendar is active by default for managers.',
+    tags:['Calendar','Manager View'],
+    tech:`<ol><li>Managers navigate to: <b>Homepage -> Team Absence Calendar</b></li><li>The calendar shows all approved absences for their direct (and optionally indirect) reports</li><li>View modes: Day, Week, Month. Color-coded by absence type (vacation = blue, sick = red, etc.)</li><li>Managers can click an absence to see details: who, dates, type, and status</li><li>To add the calendar to the homepage: <code>Manage Homepage</code> -> add the <b>Team Absence Calendar</b> tile</li></ol><div class="source">Source: SAP SF Standard - Team Absence Calendar (enabled by default)</div>`
+  },
+  { cat:'time', f:'amber', level:'Module Configuration',
+    q:'Can we set up Time Sheet for project time tracking or hourly workers?',
+    s:'SF Time Sheet is a separate tab. It supports project-based time entry, work schedules, overtime calculation, and approval workflows.',
+    approach:'Enable Time Sheet in Company Settings. Configure work schedules, time types, and approval flows. Requires Time Sheet licensing.',
+    tags:['Time Sheet','Project Time'],
+    tech:`<ol><li>Enable Time Sheet: <code>Admin Center -> Company Settings -> Time Sheet</code> -> turn on</li><li>Configure <b>Work Schedules</b>: define standard working hours, break rules, and overtime thresholds per employee group</li><li>Configure <b>Time Types</b>: Regular, Overtime, Travel, Training, On-Call, etc. Each type has accounting rules</li><li>Set up <b>Approval Flows</b>: similar to EC workflows - manager approves submitted timesheets, with escalation rules</li><li>For project tracking: integrate with the <b>Job Codes/Projects</b> Foundation Object -> employees select the project they worked on per time entry</li><li>Payroll integration: time data must be replicated to ECP or exported to external payroll. Use the standard EC-to-ECP time replication or Integration Center for external systems</li></ol><div class="source">Source: SAP SF Implementation Workbook - Time Sheet Configuration (Lesson 13.4)</div>`
+  },
+  { cat:'time', f:'green', level:'Configuration',
+    q:'Can the system prevent employees from booking leave with insufficient balance?',
+    s:'Standard. The system checks available balance before allowing a booking. You can allow negative balances up to a limit.',
+    approach:'In the time account type, set Allow Negative Balance = No for strict enforcement, or set a negative limit for limited overdraft.',
+    tags:['Balance Validation'],
+    tech:`<ol><li>In <code>Manage Time Off Structures -> Time Account Types</code>, open the account type</li><li>Set <b>Allow Negative Balance</b>: <code>No</code> (strict - blocks booking if balance would go below zero)</li><li>Or set to <code>Yes</code> and configure <b>Negative Balance Limit</b>: e.g., -5 days. Employees can overdraw up to 5 days but cannot book beyond that</li><li>The balance check runs at booking time. If the employee lacks sufficient balance, they see an error message and cannot submit the request</li><li>For future-dated bookings: the system checks the projected balance at the date of the requested absence, not the current balance</li></ol><div class="source">Source: SAP SF Implementation Workbook - Time Off Validation (Lesson 13.5)</div>`
+  },
+
+  // ═══ DATA IMPORT & MIGRATION ═══
+  { cat:'data', f:'green', level:'Import',
+    q:'Can we mass-import employee data from CSV or Excel files?',
+    s:'SF provides standard import templates for all HRIS elements, Foundation Objects, and Position data.',
+    approach:'Download the standard import template. Fill in data, validate, and import. Use "Validate Only" first to catch errors.',
+    tags:['CSV Import','Templates'],
+    tech:`<ol><li>Go to <code>Admin Center -> Import Employee Data</code></li><li>Select the entity to import: Basic Import (new hires), Job Information, Compensation, Personal Information, etc.</li><li>Download the <b>CSV Template</b> for that entity. The template includes all standard and custom fields</li><li>Fill in your data. Key rules: (a) date format = YYYY-MM-DD, (b) picklists use the External Code, not the label, (c) FO references use the FO's external code (e.g., Department code, not Department name)</li><li>Upload the file -> select <b>Validate Only</b> -> review errors -> fix -> re-upload with <b>Import</b> mode</li><li>Import limits: typically 10,000 rows per file. For larger volumes, split into multiple files</li></ol><div class="source">Source: SAP SF Implementation Workbook - Data Import (Lesson 7.1)</div>`
+  },
+  { cat:'data', f:'amber', level:'Integration Center',
+    q:'Can we schedule regular imports - like a nightly feed from a legacy HR system?',
+    s:'Integration Center handles scheduled imports. The import engine itself does not schedule; it is triggered by the integration layer.',
+    approach:'Build an Integration Center job that fetches data from the source and loads into SF. Schedule it to run nightly.',
+    tags:['Scheduled Import','Automation'],
+    tech:`<ol><li>Go to <code>Admin Center -> Integration Center</code> -> <b>Create New Integration</b></li><li>Select source type: <b>File (SFTP)</b> if the legacy system drops a file, or <b>ODATA / REST</b> if you can query the source directly</li><li>Map the source fields to SF target fields. Configure transformation rules (data type conversions, default values, lookups)</li><li>Set the destination: <b>SuccessFactors</b> entity (Employee, Job Info, etc.) with Upsert mode (insert or update based on matching key)</li><li>Schedule: daily at 2:00 AM. The integration runs server-side - no user action required</li><li>Monitor via <code>Integration Center -> Monitor</code>. Configure email alerts for failures so the HRIS team can respond promptly</li></ol><div class="source">Source: SAP SF Implementation Workbook - Scheduled Integrations (Lesson 7.3)</div>`
+  },
+  { cat:'data', f:'green', level:'Standard',
+    q:'Can we export all employee data for audit or backup purposes?',
+    s:'Full data exports available via Report Center, Integration Center, or ODATA API. Large exports may need to be chunked.',
+    approach:'For ad-hoc: Report Center with all columns, export to CSV/Excel. For automated: Integration Center export job. For API: ODATA queries.',
+    tags:['Data Export','Backup'],
+    tech:`<ol><li>For ad-hoc export: <code>Report Center</code> -> create a report with all desired HRIS elements and columns -> run -> export to CSV or Excel</li><li>For scheduled export: <code>Integration Center</code> -> create an outbound integration -> set destination to SFTP or Email -> schedule</li><li>For programmatic export: use <b>ODATA API</b> with pagination. Query: <code>/odata/v2/Employee?$select=userId,firstName,lastName&$top=2000&$skip=0</code>. Increment <code>$skip</code> for next pages</li><li>Export limits: Report Center exports cap at ~50,000 rows. For larger populations, use Integration Center or ODATA with pagination</li></ol><div class="source">Source: SAP SF Implementation Workbook - Data Export (Lesson 7.4)</div>`
+  },
+  { cat:'data', f:'green', level:'Import',
+    q:'Can we migrate historical employment data from a legacy system into EC?',
+    s:'EC supports historical data import including past Job Info records (effective-dated), prior employment, and compensation history.',
+    approach:'Use the standard import template with effective-dated records. Each historical period gets its own row with start date.',
+    tags:['Historical Data','Migration'],
+    tech:`<ol><li>Use the <b>Job Information</b> import template. Each row represents a time slice (effective-dated period)</li><li>For a single employee with 3 job changes in the past: include 3 rows, each with a different Start Date and the field values that were effective during that period</li><li>Date rules: (a) the earliest record must have <code>Event = Hire</code>, (b) subsequent records use <code>Event = Data Change</code> or specific event reasons, (c) date ranges must not overlap or have gaps</li><li>Import the records in chronological order. The system validates the sequence - gaps or overlaps cause errors</li><li>Also import supporting data first: Department, Location, Job Code FOs must exist before you import employee records referencing them</li></ol><div class="source">Source: SAP SF Implementation Workbook - Historical Data Migration (Lesson 7.5)</div>`
+  },
+  { cat:'data', f:'green', level:'Standard',
+    q:'Can we define validation rules on import - rejecting rows where the department does not exist?',
+    s:'Imports go through the same business rule validation as manual data entry. Failing rows are rejected with error details.',
+    approach:'Ensure business rules are configured before import. Rows that violate rules are skipped and appear in the import error log.',
+    tags:['Import Validation'],
+    tech:`<ol><li>Import validation happens in two stages: (1) structural validation - field format, required fields, valid picklist codes, existing FO codes; (2) business rule validation - onSave rules fire on each imported row</li><li>Stage 1 errors: wrong date format, missing required field, invalid picklist code. These are caught immediately during validate-only step</li><li>Stage 2 errors: business rule raises error (e.g., "Cost Center must match Department"). These rows are skipped and listed in the import error file</li><li>Download the error file from the import results -> fix the source data -> re-import only the errored rows</li><li>Pro tip: always run <b>Validate Only</b> before the actual import. This catches both structural and rule errors without committing any data</li></ol><div class="source">Source: SAP SF Implementation Workbook - Import Validation (Lesson 7.6)</div>`
+  },
+  { cat:'rcm-req', f:'green', level:'Configuration',
+    q:'Can we create job requisitions directly from vacant positions in EC?',
+    s:'Standard integration. Vacant positions in EC can be converted to requisitions in Recruiting with one click. Position attributes auto-populate.',
+    approach:'In Recruiting, use "Create Requisition from Position". The requisition links to the EC position for auto-fill on hire.',
+    tags:['Position-to-RCM','Requisitions'],
+    tech:`<ol><li>In <b>Recruiting -> Requisitions</b>, click <b>Create Requisition</b> -> select <b>From Position</b></li><li>Search for the vacant position. Job code, department, location, FTE auto-populate</li><li>Add recruiting fields: posting date, target fill date, hiring manager, recruiter</li><li>When candidate is hired, the position auto-fills. Verify in <b>Manage Positions</b></li></ol><div class="source">Source: SAP SF Recruiting - Position Integration (RCM Admin Guide 4.2)</div>`
+  },
+  { cat:'rcm-cand', f:'green', level:'Configuration',
+    q:'Can candidates apply via a branded career site instead of the default SF page?',
+    s:'SF Recruiting supports branded Career Site Builder. Customize layout, colors, logo, and content to match your company brand.',
+    approach:'Use Career Site Builder. Configure domain, theme, and page content. No coding required.',
+    tags:['Career Site','Branding'],
+    tech:`<ol><li>Go to <b>Admin Center -> Career Site Builder</b></li><li>Create new site: set name, language, logo. Under <b>Theme</b>, set colors, fonts, buttons</li><li>Build pages with drag-and-drop widgets (Hero Banner, Job Search, Testimonials)</li><li>Set custom domain (careers.yourcompany.com). Publish</li></ol><div class="source">Source: SAP SF Recruiting - Career Site Builder (RCM Admin Guide 7.1)</div>`
+  },
+  { cat:'rcm-offer', f:'amber', level:'Configuration + Templates',
+    q:'Can we generate offer letters with custom templates including compensation details?',
+    s:'Offer Letter templates are configurable with merge fields from requisition, candidate, and compensation data.',
+    approach:'Create templates in Offer Letter Administration. Use merge tokens. Map templates to job codes or countries.',
+    tags:['Offer Letters','Templates'],
+    tech:`<ol><li>Go to <b>Admin Center -> Offer Letter Templates</b> -> <b>Create Template</b> (HTML or DOCX)</li><li>Add merge tokens: <code>{{candidate.firstName}}</code>, <code>{{compensation.baseSalary}}</code>, <code>{{offer.startDate}}</code></li><li>Assign templates by job code or country. Configure offer approval workflow</li><li>Limitation: e-signature NOT native - integrate DocuSign or Adobe Sign</li></ol><div class="source">Source: SAP SF Recruiting - Offer Letters (RCM Admin Guide 9.3)</div>`
+  },
+  { cat:'rcm-career', f:'green', level:'Configuration',
+    q:'Can we add multi-language support to the career site for global recruiting?',
+    s:'Career Site Builder supports full multi-language. Pages have translated versions; jobs display in candidate\'s browser language.',
+    approach:'Enable languages. Create translated page versions. Job descriptions auto-translate from requisition content.',
+    tags:['Multi-Language','Global Recruiting'],
+    tech:`<ol><li>In <b>Career Site Builder -> Site Configuration -> Languages</b>, add supported languages</li><li>Create translated versions of each page. Dynamic widgets auto-render in user's language</li><li>Add translated job descriptions to requisitions. Fallback to default language</li></ol><div class="source">Source: SAP SF Career Site Builder - Multi-Language (RCM Admin Guide 7.4)</div>`
+  },
+  { cat:'onb-proc', f:'green', level:'Configuration',
+    q:'Can we trigger onboarding automatically when a candidate accepts an offer?',
+    s:'Yes. When offer accepted and hire date confirmed, Onboarding auto-triggers based on configured rules.',
+    approach:'Configure RCM-to-ONB trigger. Map onboarding programs to job codes, countries, or departments.',
+    tags:['Auto-Trigger','RCM-ONB Integration'],
+    tech:`<ol><li>In <b>Admin Center -> Onboarding -> Program Settings</b>, create an onboarding program</li><li>Under <b>Triggers</b>, select <b>Recruiting -> Hire</b>. Map to job codes, countries, departments</li><li>New hire receives email with dashboard link. Monitor via <b>Onboarding Dashboard</b></li></ol><div class="source">Source: SAP SF Onboarding - Program Configuration (ONB Admin Guide 3.2)</div>`
+  },
+  { cat:'onb-doc', f:'green', level:'Configuration',
+    q:'Can new hires upload and sign documents electronically during onboarding?',
+    s:'Onboarding includes Document Collection. New hires upload files (ID, certificates) and complete electronic forms.',
+    approach:'Add Document Collection step. Add required document types with expiry tracking. Integrate e-signature.',
+    tags:['Document Collection','Compliance'],
+    tech:`<ol><li>Add a <b>Document Collection</b> step in the program. Add types: Passport, Visa, P45, Bank Details</li><li>Set Required/Optional. Configure expiry tracking. Add e-forms for I-9, Right to Work</li><li>Integrate DocuSign/Adobe Sign for e-signature. HR reviews submitted docs</li></ol><div class="source">Source: SAP SF Onboarding - Document Management (ONB Admin Guide 5.1)</div>`
+  },
+  { cat:'onb-comp', f:'green', level:'Configuration',
+    q:'Can we include compliance forms like I-9, Right to Work, and tax withholding in onboarding?',
+    s:'Compliance forms are configurable. Standard templates for I-9, W-4, Right to Work available. Custom forms can be built.',
+    approach:'Add compliance steps. Use pre-built templates. Create custom forms for country-specific requirements.',
+    tags:['Compliance','I-9','Right to Work'],
+    tech:`<ol><li>Add a <b>Compliance Step</b>. Select templates: I-9 (US), W-4 (US), Right to Work (UK), TFN (AUS)</li><li>Build custom forms via <b>Form Builder</b>. Set as Required Before Day 1 or post-start</li><li>HR reviews in <b>Compliance Dashboard</b>. Forms stored with retention periods</li></ol><div class="source">Source: SAP SF Onboarding - Compliance Forms (ONB Admin Guide 6.1)</div>`
+  },
+  { cat:'pmgm-form', f:'green', level:'Configuration',
+    q:'Can we create a performance review form with sections for goals, competencies, and development?',
+    s:'Performance forms are fully configurable. Mix sections: goals, competencies, values, development, custom sections.',
+    approach:'Use Form Template Designer. Add sections, rating scales, weights. Assign via route maps.',
+    tags:['Performance Forms','Templates'],
+    tech:`<ol><li>Go to <b>Admin Center -> Performance Management -> Form Templates</b> -> <b>Create Template</b></li><li>Add sections: Goal Summary, Competency Assessment, Development Plan, Manager Comments, Self-Assessment</li><li>Configure rating scales, section weights (Goals 60%, Competencies 30%, Values 10%)</li><li>Create Route Map: Self-Assessment -> Manager Review -> 1:1 -> Acknowledgment. Launch for review period</li></ol><div class="source">Source: SAP SF Performance - Form Template Design (PMGM Admin Guide 4.1)</div>`
+  },
+  { cat:'pmgm-goal', f:'green', level:'Standard',
+    q:'Can goals cascade from company objectives down to individual employees?',
+    s:'Goal Management supports cascading goals. Company -> Department -> Team -> Individual, all linked with auto roll-up.',
+    approach:'Create company goals. Use Cascade to push down. Employees align personal goals.',
+    tags:['Goal Cascading','OKRs'],
+    tech:`<ol><li>Create company goal in <b>Goal Management -> Company Goals</b>. Use <b>Cascade</b> to push to departments</li><li>Department heads refine and cascade to teams, then to individuals</li><li>Goal Alignment Chart shows full cascade. Progress rolls up automatically</li></ol><div class="source">Source: SAP SF Goal Management - Cascading Goals (PMGM Admin Guide 5.3)</div>`
+  },
+  { cat:'pmgm-calib', f:'amber', level:'Configuration + Facilitation',
+    q:'Can we run calibration sessions where managers review and adjust ratings across teams?',
+    s:'Calibration is a structured process. Configure templates, launch sessions by org, facilitators adjust with drag-and-drop.',
+    approach:'Create calibration template. Launch sessions. Facilitators adjust and publish final ratings.',
+    tags:['Calibration','Rating Consistency'],
+    tech:`<ol><li>Create template in <b>Admin Center -> Calibration -> Templates</b>. Choose rating scale, 9-box grid</li><li>Define subjects, guidelines (target distribution, forced ranking). Launch session with facilitators</li><li>Facilitators drag-and-drop to adjust, add comments. Publish adjusted ratings after session</li></ol><div class="source">Source: SAP SF Calibration - Session Management (PMGM Admin Guide 8.2)</div>`
+  },
+  { cat:'pmgm-360', f:'amber', level:'Configuration + Change Management',
+    q:'Can we run 360-degree feedback where employees get reviews from managers, peers, and direct reports?',
+    s:'SF supports 360 Reviews as separate process. Collects feedback from multiple raters and aggregates results.',
+    approach:'Configure 360 template. Select participants. Launch feedback collection. Results compiled into report.',
+    tags:['360 Review','Multi-Rater Feedback'],
+    tech:`<ol><li>Go to <b>Admin Center -> 360 Reviews -> Templates</b>. Design questionnaire with rating scale + free text</li><li>Configure rater categories: Self, Manager, Peers (min 3 for anonymity), Direct Reports, Matrix Partners</li><li>Launch: select participants, set window (2-3 weeks). System generates aggregated 360 Report</li></ol><div class="source">Source: SAP SF 360 Reviews - Template & Process (PMGM Admin Guide 9.1)</div>`
+  },
+  { cat:'comp-base', f:'green', level:'Configuration',
+    q:'Can we manage annual salary review cycles with budget allocation and manager worksheets?',
+    s:'SF Compensation supports structured cycles. Budgets allocated to managers, who distribute increases within constraints.',
+    approach:'Create compensation template with budget rules, guidelines, worksheets. Launch and monitor completion.',
+    tags:['Salary Review','Compensation Cycle'],
+    tech:`<ol><li>Go to <b>Admin Center -> Compensation -> Plan Setup</b>. Create template with merit budget (3.5%), promotion/adjustment budgets</li><li>Set guidelines: min/max increase, tenure tiers, performance multipliers. Add compa-ratio visualization</li><li>Launch cycle. Managers use <b>Compensation Worksheet</b> to allocate within budget. HR approves. Writes to EC</li></ol><div class="source">Source: SAP SF Compensation - Cycle Management (COMP Admin Guide 4.1)</div>`
+  },
+  { cat:'comp-var', f:'amber', level:'Configuration + Plan Setup',
+    q:'Can we manage bonus plans with complex formulas based on company and individual performance?',
+    s:'Variable Pay supports formula-based bonus plans combining financial metrics, KPIs, and individual performance.',
+    approach:'Design bonus plan. Define business goals with weights. Create payout formula.',
+    tags:['Bonus','Variable Pay'],
+    tech:`<ol><li>In <b>Admin Center -> Variable Pay -> Plan Setup</b>. Define Business Goals: Revenue (40%), EBITDA (30%)</li><li>Set payout curves (threshold 50%, target 100%, stretch 200%). Add Individual Modifier by performance</li><li>Calculate: Business Results × Individual Modifier × Target Bonus = Payout. Export to payroll</li></ol><div class="source">Source: SAP SF Variable Pay - Formula Design (COMP Admin Guide 6.2)</div>`
+  },
+  { cat:'comp-stock', f:'amber', level:'Configuration + External Integration',
+    q:'Can SF track equity grants like RSUs, stock options, and long-term incentive plans?',
+    s:'Compensation includes LTI support. Track equity grants, vesting schedules, balances. Full cap-table needs external platforms.',
+    approach:'Configure LTI award types. Track grant date, shares, vesting schedule, FMV. Integrate external equity platforms.',
+    tags:['Equity','LTI','Stock Options'],
+    tech:`<ol><li>In <b>Admin Center -> Compensation -> Award Types</b>, create: RSU, Stock Option, Performance Shares, SAR</li><li>Define: grant date, shares, grant price (FMV), vesting schedule (e.g., 25%/year over 4 years)</li><li>Managers grant in <b>Compensation Worksheet</b>. Vesting updates auto. Export to payroll for tax</li><li>Limitation: no cap table or SEC filings - integrate Shareworks, Equity Online, Global Shares</li></ol><div class="source">Source: SAP SF Compensation - LTI & Equity (COMP Admin Guide 8.1)</div>`
+  },
+  { cat:'lms-catalog', f:'green', level:'Configuration',
+    q:'Can we create a course catalog with both internal training and external content like LinkedIn Learning?',
+    s:'SF Learning supports internal courses, external integrations, and blended learning. Content Marketplace connects major providers.',
+    approach:'Create courses and programs. Integrate external content via Content Marketplace or custom API.',
+    tags:['Course Catalog','Content Integration'],
+    tech:`<ol><li>Go to <b>Admin Center -> Learning -> Courses</b> -> <b>Create Course</b>. Types: e-Learning (SCORM), Instructor-Led, Virtual, Video, URL</li><li>For external: browse <b>Content Marketplace</b> (LinkedIn Learning, Coursera). Import or sync catalog</li><li>Organize into <b>Programs</b> and <b>Curricula</b>. Set visibility by department, job code</li></ol><div class="source">Source: SAP SF Learning - Course Administration (LMS Admin Guide 3.1)</div>`
+  },
+  { cat:'lms-assign', f:'green', level:'Configuration',
+    q:'Can we auto-assign mandatory training based on job role, country, or compliance requirements?',
+    s:'Assignment profiles automatically push required courses based on employee attributes - job code, department, country.',
+    approach:'Create assignment profiles with conditions. Set due dates, recurring schedules, escalation.',
+    tags:['Auto-Assignment','Compliance Training'],
+    tech:`<ol><li>In <b>Admin Center -> Learning -> Assignment Profiles</b>. Set target: Country=UK AND Job contains "Engineer"</li><li>Add courses. Set due dates ("30 days from hire" or "annually Jan 1st"). Configure recurrence</li><li>Set escalation: notify employee -> manager -> HR at intervals. New hires auto-assigned within 24h</li></ol><div class="source">Source: SAP SF Learning - Assignment Profiles (LMS Admin Guide 4.3)</div>`
+  },
+  { cat:'lms-ext', f:'green', level:'Configuration',
+    q:'Can we integrate external content providers like LinkedIn Learning, Coursera, or Udemy into SF Learning?',
+    s:'Content Marketplace has pre-built integrations for major providers. Custom content via AICC/xAPI/URL courses.',
+    approach:'Browse Content Marketplace to connect providers. For unsupported ones, create External URL courses with xAPI tracking.',
+    tags:['Content Integration','LinkedIn Learning'],
+    tech:`<ol><li>Go to <b>Admin Center -> Learning -> Content Marketplace</b>. Browse: LinkedIn Learning, Coursera, Pluralsight, Udemy</li><li>Click <b>Connect</b>. Enter API credentials. Import curated courses or enable full sync</li><li>Completion data flows back. Tip: curate 50-100 courses - don't import full catalog</li></ol><div class="source">Source: SAP SF Learning - Content Marketplace (LMS Admin Guide 3.4)</div>`
+  },
+  { cat:'scdp-nom', f:'green', level:'Configuration',
+    q:'Can managers nominate employees as successors for key positions?',
+    s:'Succession Management allows managers to nominate successors. Evaluate on readiness and potential. HR runs talent reviews.',
+    approach:'Identify critical positions. Managers nominate. HR validates via talent reviews and builds successor pools.',
+    tags:['Succession Planning','Talent Nominations'],
+    tech:`<ol><li>Define <b>Critical Positions</b> in <b>Admin Center -> Succession -> Position Settings</b></li><li>Managers access <b>Succession -> My Team</b>. Nominate successors. Rate: Readiness (Ready Now, 1-2yr, 3-5yr) and Impact of Loss</li><li>Nominees appear on <b>Succession Org Chart</b>. HR runs <b>Talent Reviews</b>. Dashboard shows bench strength</li></ol><div class="source">Source: SAP SF Succession - Nomination & Planning (SCDP Admin Guide 3.1)</div>`
+  },
+  { cat:'scdp-pool', f:'green', level:'Configuration',
+    q:'Can we create and manage talent pools for future leadership and critical roles?',
+    s:'Talent Pools group high-potential employees by role or competency. Support targeted development and succession planning.',
+    approach:'Create pools in Succession. Add members manually or via rule-based criteria. Use for development and nominations.',
+    tags:['Talent Pools','HiPo'],
+    tech:`<ol><li>Go to <b>Admin Center -> Succession -> Talent Pools</b> -> <b>Create Pool</b></li><li>Add members: manual or <b>Rule-Based</b> (performance=Exceeds AND job level≥3)</li><li>Pool Dashboard: readiness heatmap, diversity stats. Members highlighted as pre-vetted in succession nominations</li></ol><div class="source">Source: SAP SF Succession - Talent Pools (SCDP Admin Guide 4.1)</div>`
+  },
+  { cat:'scdp-dev', f:'green', level:'Configuration',
+    q:'Can employees have development plans linked to their career goals and competency gaps?',
+    s:'Development Plans connect career aspirations, competency gaps, and learning activities. Include goals, courses, mentoring.',
+    approach:'Enable Development Plans in RBP. Employees and managers build plans with activities and target dates.',
+    tags:['Development Plans','Career Pathing'],
+    tech:`<ol><li>Enable <b>Development Plan</b> in <b>Admin Center -> Development -> Configuration</b>. Configure templates</li><li>Employee creates plan: career goal, competency gaps, activities (courses, mentoring, rotations, certifications)</li><li>Manager reviews. Integration: performance goals and LMS completions sync into the plan</li></ol><div class="source">Source: SAP SF Development - Plan Configuration (SCDP Admin Guide 5.2)</div>`
+  },
+];
+
+// ═══════════════════════════════════════════
+// APP
+// ═══════════════════════════════════════════
+
+let activeCategory = 'all', activeFeas = 'all', searchQuery = '', techMode = false;
+
+function init() {
+  initTheme();
+  renderCategories();
+  filterEntries();
+  const queryEl = document.getElementById('client-query');
+  if (queryEl) {
+    queryEl.addEventListener('input', function() { searchQuery = this.value.trim().toLowerCase(); filterEntries(); });
+    queryEl.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); document.getElementById('content').scrollIntoView({ behavior: 'smooth' }); } });
+  }
+}
+
+function initTheme() {
+  try {
+    const saved = localStorage.getItem('sf-compass-theme');
+    if (saved) {
+      setTheme(saved);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setTheme('light');
+    }
+  } catch (e) {
+    console.warn('SF Compass: theme init failed (localStorage blocked)', e);
+  }
+  // Listen for system changes
+  try {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+      try {
+        if (!localStorage.getItem('sf-compass-theme')) {
+          setTheme(e.matches ? 'light' : 'dark');
+        }
+      } catch (e) {
+        console.warn('SF Compass: theme auto-switch failed', e);
+      }
+    });
+  } catch (e) {
+    console.warn('SF Compass: could not listen to prefers-color-scheme', e);
+  }
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  setTheme(current === 'light' ? 'dark' : 'light');
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  try {
+    localStorage.setItem('sf-compass-theme', theme);
+  } catch (e) {
+    console.warn('SF Compass: could not persist theme preference', e);
+  }
+  const btn = document.querySelector('.theme-toggle-btn');
+  if (btn) btn.textContent = theme === 'light' ? '☾' : '☀';
+}
+
+function renderCategories() {
+  const list = document.getElementById('category-list');
+  const counts = {};
+  for (const e of ENTRIES) counts[e.cat] = (counts[e.cat] || 0) + 1;
+  const modules = {};
+  for (const c of CATEGORIES) {
+    if (!modules[c.module]) modules[c.module] = { cats: [], total: 0, icon: c.modIcon };
+    modules[c.module].cats.push(c);
+    modules[c.module].total += (counts[c.id] || 0);
+  }
+  let html = `<div class="cat-item active" data-cat="all" onclick="selectCategory('all', this)">
+    <span class="icon">🏠</span> All Modules <span class="count">${ENTRIES.length}</span></div>`;
+  for (const [modName, modData] of Object.entries(modules)) {
+    html += `<div class="module-header" onclick="toggleModule(this)" data-module="${modName}">
+      <span class="mod-icon">${modData.icon}</span>${modName}
+      <span class="mod-count">${modData.total}</span>
+      <span class="mod-chevron">▸</span></div>
+    <div class="module-categories" data-module="${modName}">`;
+    for (const c of modData.cats) {
+      html += `<div class="cat-item" data-cat="${c.id}" onclick="event.stopPropagation();selectCategory('${c.id}', this)">
+        <span class="icon">${c.icon}</span> ${c.name} <span class="count">${counts[c.id]||0}</span></div>`;
+    }
+    html += `</div>`;
+  }
+  list.innerHTML = html;
+  setTimeout(() => {
+    const ecHeader = document.querySelector('.module-header[data-module="Employee Central"]');
+    if (ecHeader) toggleModule(ecHeader);
+  }, 100);
+}
+
+function toggleModule(header) {
+  const moduleName = header.getAttribute('data-module');
+  const categories = document.querySelector(`.module-categories[data-module="${moduleName}"]`);
+  if (!categories) return;
+  const isOpen = categories.classList.contains('open');
+  document.querySelectorAll('.module-categories.open').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.module-header.open').forEach(h => h.classList.remove('open'));
+  if (!isOpen) { categories.classList.add('open'); header.classList.add('open'); }
+}
+
+function selectCategory(id, el) {
+  activeCategory = id;
+  document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  const cat = CATEGORIES.find(c => c.id === id);
+  document.getElementById('active-cat-label').textContent = id === 'all' ? 'All Modules' : (cat ? cat.module + ' › ' + cat.name : id);
+  filterEntries();
+}
+
+function setFeasFilter(feas, el) {
+  activeFeas = feas;
+  document.querySelectorAll('.feas-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  filterEntries();
+}
+
+function toggleTechDetails() {
+  techMode = !techMode;
+  const pill = document.getElementById('tech-pill');
+  const label = document.getElementById('tech-label');
+  if (techMode) {
+    pill.classList.add('active');
+    label.textContent = 'Implementation Steps: ON';
+  } else {
+    pill.classList.remove('active');
+    label.textContent = 'Implementation Steps';
+  }
+  filterEntries();
+}
+
+function filterEntries() {
+  const sidebarQ = document.getElementById('search-box').value.toLowerCase();
+  const clientQ = document.getElementById('client-query') ? document.getElementById('client-query').value.toLowerCase() : '';
+  searchQuery = sidebarQ || clientQ;
+  let filtered = ENTRIES;
+  if (activeCategory !== 'all') filtered = filtered.filter(e => e.cat === activeCategory);
+  if (activeFeas !== 'all') filtered = filtered.filter(e => e.f === activeFeas);
+  if (searchQuery) {
+    const terms = searchQuery.split(/\s+/).filter(t => t.length > 0);
+    filtered = filtered.filter(e => {
+      const haystack = [e.q, e.s, e.approach, ...e.tags, e.tech || ''].join(' ').toLowerCase();
+      return terms.some(t => haystack.includes(t));
+    });
+  }
+  document.getElementById('result-count').textContent = `${filtered.length} item${filtered.length !== 1 ? 's' : ''}`;
+  const qmc = document.getElementById('query-match-count');
+  if (qmc && searchQuery) { qmc.textContent = `${filtered.length} match${filtered.length !== 1 ? 'es' : ''}`; }
+  else if (qmc) { qmc.textContent = ''; }
+  renderEntries(filtered);
+}
+
+function getVisibleEntries() {
+  const sidebarQ = document.getElementById('search-box').value.toLowerCase();
+  const clientQ = document.getElementById('client-query') ? document.getElementById('client-query').value.toLowerCase() : '';
+  const q = sidebarQ || clientQ;
+  let filtered = ENTRIES;
+  if (activeCategory !== 'all') filtered = filtered.filter(e => e.cat === activeCategory);
+  if (activeFeas !== 'all') filtered = filtered.filter(e => e.f === activeFeas);
+  if (q) {
+    const terms = q.split(/\s+/).filter(t => t.length > 0);
+    filtered = filtered.filter(e => {
+      const haystack = [e.q, e.s, e.approach, ...e.tags, e.tech || ''].join(' ').toLowerCase();
+      return terms.some(t => haystack.includes(t));
+    });
+  }
+  return filtered;
+}
+
+function scenarioText(e, idx) {
+  const feasLabels = { green:'Fully Supported', amber:'Partially Supported', orange:'Workaround Required', red:'Limited / Not Supported' };
+  const category = CATEGORIES.find(c => c.id === e.cat)?.name || e.cat;
+  const cleanTech = (e.tech || 'Implementation steps not captured yet.')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return [
+    `${idx + 1}. ${e.q}`,
+    `Feasibility: ${feasLabels[e.f]}`,
+    `Effort: ${e.level}`,
+    `Category: ${category}`,
+    `Tags: ${e.tags.join(', ')}`,
+    `Summary: ${e.s}`,
+    `Approach: ${e.approach}`,
+    techMode ? `Implementation notes: ${cleanTech}` : null
+  ].filter(Boolean).join('\n');
+}
+
+function exportScenarioPack() {
+  const entries = getVisibleEntries();
+  const generated = new Date().toISOString().slice(0, 10);
+  const body = [
+    'SF Compass Scenario Pack',
+    `Generated: ${generated}`,
+    `Scenario count: ${entries.length}`,
+    '',
+    ...entries.map(scenarioText)
+  ].join('\n\n---\n\n');
+  const blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sf-compass-scenario-pack-${generated}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function copyScenarioSummary() {
+  const entries = getVisibleEntries().slice(0, 12);
+  const body = [
+    `SF Compass summary (${entries.length} shown)`,
+    ...entries.map((e, i) => scenarioText(e, i))
+  ].join('\n\n');
+  try {
+    await navigator.clipboard.writeText(body);
+    alert('Scenario summary copied.');
+  } catch {
+    alert('Copy failed. Use Export Pack instead.');
+  }
+}
+
+function extractSourceMeta(entry) {
+  const tech = entry.tech || '';
+  const sourceMatch = tech.match(/<div class="source">Source:\s*([^<]+)<\/div>/i);
+  const source = sourceMatch ? sourceMatch[1].trim() : 'Scenario library guidance';
+  const lessonMatch = source.match(/Lesson\s+([0-9.]+)/i);
+  return {
+    source,
+    lesson: lessonMatch ? `Lesson ${lessonMatch[1]}` : 'General reference'
+  };
+}
+
+function inferConfidence(entry, sourceMeta) {
+  const source = sourceMeta.source.toLowerCase();
+  if (source.includes('implementation workbook') || source.includes('help portal')) {
+    return 'High Confidence';
+  }
+  if (
+    source.includes('product documentation') ||
+    source.includes('best practices') ||
+    source.includes('standard') ||
+    source.includes('community') ||
+    source.includes('field notes') ||
+    source.includes('kb')
+  ) {
+    return 'Medium Confidence';
+  }
+  return entry.f === 'green' ? 'Medium Confidence' : 'Low Confidence';
+}
+
+function buildRationale(entry, sourceMeta) {
+  const tagSummary = (entry.tags || []).slice(0, 3).join(', ');
+  const category = CATEGORIES.find(c => c.id === entry.cat)?.name || entry.cat || 'implementation';
+  return `Answer is grounded in ${category} guidance${tagSummary ? `, tagged for ${tagSummary}` : ''}, and anchored to ${sourceMeta.lesson}.`;
+}
+
+function renderEntries(entries) {
+  const content = document.getElementById('content');
+  if (!entries.length) {
+    content.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><h3>No matching items</h3><p>Try adjusting your search or filters. ${ENTRIES.length} scenarios across ${CATEGORIES.length} topic areas.</p></div>`;
+    return;
+  }
+  const feasLabels = { green:'Fully Supported', amber:'Partially Supported', orange:'Workaround Required', red:'Limited / Not Supported' };
+  const feasIcons = { green:'✓', amber:'◐', orange:'⚒', red:'✗' };
+
+  content.innerHTML = entries.map((e, i) => {
+    const sourceMeta = extractSourceMeta(e);
+    const confidence = inferConfidence(e, sourceMeta);
+    const confidenceClass = confidence.toLowerCase().split(' ')[0];
+    const rationale = buildRationale(e, sourceMeta);
+    return `
+    <div class="entry${techMode ? ' tech-visible' : ''}" id="entry-${i}" onclick="toggleEntry(${i})">
+      <div class="entry-header">
+        <div class="feasibility-badge ${e.f}">${feasIcons[e.f]}</div>
+        <div class="entry-body">
+          <div class="entry-question">${highlight(e.q)}</div>
+          <div class="entry-subtitle">${feasLabels[e.f]} · ${e.level}</div>
+          <div class="entry-tags">
+            ${e.tags.map(t => `<span class="tag ${e.f==='green'?'green':e.f==='amber'?'amber':e.f==='orange'?'orange':'red'}">${t}</span>`).join('')}
+          </div>
+          <div class="entry-detail">
+            <h4>Summary</h4><p>${e.s}</p>
+            <h4>Approach</h4><p>${e.approach}</p>
+            <div class="traceability-panel">
+              <div class="traceability-title">Answer Traceability</div>
+              <div class="traceability-grid">
+                <div class="traceability-item">
+                  <label>Confidence</label>
+                  <div class="traceability-value"><span class="confidence-chip ${confidenceClass}">${confidence}</span></div>
+                </div>
+                <div class="traceability-item">
+                  <label>Primary Reference</label>
+                  <div class="traceability-value">${sourceMeta.source}</div>
+                </div>
+                <div class="traceability-item">
+                  <label>Why This Answer</label>
+                  <div class="traceability-value">${rationale}</div>
+                </div>
+                <div class="traceability-item">
+                  <label>Decision Basis</label>
+                  <div class="traceability-value">Feasibility is ${feasLabels[e.f]} and effort is ${e.level} for this implementation pattern.</div>
+                </div>
+              </div>
+            </div>
+            <div class="tech-section">
+              <h4>⚙ Technical Implementation Steps</h4>
+              ${e.tech || '<p style="color:var(--dim)">Detailed steps coming soon.</p>'}
+            </div>
+            <div class="detail-grid" style="margin-top:12px">
+              <div class="detail-item"><label>Feasibility</label><div class="value">${feasLabels[e.f]}</div></div>
+              <div class="detail-item"><label>Effort Level</label><div class="value">${e.level}</div></div>
+              <div class="detail-item"><label>Category</label><div class="value">${CATEGORIES.find(c=>c.id===e.cat)?.name||e.cat}</div></div>
+            </div>
+          </div>
+          <span class="expand-hint" onclick="event.stopPropagation();toggleEntry(${i})">Click to expand details -></span>
+        </div>
+      </div>
+    </div>
+  `;
+  }).join('');
+}
+
+function highlight(text) {
+  if (!searchQuery) return text;
+  const esc = searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(`(${esc})`, 'gi'), '<mark style="background:rgba(91,156,245,0.3);color:#fff;padding:0 2px;border-radius:2px">$1</mark>');
+}
+
+function toggleEntry(i) {
+  const el = document.getElementById('entry-' + i);
+  if (!el) return;
+  el.classList.toggle('expanded');
+  const hint = el.querySelector('.expand-hint');
+  if (hint) hint.textContent = el.classList.contains('expanded') ? 'Click to collapse ↑' : 'Click to expand details ->';
+}
+
+document.getElementById('search-box').addEventListener('input', filterEntries);
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && document.activeElement !== document.getElementById('search-box')) {
+    e.preventDefault(); document.getElementById('search-box').focus();
+  }
+  if (e.key === 'Escape') document.getElementById('search-box').blur();
+});
+
+init();
+</script>
+</body>
+</html>
