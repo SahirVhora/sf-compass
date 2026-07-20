@@ -3,6 +3,7 @@
 
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import Optional
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,7 +15,7 @@ class SiteParser(HTMLParser):
         self.ids: list[str] = []
         self.assurance_stages = 0
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, Optional[str]]]) -> None:
         attributes = dict(attrs)
         if attributes.get("id"):
             self.ids.append(str(attributes["id"]))
