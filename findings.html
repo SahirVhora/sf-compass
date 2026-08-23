@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!-- GitHub Pages ignores _headers; set CSP via meta. 'unsafe-inline' is
-     required for the inline app logic/styles. findings.html loads JSON via
-     client-side file upload (FileReader), so connect-src 'self' is safe. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<!-- Files are parsed in-browser. The module and styles are same-origin and
+     connect-src blocks uploads or other network requests. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SF Compass - Tenant Findings Viewer</title>
-<meta name="description" content="Load findings JSON from any SF Compass suite tool (Config Debt Radar, Position Integrity Checker) and review them in one combined tenant health view. 100% client-side.">
+<title>SF Compass - Migration Assurance Engagement Gate Pack</title>
+<meta name="description" content="Combine local SAP SuccessFactors assurance evidence into G0-G4 migration gates and an executive outcome pack. Files never leave the browser.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://sahirvhora.github.io/sf-compass/findings.html">
 <meta property="og:url" content="https://sahirvhora.github.io/sf-compass/findings.html">
@@ -39,6 +38,36 @@ header a { color: var(--blue); text-decoration: none; }
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
   padding: 8px 12px; display: inline-block;
 }
+.scope-options { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.scope-option {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 11px; color: var(--text2); font-size: 12px;
+}
+.scope-option input { margin-right: 6px; accent-color: var(--accent); }
+.approval-ref {
+  background: var(--surface); border: 1px solid var(--border2); border-radius: 8px;
+  color: var(--text); font: inherit; font-size: 12px; padding: 8px 11px; min-width: 210px;
+}
+.approval-ref:focus { outline: none; border-color: var(--accent); }
+.message { margin-top: 14px; border-radius: 8px; padding: 10px 12px; font-size: 12px; }
+.message.error { border: 1px solid var(--red); background: rgba(224,81,81,.10); color: #ffbaba; }
+.message.success { border: 1px solid var(--green); background: rgba(63,185,107,.10); color: #9be8b7; }
+.gates { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 22px; }
+.gate { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px; }
+.gate.pass { border-color: var(--green); }
+.gate.attention_required { border-color: var(--amber); }
+.gate.blocked { border-color: var(--red); }
+.gate.incomplete { border-color: var(--dim); }
+.gate-id { color: var(--accent); font-size: 17px; font-weight: 750; }
+.gate-status { font-size: 12px; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
+.gate-note { color: var(--dim); font-size: 11px; line-height: 1.4; margin-top: 5px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.action-btn {
+  background: var(--surface); border: 1px solid var(--border2); border-radius: 8px;
+  color: var(--text2); font: inherit; font-size: 12px; padding: 7px 12px; cursor: pointer;
+}
+.action-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+.action-btn:disabled { opacity: .4; cursor: not-allowed; }
 #drop {
   margin-top: 22px; border: 2px dashed var(--border2); border-radius: 12px;
   padding: 36px 20px; text-align: center; color: var(--dim);
@@ -91,27 +120,51 @@ td .rec { color: var(--dim); font-size: 12px; margin-top: 3px; line-height: 1.4;
 #empty { color: var(--dim); text-align: center; padding: 30px 0; font-size: 13px; display: none; }
 footer { margin-top: 40px; font-size: 12px; color: var(--dim); }
 footer a { color: var(--blue); text-decoration: none; }
-@media (max-width: 640px) { th:nth-child(4), td:nth-child(4) { display: none; } }
+@media (max-width: 760px) {
+  .gates { grid-template-columns: 1fr 1fr; }
+  th:nth-child(4), td:nth-child(4) { display: none; }
+}
+@media print {
+  body { background: #fff; color: #111; padding: 10px; }
+  #drop, .scope-options, .actions, .toolbar, footer, .message { display: none !important; }
+  .card, .gate { break-inside: avoid; border-color: #999; background: #fff; color: #111; }
+  td, th, .meta-row, .gate-note { color: #222; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1><span>SF</span> Compass - Tenant Findings Viewer</h1>
+    <h1><span>SF</span> Compass - Migration Assurance Engagement Gate Pack</h1>
     <div class="sub">
-      Load findings JSON files produced by SF Compass suite tools -
-      <a href="https://github.com/SahirVhora/sf-config-debt-radar">Config Debt Radar</a> (<code>config_debt_findings.json</code>) and
-      <a href="https://github.com/SahirVhora/sf-position-integrity-checker">Position Integrity Checker</a> (<code>position_integrity_findings_*.json</code>) -
-      and review them in one combined tenant health view.
+      Load <code>sapsf-assurance/v1</code> files from the Migration Assurance Studio.
+      The pack validates each run, keeps transformation and independent validation separate,
+      and combines findings, actions and evidence into G0-G4 decision support.
     </div>
-    <div class="privacy">🔒 100% client-side - files are read in your browser and never uploaded anywhere.</div>
+    <div class="privacy">Local-only: files stay in this browser. No employee data, credentials or unmasked tenant IDs are accepted in assurance documents.</div>
   </header>
 
   <div id="drop">
-    <b>Drop findings JSON files here</b> or click to choose<br>
-    <span class="hint">Accepts one or more files in the <code>sf-compass-findings/v1</code> schema. Loading more files adds to the combined view.</span>
+    <b>Drop assurance JSON files here</b> or click to choose<br>
+    <span class="hint">Accepts <code>sapsf-assurance/v1</code>. Legacy <code>sf-compass-findings/v1</code> files remain viewable but never influence gates.</span>
     <input type="file" id="file-input" accept=".json,application/json" multiple hidden>
   </div>
+
+  <div class="scope-options" aria-label="Engagement scope and human approvals">
+    <label class="scope-option"><input type="checkbox" id="scope-approved">G0 scope explicitly approved</label>
+    <input class="approval-ref" id="scope-approval-ref" aria-label="G0 approval reference" placeholder="G0 reference, e.g. CAB-1042">
+    <label class="scope-option"><input type="checkbox" id="position-scope">Position Management in scope</label>
+    <label class="scope-option"><input type="checkbox" id="twin-scope">Digital rehearsal twin in scope</label>
+    <label class="scope-option"><input type="checkbox" id="hypercare-approved">G4 hypercare closure explicitly approved</label>
+    <input class="approval-ref" id="hypercare-approval-ref" aria-label="G4 closure reference" placeholder="G4 reference, e.g. HYP-208">
+  </div>
+  <div class="actions">
+    <button class="action-btn" id="export-pack" disabled>Export evidence pack JSON</button>
+    <button class="action-btn" id="print-pack" disabled>Print executive outcome</button>
+    <button class="action-btn" id="reset-pack">Clear local files</button>
+  </div>
+  <div id="message" class="message" hidden role="status"></div>
+  <section class="gates" id="gates" hidden aria-label="Migration assurance gates"></section>
 
   <div class="cards" id="cards" hidden></div>
 
@@ -126,7 +179,7 @@ footer a { color: var(--blue); text-decoration: none; }
 
   <table id="tbl" hidden>
     <thead>
-      <tr><th>Severity</th><th>Tool</th><th>Object</th><th>Category</th><th>Finding</th></tr>
+      <tr><th>Severity</th><th>Tool</th><th>Object</th><th>Owner</th><th>Finding</th></tr>
     </thead>
     <tbody id="tbody"></tbody>
   </table>
@@ -136,119 +189,9 @@ footer a { color: var(--blue); text-decoration: none; }
   <footer>
     Part of the <a href="index.html">SF Compass</a> suite ·
     <a href="https://github.com/SahirVhora/sf-compass">Source on GitHub</a> ·
-    Findings schema: <code>sf-compass-findings/v1</code>
+    Assurance schema: <code>sapsf-assurance/v1</code> · Pack schema: <code>sapsf-engagement-pack/v1</code>
   </footer>
 </div>
-
-<script>
-'use strict';
-const state = { docs: [], sev: 'all', q: '' };
-const SEV_ORDER = { critical: 0, high: 1, medium: 2, low: 3, info: 4 };
-
-const drop = document.getElementById('drop');
-const fileInput = document.getElementById('file-input');
-drop.addEventListener('click', () => fileInput.click());
-drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
-drop.addEventListener('dragleave', () => drop.classList.remove('over'));
-drop.addEventListener('drop', e => {
-  e.preventDefault(); drop.classList.remove('over');
-  loadFiles(e.dataTransfer.files);
-});
-fileInput.addEventListener('change', () => { loadFiles(fileInput.files); fileInput.value = ''; });
-
-function loadFiles(fileList) {
-  for (const file of fileList) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      let doc;
-      try { doc = JSON.parse(reader.result); }
-      catch { alert(file.name + ' is not valid JSON.'); return; }
-      if (doc.schema !== 'sf-compass-findings/v1' || !Array.isArray(doc.findings)) {
-        alert(file.name + ' is not an sf-compass-findings/v1 file (missing schema marker or findings array).');
-        return;
-      }
-      // replace a previously loaded doc from the same tool+timestamp
-      state.docs = state.docs.filter(d => !(d.tool === doc.tool && d.generated_at === doc.generated_at));
-      state.docs.push(doc);
-      render();
-    };
-    reader.readAsText(file);
-  }
-}
-
-function allFindings() {
-  return state.docs.flatMap(doc => doc.findings.map(f => ({ ...f, _tool: doc.tool })));
-}
-
-function render() {
-  const findings = allFindings();
-  const counts = { critical: 0, high: 0, medium: 0, low: 0, info: 0 };
-  findings.forEach(f => { counts[f.severity] = (counts[f.severity] || 0) + 1; });
-
-  const cards = document.getElementById('cards');
-  cards.hidden = false;
-  cards.innerHTML =
-    `<div class="card"><div class="num">${findings.length}</div><div class="lbl">Findings</div></div>` +
-    ['critical', 'high', 'medium', 'low']
-      .map(s => `<div class="card ${s}"><div class="num">${counts[s] || 0}</div><div class="lbl">${s}</div></div>`)
-      .join('') +
-    `<div class="card"><div class="num">${state.docs.length}</div><div class="lbl">Tools loaded</div></div>`;
-
-  document.getElementById('toolbar').hidden = false;
-  document.getElementById('tbl').hidden = false;
-
-  const meta = document.getElementById('meta');
-  meta.hidden = false;
-  meta.innerHTML = state.docs
-    .map(d => `<b>${esc(d.tool)}</b> ${esc(d.tool_version || '')} - generated ${esc(d.generated_at || 'n/a')}` +
-      (d.tenant ? ` - tenant ${esc(d.tenant)}` : ''))
-    .join('<br>');
-
-  renderRows();
-}
-
-function renderRows() {
-  const q = state.q.toLowerCase();
-  const rows = allFindings()
-    .filter(f => state.sev === 'all' || f.severity === state.sev)
-    .filter(f => !q || [f.object_id, f.category, f.message, f.id, f.field]
-      .some(v => String(v || '').toLowerCase().includes(q)))
-    .sort((a, b) => (SEV_ORDER[a.severity] ?? 9) - (SEV_ORDER[b.severity] ?? 9));
-
-  document.getElementById('tbody').innerHTML = rows.map(f => {
-    const rec = f.details && f.details.recommendation
-      ? `<div class="rec">→ ${esc(f.details.recommendation)}</div>` : '';
-    return `<tr>
-      <td><span class="sev ${esc(f.severity)}">${esc(f.severity)}</span></td>
-      <td><span class="tool-tag">${esc(shortTool(f._tool))}</span></td>
-      <td>${esc(f.object_id || '-')}${f.field ? `<div class="rec">${esc(f.field)}</div>` : ''}</td>
-      <td>${esc(f.category || '-')}</td>
-      <td class="msg">${esc(f.message)}${rec}</td>
-    </tr>`;
-  }).join('');
-  document.getElementById('empty').style.display = rows.length ? 'none' : 'block';
-}
-
-function shortTool(name) {
-  return String(name || '').replace(/^sf-/, '').replace(/-/g, ' ');
-}
-function esc(value) {
-  return String(value ?? '').replace(/[&<>"']/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-document.querySelectorAll('.chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    state.sev = chip.dataset.sev;
-    renderRows();
-  });
-});
-document.getElementById('search').addEventListener('input', e => {
-  state.q = e.target.value;
-  renderRows();
-});
-</script>
+<script type="module" src="engagement-pack-ui.mjs"></script>
 </body>
 </html>

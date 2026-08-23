@@ -18,3 +18,5 @@ jobs:
           python-version: "3.12"
       - name: Validate site structure and assurance lifecycle
         run: python scripts/validate_site.py
+      - name: Test engagement gate decisions and edge cases
+        run: node --test engagement-pack.test.mjs scripts/build-engagement-pack.test.mjs

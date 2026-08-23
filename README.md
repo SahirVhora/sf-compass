@@ -14,7 +14,33 @@ Live site: https://sahirvhora.github.io/sf-compass/
 | Control | What changed across tenants, and was it expected? | Config Compare / Change Ledger |
 | Measure | Which outcomes and benefits should the programme track? | Value Navigator |
 
+## Migration assurance engagement pack
+
+Open [`findings.html`](findings.html) to combine one or more
+`sapsf-assurance/v1` run documents into a local G0-G4 engagement view. The
+viewer validates contracts and cross-references, rejects mixed engagements,
+keeps human approvals explicit, and exports a namespaced
+`sapsf-engagement-pack/v1` evidence index. Files stay in the browser and are
+never uploaded. Legacy `sf-compass-findings/v1` files remain viewable but do
+not affect gate decisions.
+
 The tools provide decision support and evidence. Consequential configuration changes and remediation remain subject to named human approval.
+
+### One-command engagement pack
+
+Build the same validated G0-G4 pack without using the browser:
+
+```bash
+node scripts/build-engagement-pack.mjs \
+  --input /approved/local/assurance-runs \
+  --output /approved/local/engagement-pack.json
+```
+
+Directory inputs are searched recursively for `sapsf-assurance/v1` JSON.
+Unrelated JSON is ignored, while an explicitly supplied invalid file fails the
+run. The output is written with owner-only permissions. Human gates remain
+incomplete unless an optional local options JSON supplies explicit non-personal
+approval references; the command never authorises production activity.
 
 ## Workshop reference
 

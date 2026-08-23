@@ -34,11 +34,16 @@ def validate(path: Path) -> SiteParser:
 
 def main() -> int:
     index = validate(ROOT / "index.html")
-    validate(ROOT / "findings.html")
+    findings = validate(ROOT / "findings.html")
     assert index.assurance_stages == 5, "Expected five transformation assurance stages"
     html = (ROOT / "index.html").read_text(encoding="utf-8")
+    findings_html = (ROOT / "findings.html").read_text(encoding="utf-8")
     assert "Transformation Assurance" in html
     assert "94 scenarios" in html
+    assert 'href="findings.html"' in html
+    assert "Migration Assurance Engagement Gate Pack" in findings_html
+    assert 'src="engagement-pack-ui.mjs"' in findings_html
+    assert findings.assurance_stages == 0
     print("PASS: HTML parsing, unique IDs, lifecycle and core content")
     return 0
 
