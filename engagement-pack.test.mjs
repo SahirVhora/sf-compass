@@ -235,7 +235,7 @@ test("namespaces cross-tool IDs and rewrites references", () => {
   assert.equal(pack.actions[0].finding_refs[0], "migration-tool::A::F-1");
 });
 
-test("requires optional position and digital twin controls only when in scope", () => {
+test("requires optional position, digital twin, and payroll stitcher controls only when in scope", () => {
   const docs = [
     documentFor("migration-tool", { runId: "MAP" }),
     documentFor("sf-config-compare-ec", { runId: "CFG" }),
@@ -243,7 +243,14 @@ test("requires optional position and digital twin controls only when in scope", 
     documentFor("sf-change-ledger", { runId: "LED" }),
     documentFor("sf-cutover-planner", { runId: "CUT" }),
   ];
-  const pack = buildEngagementPack(docs, { positionInScope: true, digitalTwinInScope: true });
+  const pack = buildEngagementPack(docs, {
+    positionInScope: true,
+    digitalTwinInScope: true,
+    payrollStitcherInScope: true,
+  });
   assert.deepEqual(pack.gates.find((gate) => gate.id === "G2").missing_tools, ["sf-position-integrity-checker"]);
-  assert.deepEqual(pack.gates.find((gate) => gate.id === "G3").missing_tools, ["sf-cutover-digital-twin"]);
+  assert.deepEqual(pack.gates.find((gate) => gate.id === "G3").missing_tools, [
+    "sf-cutover-digital-twin",
+    "sf-payroll-error-stitcher",
+  ]);
 });

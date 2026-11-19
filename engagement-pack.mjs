@@ -360,6 +360,7 @@ export function buildEngagementPack(documents, options = {}) {
   };
   if (options.positionInScope) requirements.G2.push("sf-position-integrity-checker");
   if (options.digitalTwinInScope) requirements.G3.push("sf-cutover-digital-twin");
+  if (options.payrollStitcherInScope) requirements.G3.push("sf-payroll-error-stitcher");
   for (const [gate, tools] of Object.entries(options.additionalRequirements || {})) {
     if (!Object.hasOwn(requirements, gate)) fail("additionalRequirements", `unknown gate ${gate}`);
     for (const tool of tools) requirements[gate].push(canonicalTool(tool));
